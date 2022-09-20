@@ -20,3 +20,6 @@ ENV TZ=Asia/Tokyo
 RUN echo ''
 RUN echo 'setopt print_eight_bit' >> .zshrc
 
+### plugins
+RUN git clone https://github.com/zsh-users/zsh-autosuggestions .oh-my-zsh/custom/plugins/zsh-autosuggestions
+RUN sed -i 's/plugins=\((.*)\)/plugins=(git zsh-autosuggestions)/g' .zshrc
