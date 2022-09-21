@@ -2,10 +2,14 @@
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.245.2/containers/debian
 {
 	"name": "Debian",
+	// "postCreateCommand": "pwd",
 	"build": {
 		"dockerfile": "Dockerfile"
 	},
-	// "postCreateCommand": "pwd",
+	// Uncomment when using a ptrace-based debugger like C++, Go, and Rust
+	// "runArgs": [ "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined" ],
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
 	"extensions": [
 		"ms-azuretools.vscode-docker",
 		"eamodio.gitlens",
@@ -25,16 +29,12 @@
 		"CLOUDSDK_CONFIG": "/home/vscode/.gcloud-config/"
 	},
 	"mounts": [
+		// Uncomment to use the Docker CLI from inside the container. See https://aka.ms/vscode-remote/samples/docker-from-docker.
+		// "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind",
 		"source=${localEnv:HOME}/.ssh/,target=/home/vscode/.ssh/,type=bind,consistency=cached",
 		"source=${localEnv:HOME}/.config/git/,target=/home/vscode/.git-config/,type=bind,consistency=cached",
 		"source=${localEnv:HOME}/.config/gcloud/,target=/home/vscode/.gcloud-config/,type=bind,consistency=cached"
 	],
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [],
-	// Uncomment to use the Docker CLI from inside the container. See https://aka.ms/vscode-remote/samples/docker-from-docker.
-	// "mounts": [ "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind" ],
-	// Uncomment when using a ptrace-based debugger like C++, Go, and Rust
-	// "runArgs": [ "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined" ],
 	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "vscode"
 }
