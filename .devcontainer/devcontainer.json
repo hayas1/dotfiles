@@ -19,6 +19,9 @@
 		"terminal.integrated.defaultProfile.linux": "zsh",
 		"editor.formatOnSave": true
 	},
+	"mounts": [
+		"source=${localEnv:HOME}/.ssh/,target=/home/vscode/.ssh/,type=bind,consistency=cached"
+	],
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
 	// Uncomment to use the Docker CLI from inside the container. See https://aka.ms/vscode-remote/samples/docker-from-docker.
