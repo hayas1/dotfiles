@@ -13,15 +13,20 @@
 		"streetsidesoftware.code-spell-checker",
 		"shardulm94.trailing-spaces",
 		"Gruntfuggly.todo-tree",
-		"yzhang.markdown-all-in-one"
+		"yzhang.markdown-all-in-one",
+		"googlecloudtools.cloudcode"
 	],
 	"settings": {
 		"terminal.integrated.defaultProfile.linux": "zsh",
 		"editor.formatOnSave": true
 	},
+	"containerEnv": {
+		"CLOUDSDK_CONFIG": "/home/vscode/.gcloud-config/"
+	},
 	"mounts": [
 		"source=${localEnv:HOME}/.ssh/,target=/home/vscode/.ssh/,type=bind,consistency=cached",
-		"source=${localEnv:HOME}/.config/git/,target=/home/vscode/.git-config/,type=bind,consistency=cached"
+		"source=${localEnv:HOME}/.config/git/,target=/home/vscode/.git-config/,type=bind,consistency=cached",
+		"source=${localEnv:HOME}/.config/gcloud/,target=/home/vscode/.gcloud-config/,type=bind,consistency=cached"
 	],
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
