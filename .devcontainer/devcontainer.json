@@ -24,7 +24,14 @@
 	],
 	"settings": {
 		"terminal.integrated.defaultProfile.linux": "zsh",
-		"editor.formatOnSave": true
+		"editor.formatOnSave": true,
+		"[python]": {
+			"editor.codeActionsOnSave": {
+				"source.organizeImports": true
+			}
+		},
+		"python.linting.flake8Enabled": true,
+		"python.formatting.provider": "black"
 	},
 	"containerEnv": {
 		"CLOUDSDK_CONFIG": "/home/vscode/.gcloud-config/"
