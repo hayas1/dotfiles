@@ -2,7 +2,7 @@
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.245.2/containers/debian
 {
 	"name": "Debian",
-	"postCreateCommand": "zsh",
+	// "postCreateCommand": "zsh",
 	"build": {
 		"dockerfile": "./Dockerfile",
 		"context": "..",
