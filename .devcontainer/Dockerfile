@@ -3,10 +3,15 @@ ARG VARIANT="bullseye"
 FROM mcr.microsoft.com/vscode/devcontainers/base:0-${VARIANT}
 
 RUN apt-get update -y && apt-get upgrade -y && export DEBIAN_FRONTEND=noninteractive
+RUN apt-get install -y exa ripgrep fd-find bat hexyl
 
 ### set home directory for docker
 ARG HOME="/home/vscode"
 WORKDIR $HOME
+
+### copy dotfiles
+COPY .devcontainer/dotfiles/.bash_aliases .bash_aliases
+RUN echo ". ~/.bash_aliases" >> .zshrc
 
 ### get powerlevel10k fonts, however this configuration may need to be done on the host machine.
 # RUN apt-get install -y fonts-powerline
