@@ -2,8 +2,9 @@
 ARG VARIANT="bullseye"
 FROM mcr.microsoft.com/vscode/devcontainers/base:0-${VARIANT}
 
-RUN apt-get update -y && apt-get upgrade -y && export DEBIAN_FRONTEND=noninteractive
-RUN apt-get install -y exa ripgrep fd-find bat hexyl
+### set home directory for docker
+ARG HOME="/home/vscode"
+WORKDIR $HOME
 
 ### proxy setting
 ARG http_proxy
@@ -17,9 +18,10 @@ ENV https_proxy=${https_proxy} HTTPS_PROXY=${HTTPS_PROXY}
 ENV no_proxy=${no_proxy} NO_PROXY=${NO_PROXY}
 RUN apt-get install -y connect-proxy
 
-### set home directory for docker
-ARG HOME="/home/vscode"
-WORKDIR $HOME
+### apt update and install tools implemented by rust
+RUN apt-get update -y && apt-get upgrade -y && export DEBIAN_FRONTEND=noninteractive
+RUN apt-get install -y exa ripgrep fd-find bat hexyl
+
 
 ### copy dotfiles
 COPY .devcontainer/dotfiles/.bash_aliases .bash_aliases
