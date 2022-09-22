@@ -5,7 +5,15 @@
 	"postCreateCommand": "zsh",
 	"build": {
 		"dockerfile": "./Dockerfile",
-		"context": ".."
+		"context": "..",
+		"args": {
+			"http_proxy": "${localEnv:http_proxy}",
+			"HTTP_PROXY": "${localEnv:HTTP_PROXY}",
+			"https_proxy": "${localEnv:https_proxy}",
+			"HTTPS_PROXY": "${localEnv:HTTPS_PROXY}",
+			"no_PROXY": "${localEnv:no_proxy}",
+			"NO_PROXY": "${localEnv:NO_PROXY}",
+		}
 	},
 	// Uncomment when using a ptrace-based debugger like C++, Go, and Rust
 	// "runArgs": [ "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined" ],
@@ -20,7 +28,6 @@
 		"Gruntfuggly.todo-tree",
 		"yzhang.markdown-all-in-one",
 		"rangav.vscode-thunder-client",
-		"googlecloudtools.cloudcode"
 	],
 	"settings": {
 		"terminal.integrated.defaultProfile.linux": "zsh",
