@@ -22,10 +22,15 @@ RUN apt-get install -y connect-proxy
 RUN apt-get update -y && apt-get upgrade -y && export DEBIAN_FRONTEND=noninteractive
 RUN apt-get install -y exa ripgrep fd-find bat hexyl
 
-
 ### copy dotfiles
 COPY .devcontainer/dotfiles/.bash_aliases .bash_aliases
 RUN echo ". ~/.bash_aliases" >> .zshrc
+
+### install google-cloud-sdk and kubectl
+RUN echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list \
+    && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key --keyring /usr/share/keyrings/cloud.google.gpg  add - \
+    && apt-get update -y && apt-get install google-cloud-sdk -y
+RUN apt-get install -y kubectl
 
 ### get powerlevel10k fonts, however this configuration may need to be done on the host machine.
 # RUN apt-get install -y fonts-powerline
