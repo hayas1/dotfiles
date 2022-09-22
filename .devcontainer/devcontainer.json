@@ -26,19 +26,14 @@
 		"streetsidesoftware.code-spell-checker",
 		"shardulm94.trailing-spaces",
 		"Gruntfuggly.todo-tree",
+		"christian-kohler.path-intellisense",
 		"yzhang.markdown-all-in-one",
 		"rangav.vscode-thunder-client",
+		// "googlecloudtools.cloudcode", // this extension will cause 100% cup/memory/storage
 	],
 	"settings": {
 		"terminal.integrated.defaultProfile.linux": "zsh",
 		"editor.formatOnSave": true,
-		"[python]": {
-			"editor.codeActionsOnSave": {
-				"source.organizeImports": true
-			}
-		},
-		"python.linting.flake8Enabled": true,
-		"python.formatting.provider": "black"
 	},
 	"containerEnv": {
 		"CLOUDSDK_CONFIG": "/home/vscode/.gcloud-config/"
