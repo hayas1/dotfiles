@@ -18,14 +18,17 @@ ENV https_proxy=${https_proxy} HTTPS_PROXY=${HTTPS_PROXY}
 ENV no_proxy=${no_proxy} NO_PROXY=${NO_PROXY}
 RUN apt-get install -y connect-proxy
 
+
 ### apt update and install tools implemented by rust
 RUN apt-get update -y && apt-get upgrade -y && export DEBIAN_FRONTEND=noninteractive
 RUN apt-get install -y exa ripgrep fd-find bat hexyl
+
 
 ### copy dotfiles
 COPY .devcontainer/dotfiles/.bash_aliases .bash_aliases
 RUN echo '' >> .zshrc
 RUN echo '. ~/.bash_aliases' >> .zshrc
+
 
 ### install google-cloud-sdk and kubectl
 RUN echo '' >> .zshrc
@@ -36,12 +39,14 @@ RUN echo '# gcloud and kubectl completion setting' >> .zshrc
 RUN echo '. /usr/lib/google-cloud-sdk/completion.bash.inc' >> .zshrc
 RUN echo '[[ $commands[kubectl] ]] && source <(kubectl completion zsh)' >> ~/.zshrc
 
+
 ### get powerlevel10k fonts, however this configuration may need to be done on the host machine.
-RUN wget -P .fonts/ https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
-RUN wget -P .fonts/ https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf
-RUN wget -P .fonts/ https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf
-RUN wget -P .fonts/ https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf
-# install powerlevel10k
+# RUN wget -P .fonts/ https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
+# RUN wget -P .fonts/ https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf
+# RUN wget -P .fonts/ https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf
+# RUN wget -P .fonts/ https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf
+
+### install powerlevel10k
 RUN git clone --depth=1 https://github.com/romkatv/powerlevel10k.git .oh-my-zsh/custom/themes/powerlevel10k
 RUN sed -i 's/^ZSH_THEME="codespaces"$/ZSH_THEME="powerlevel10k\/powerlevel10k"/g' .zshrc
 # install purepower
@@ -66,7 +71,7 @@ RUN echo 'fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completi
 # zsh-autosuggestion https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md
 RUN git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-autosuggestions
 RUN sed -ri 's/^\s*plugins=\((.*)\)/plugins=(\1 zsh-autosuggestions)/g' .zshrc
-# zsh-syntax-highliting https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md
+# zsh-syntax-highlighting https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md
 RUN git clone https://github.com/zsh-users/zsh-syntax-highlighting.git /usr/local/lib/zsh-syntax-highlighting
 RUN echo '. /usr/local/lib/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh' >> .zshrc
 # zsh-history-substring-search https://github.com/zsh-users/zsh-history-substring-search
