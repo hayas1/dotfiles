@@ -29,12 +29,12 @@ RUN echo '. ~/.bash_aliases' >> .zshrc
 
 ### install google-cloud-sdk and kubectl
 RUN echo '' >> .zshrc
-RUN echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list \
+RUN echo 'deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main' | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list \
     && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key --keyring /usr/share/keyrings/cloud.google.gpg  add - \
-    && apt-get update -y && apt-get install google-cloud-sdk -y
-RUN echo ". /usr/lib/google-cloud-sdk" >> .zshrc
-RUN apt-get install -y kubectl
-RUN echo "[[ $commands[kubectl] ]] && source <(kubectl completion zsh)" >> ~/.zshrc
+    && apt-get update -y && apt-get install -y google-cloud-sdk kubectl
+RUN echo '# gcloud and kubectl completion setting' >> .zshrc
+RUN echo '. /usr/lib/google-cloud-sdk/completion.bash.inc' >> .zshrc
+RUN echo '[[ $commands[kubectl] ]] && source <(kubectl completion zsh)' >> ~/.zshrc
 
 ### get powerlevel10k fonts, however this configuration may need to be done on the host machine.
 RUN wget -P .fonts/ https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
