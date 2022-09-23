@@ -49,6 +49,7 @@
     status                  # exit code of the last command
     command_execution_time  # duration of the last command
     background_jobs         # presence of background jobs
+    devcontainer            # devcontainer indicator (https://github.com/devcontainers)
     direnv                  # direnv status (https://direnv.net/)
     asdf                    # asdf version manager (https://github.com/asdf-vm/asdf)
     virtualenv              # python virtual environment (https://docs.python.org/3/library/venv.html)
@@ -1738,3 +1739,16 @@ typeset -g POWERLEVEL9K_CONFIG_FILE=${${(%):-%x}:a}
 
 (( ${#p10k_config_opts} )) && setopt ${p10k_config_opts[@]}
 'builtin' 'unset' 'p10k_config_opts'
+
+# custom devcontainer indicator for right prompt https://github.com/romkatv/powerlevel10k/issues/1895
+# icon cheat sheet https://www.nerdfonts.com/cheat-sheet
+function prompt_devcontainer() {
+  if [[ -n $REMOTE_CONTAINERS$CODESPACES$VSCODE_REMOTE_CONTAINERS_SESSION$GITPOD_HOST ]]; then
+    if [[ $USE_NERDFONT == 'nerdfont-complete'  ]]; then
+      # p10k segment -f cyan -i "\uf308" -t 'dev'
+      p10k segment -f cyan -i '' -t 'Dev'
+    else
+      p10k segment -f cyan -t 'Dev Container'
+    fi
+  fi
+}
