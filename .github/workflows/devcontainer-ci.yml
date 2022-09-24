@@ -17,8 +17,13 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Build and check installed powerlevel10k and docker
+      - name: Build and test zsh
         uses: devcontainers/ci@v0.2
         with:
           imageName: ghcr.io/hayas1/dotfiles
-          runCmd: zsh -c type p10k && which docker && which docker-compose
+          runCmd: >
+            zsh -c type p10k
+            && ls --help > /dev/null && grep --help > /dev/null && ps --help > /dev/null
+            && cat --help > /dev/null && od --help > /dev/null && fd --help > /dev/null
+            && diff /workspaces/dotfiles/.devcontainer/dotfiles/.p10k.zsh ~/.p10k.zsh 1>&2
+            && diff /workspaces/dotfiles/.devcontainer/dotfiles/.bash_aliases ~/.bash_aliases 1>&2
