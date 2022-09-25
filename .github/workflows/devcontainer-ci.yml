@@ -25,3 +25,18 @@ jobs:
             zsh -c exit && cat /home/vscode/.oh-my-zsh/custom/themes/powerlevel10k/internal/p10k.zsh > /dev/null
             && diff /workspaces/dotfiles/.devcontainer/dotfiles/.p10k.zsh ~/.p10k.zsh 1>&2
             && diff /workspaces/dotfiles/.devcontainer/dotfiles/.bash_aliases ~/.bash_aliases 1>&2
+  push:
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.event_name == 'push'
+    steps:
+      - uses: actions/checkout@v3
+      - name: Git setting
+        run: |
+          git config --local user.email "${GITHUB_ACTOR}"
+          git config --local user.name "${GITHUB_ACTOR}@users.noreply.github.com"
+      - name: Merge and push to mount branch
+        run: |
+          git switch mount
+          git merge master
+          git push origin mount

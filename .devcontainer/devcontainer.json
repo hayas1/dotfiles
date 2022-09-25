@@ -13,13 +13,12 @@
 			"HTTPS_PROXY": "${localEnv:HTTPS_PROXY}",
 			"no_PROXY": "${localEnv:no_proxy}",
 			"NO_PROXY": "${localEnv:NO_PROXY}",
-			"USE_NERDFONT": "nerdfont-complete", // can use nerdfont, uncomment this line
+			"USE_NERDFONT": "nerdfont-complete", // cannot use nerdfont, comment out this line
 		}
 	},
 	/// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
 	"extensions": [
-		"ms-azuretools.vscode-docker",
 		"eamodio.gitlens",
 		// "mhutchie.git-graph", /// in open source project, gitlens has same feature
 		"streetsidesoftware.code-spell-checker",
@@ -76,5 +75,8 @@
 		"ghcr.io/devcontainers/features/docker-from-docker:1": {
 			"version": "latest"
 		},
+		// "ghcr.io/devcontainers/features/aws-cli:1": {
+		//     "version": "latest"
+		// },
 	}
 }
