@@ -9,12 +9,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: >
+      - name: Create Pull request
+        id: create-pull-request
+        run: >
           gh pr create --assignee $AUTHOR
           --title 'Auto integration to master'
           --body 'No mount setting in master branch.'
+        continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           AUTHOR: ${{ github.event.pusher.name }}
       - if: failure()
-        run: echo 'Something wrong, maybe pull request have already created.'
+        run: echo "${{ steps.create-pull-request.outcome }} create pull request"
