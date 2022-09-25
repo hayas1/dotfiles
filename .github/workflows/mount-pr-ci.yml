@@ -19,5 +19,4 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           AUTHOR: ${{ github.event.pusher.name }}
-      - name: Create pull request status
-        run: echo "${{ steps.create-pull-request.outcome }} create new pull request"
+      - run: echo "${{ steps.create-pull-request.outcome }} create new pull request"
