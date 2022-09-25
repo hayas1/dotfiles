@@ -17,6 +17,6 @@ jobs:
           --body 'No mount setting in master branch.'
         continue-on-error: true
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.PR_TOKEN }}
           AUTHOR: ${{ github.event.pusher.name }}
       - run: echo "${{ steps.create-pull-request.outcome }} create new pull request"
