@@ -7,6 +7,6 @@ alias grep=rg
 alias psp=htop
 alias cat='batcat --paging=never --style=header'
 alias less=batcat
-alias od=hexyl
+alias odp=hexyl
 # alias find=fdfind
 alias fd=fdfind
