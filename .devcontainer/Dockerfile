@@ -60,3 +60,6 @@ RUN git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-${Z
 RUN git clone https://github.com/zsh-users/zsh-syntax-highlighting.git /usr/local/lib/zsh-syntax-highlighting
 # zsh-history-substring-search https://github.com/zsh-users/zsh-history-substring-search
 RUN git clone https://github.com/zsh-users/zsh-history-substring-search ${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-history-substring-search
+
+### for sudo, use same zsh setting
+RUN cp -r .bash_aliases .oh-my-zsh .p10k.zsh .purepower .zshrc /root
