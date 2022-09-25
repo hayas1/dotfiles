@@ -23,7 +23,5 @@ jobs:
           imageName: ghcr.io/hayas1/dotfiles
           runCmd: >
             zsh -c exit && cat /home/vscode/.oh-my-zsh/custom/themes/powerlevel10k/internal/p10k.zsh > /dev/null
-            && ls --help > /dev/null && grep --help > /dev/null && htop --help > /dev/null
-            && cat --help > /dev/null && od --help > /dev/null && fd --help > /dev/null
             && diff /workspaces/dotfiles/.devcontainer/dotfiles/.p10k.zsh ~/.p10k.zsh 1>&2
             && diff /workspaces/dotfiles/.devcontainer/dotfiles/.bash_aliases ~/.bash_aliases 1>&2
