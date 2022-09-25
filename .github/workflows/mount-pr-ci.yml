@@ -1,4 +1,4 @@
-name: Mount PR CI
+name: Mount create PR CI
 
 on:
   push:
@@ -19,5 +19,5 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           AUTHOR: ${{ github.event.pusher.name }}
-      - name: Create pull status
-        run: echo "${{ steps.create-pull-request.outcome }} create pull request"
+      - name: Create pull request status
+        run: echo "${{ steps.create-pull-request.outcome }} create new pull request"
