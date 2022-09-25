@@ -4,7 +4,7 @@ on:
   workflow_run:
     workflows: ["Devcontainer CI"]
     types: [completed]
-    branches: ["master"]
+    branches: ["mount"]
 
 jobs:
   merge:
