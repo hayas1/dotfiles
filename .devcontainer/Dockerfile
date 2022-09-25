@@ -33,7 +33,7 @@ RUN echo 'deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.c
 
 ### copy dotfiles
 COPY .devcontainer/dotfiles/.bash_aliases .bash_aliases
-COPY .devcontainer/dotfiles/.zshrc .
+COPY .devcontainer/dotfiles/.zshrc .zshrc
 
 ### get powerlevel10k fonts, however this configuration may need to be done on the host machine.
 # RUN wget -P .fonts/ https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
