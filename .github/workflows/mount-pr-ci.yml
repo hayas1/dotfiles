@@ -23,7 +23,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: hayas1/dotfiles/.github/workflows/devcontainer-ci.yml
+      - uses: hayas1/dotfiles/.github/workflows/devcontainer-ci.yml@master
   merge-pr:
     runs-on: ubuntu-latest
     needs: [create-pr, build]
