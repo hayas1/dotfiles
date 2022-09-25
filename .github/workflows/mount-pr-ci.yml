@@ -1,4 +1,4 @@
-name: Mount create PR CI
+name: Mount PR CI
 
 on:
   push:
@@ -17,6 +17,23 @@ jobs:
           --body 'No mount setting in master branch.'
         continue-on-error: true
         env:
-          GH_TOKEN: ${{ secrets.PR_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           AUTHOR: ${{ github.event.pusher.name }}
       - run: echo "${{ steps.create-pull-request.outcome }} create new pull request"
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./.github/workflows/devcontainer-ci.yml
+  merge-pr:
+    runs-on: ubuntu-latest
+    needs: [create-pr, build]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Merge pull request
+        id: merge-pull-request
+        run: >
+          gh pr merge mount --body 'Pass build, do auto merge' --merge
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: echo "${{ steps.merge-pull-request.outcome }} merge pull request"
