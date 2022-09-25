@@ -11,12 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Merge Pull Request
+      - name: Merge pull request
         id: merge-pull-request
         run: >
           gh pr merge mount --body 'Pass build, do auto merge' --merge
         continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Merge pull request status
-        run: echo "${{ steps.merge-pull-request.outcome }} merge pull request"
+      - run: echo "${{ steps.merge-pull-request.outcome }} merge pull request"
