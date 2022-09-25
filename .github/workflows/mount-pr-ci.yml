@@ -1,11 +1,11 @@
-name: mount PR CI
+name: Mount PR CI
 
 on:
   push:
     branches: ["mount"]
 
 jobs:
-  pull-request:
+  create-pr:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
