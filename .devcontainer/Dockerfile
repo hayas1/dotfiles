@@ -1,6 +1,6 @@
-### See here for image contents: https://github.com/microsoft/vscode-dev-containers/tree/v0.245.2/containers/debian/.devcontainer/base.Dockerfile
 ARG VARIANT="bullseye"
-FROM mcr.microsoft.com/vscode/devcontainers/base:0-${VARIANT}
+### See here for image contents: https://github.com/microsoft/vscode-dev-containers/tree/v0.245.2/containers/debian/.devcontainer/base.Dockerfile
+FROM mcr.microsoft.com/vscode/devcontainers/base:0-${VARIANT:-bullseye}
 
 ### set home directory for docker
 ARG HOME="/home/vscode"
@@ -34,10 +34,11 @@ RUN echo '. ~/.bash_aliases' >> .zshrc
 RUN echo '' >> .zshrc
 RUN echo 'deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main' | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list \
     && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key --keyring /usr/share/keyrings/cloud.google.gpg  add - \
-    && apt-get update -y && apt-get install -y google-cloud-sdk kubectl
+    && apt-get update -y && apt-get install -y google-cloud-sdk
+# kubectl
 RUN echo '# gcloud and kubectl completion setting' >> .zshrc
 RUN echo '. /usr/lib/google-cloud-sdk/completion.bash.inc' >> .zshrc
-RUN echo '[[ $commands[kubectl] ]] && source <(kubectl completion zsh)' >> ~/.zshrc
+RUN echo '[[ $commands[kubectl] ]] && source <(kubectl completion zsh)' >> .zshrc
 
 
 ### get powerlevel10k fonts, however this configuration may need to be done on the host machine.

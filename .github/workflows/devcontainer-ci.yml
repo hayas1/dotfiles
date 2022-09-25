@@ -2,23 +2,26 @@ name: Devcontainer CI
 
 on:
   push:
-    branches: [ "master" ]
+    branches: ["master"]
   pull_request:
-    branches: [ "master" ]
+    branches: ["master"]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - name: Login to GitHub Container Registry
-      uses: docker/login-action@v1 
-      with:
-        registry: ghcr.io
-        username: ${{ github.repository_owner }}
-        password: ${{ secrets.GITHUB_TOKEN }}
-    - name: Build and run dev container task
-      uses: devcontainers/ci@v0.2
-      with:
-        imageName: ghcr.io/hayas1/dotfiles
-        runCmd: zsh -c exit
+      - uses: actions/checkout@v3
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and test zsh
+        uses: devcontainers/ci@v0.2
+        with:
+          imageName: ghcr.io/hayas1/dotfiles
+          runCmd: >
+            zsh -c exit && cat /home/vscode/.oh-my-zsh/custom/themes/powerlevel10k/internal/p10k.zsh > /dev/null
+            && diff /workspaces/dotfiles/.devcontainer/dotfiles/.p10k.zsh ~/.p10k.zsh 1>&2
+            && diff /workspaces/dotfiles/.devcontainer/dotfiles/.bash_aliases ~/.bash_aliases 1>&2
