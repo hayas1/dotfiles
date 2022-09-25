@@ -5,8 +5,8 @@ This is devcontainer image for [VSCode](https://github.com/microsoft/vscode) wit
 
 ## Remark
 - ***Default shell***: Just after build, terminal will be opened by `bash`. To use `zsh`, execute `zsh` or open new terminal with `+` button.
-- ***Local config***: [devcontainer.json](.devcontainer/devcontainer.json) in `master` branch has commented out mounts setting. So, if we want to use `git`/`gcloud`/`kubectl`/etc with local config, enable its setting by uncomment.
-- ***Fonts***: To use this image with better icon, we have to install [nerdfont](https://github.com/ryanoasis/nerd-fonts) to your local machine and set it for VSCode like [Manual font installation](https://github.com/romkatv/powerlevel10k/blob/master/font.md#manual-font-installation). If we cannot install it, recommend to comment out `USE_NERDFONT` setting of [devcontainer.json](.devcontainer/devcontainer.json).
+- ***Local config***: [devcontainer.json](.devcontainer/devcontainer.json) in `master` branch has commented out mounts setting. So, if we want to use `git`/`gcloud`/`kubectl`/etc with local config, enable these settings by uncomment.
+- ***Fonts***: To use this image with better icon, we have to install [nerdfont](https://github.com/ryanoasis/nerd-fonts) to our local machine and set it for VSCode like [Manual font installation](https://github.com/romkatv/powerlevel10k/blob/master/font.md#manual-font-installation). If we cannot install it, recommend to comment out `USE_NERDFONT` setting of [devcontainer.json](.devcontainer/devcontainer.json).
 
 ## Installation
 ### Simple
