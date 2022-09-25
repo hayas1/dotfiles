@@ -19,7 +19,6 @@
 	/// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
 	"extensions": [
-		"ms-azuretools.vscode-docker",
 		"eamodio.gitlens",
 		// "mhutchie.git-graph", /// in open source project, gitlens has same feature
 		"streetsidesoftware.code-spell-checker",
