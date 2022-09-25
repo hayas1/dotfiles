@@ -1,7 +1,4 @@
-FROM rust:latest AS proc-builder
-WORKDIR /work
-RUN git clone https://github.com/dalance/procs.git && cd procs && cargo build --release && mkdir /work/build && mv target/release/procs /work/build
-
+ARG VARIANT="bullseye"
 ### See here for image contents: https://github.com/microsoft/vscode-dev-containers/tree/v0.245.2/containers/debian/.devcontainer/base.Dockerfile
 FROM mcr.microsoft.com/vscode/devcontainers/base:0-${VARIANT:-bullseye}
 
@@ -25,8 +22,6 @@ RUN apt-get install -y connect-proxy
 ### apt update and install tools implemented by rust
 RUN apt-get update -y && apt-get upgrade -y && export DEBIAN_FRONTEND=noninteractive
 RUN apt-get install -y exa ripgrep fd-find bat hexyl
-# install procs, that cannot be installed via apt-get.
-COPY --from=proc-builder /work/build/procs /usr/bin/procs
 
 
 ### copy dotfiles
