@@ -12,6 +12,7 @@
         "dups",
         "eamodio",
         "fdfind",
+        "foxundermoon",
         "fpath",
         "gcloud",
         "googlecloudtools",
@@ -33,6 +34,8 @@
         "seccomp",
         "setopt",
         "shardulm",
+        "shellcheck",
+        "timonwong",
         "yzhang"
     ]
 }
