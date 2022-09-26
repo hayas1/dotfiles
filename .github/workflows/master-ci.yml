@@ -1,0 +1,13 @@
+name: On Master CI
+
+on:
+  push:
+    branches: ["master"]
+  pull_request:
+    branches: ["master"]
+
+jobs:
+  test-build:
+    uses: hayas1/dotfiles/.github/workflows/devcontainer-ci.yml
+    with:
+      branch: ${{ github.ref }}
