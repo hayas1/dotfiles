@@ -7,7 +7,6 @@ ARG HOME="/home/vscode"
 WORKDIR $HOME
 
 
-
 ### apt update and install
 RUN apt-get update -y && apt-get upgrade -y && export DEBIAN_FRONTEND=noninteractive
 RUN apt-get install -y connect-proxy
@@ -15,15 +14,10 @@ RUN apt-get install -y exa ripgrep fd-find bat hexyl
 
 
 ### install google-cloud-sdk
-RUN echo '' >> .zshrc
 RUN echo 'deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main' | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list \
     && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key --keyring /usr/share/keyrings/cloud.google.gpg  add - \
     && apt-get update -y && apt-get install -y google-cloud-sdk
 
-
-### copy dotfiles
-COPY .devcontainer/dotfiles/.bash_aliases .bash_aliases
-COPY .devcontainer/dotfiles/.zshrc .zshrc
 
 ### get powerlevel10k fonts, however this configuration may need to be done on the host machine.
 # RUN wget -P .fonts/ https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
@@ -36,10 +30,13 @@ RUN git clone --depth=1 https://github.com/romkatv/powerlevel10k.git .oh-my-zsh/
 # install purepower
 RUN curl -fsSLO https://raw.githubusercontent.com/romkatv/dotfiles-public/master/.purepower
 # powerlevel10k setting
-COPY .devcontainer/dotfiles/.p10k.zsh .p10k.zsh
 ARG USE_NERDFONT=powerline
 ENV USE_NERDFONT=${USE_NERDFONT}
 
+### copy dotfiles
+COPY .devcontainer/dotfiles/.bash_aliases .bash_aliases
+COPY .devcontainer/dotfiles/.zshrc .zshrc
+COPY .devcontainer/dotfiles/.p10k.zsh .p10k.zsh
 
 ### plugins
 # zsh-completions https://github.com/zsh-users/zsh-completions
