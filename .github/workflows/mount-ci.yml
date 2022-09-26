@@ -26,6 +26,7 @@ jobs:
     outputs:
       pr-branch-ref: ${{ steps.pr-branch-ref.outputs.pr-ref }}
     steps:
+      - uses: actions/checkout@v3
       - name: Get pull request branch ref
         id: pr-branch-ref
         run: echo "::set-output name=pr-ref::refs/pull/$(gh pr view --json number -q .number)/merge"
