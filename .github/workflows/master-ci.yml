@@ -7,7 +7,21 @@ on:
     branches: ["master"]
 
 jobs:
+  pr-opener:
+    runs-on: ubuntu-latest
+    needs: create-pr
+    outputs:
+      pr-opener: ${{ steps.get-pr-opener.outputs.pr-opener }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Get pull request opener
+        id: get-pr-opener
+        run: echo "::set-output name=pr-opener::$(gh pr view --json author -q .author.login)"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   test-build:
     uses: hayas1/dotfiles/.github/workflows/devcontainer-ci.yml@master
+    needs: pr-opener
+    if: ${{ needs.pr-opener.outputs.pr-opener }} != ${ GITHUB_ACTOR }
     with:
       branch: ${{ github.ref }}
