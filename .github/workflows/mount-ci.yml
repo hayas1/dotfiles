@@ -29,6 +29,8 @@ jobs:
       - name: Get pull request branch ref
         id: pr-branch-ref
         run: echo "::set-output name=pr-ref::refs/pull/$(gh pr view --json number -q .number)/merge"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   build:
     uses: hayas1/dotfiles/.github/workflows/devcontainer-ci.yml@master
     needs: get-pr-branch
