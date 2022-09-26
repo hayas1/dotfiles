@@ -6,21 +6,11 @@ FROM mcr.microsoft.com/vscode/devcontainers/base:0-${VARIANT:-bullseye}
 ARG HOME="/home/vscode"
 WORKDIR $HOME
 
-### proxy setting
-ARG http_proxy
-ARG HTTP_PROXY
-ARG https_proxy
-ARG HTTPS_PROXY
-ARG no_proxy
-ARG NO_PROXY
-ENV http_proxy=${http_proxy} HTTP_PROXY=${HTTP_PROXY}
-ENV https_proxy=${https_proxy} HTTPS_PROXY=${HTTPS_PROXY}
-ENV no_proxy=${no_proxy} NO_PROXY=${NO_PROXY}
-RUN apt-get install -y connect-proxy
 
 
-### apt update and install tools implemented by rust
+### apt update and install
 RUN apt-get update -y && apt-get upgrade -y && export DEBIAN_FRONTEND=noninteractive
+RUN apt-get install -y connect-proxy
 RUN apt-get install -y exa ripgrep fd-find bat hexyl
 
 
