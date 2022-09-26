@@ -12,6 +12,7 @@
         "dups",
         "eamodio",
         "fdfind",
+        "foxundermoon",
         "fpath",
         "gcloud",
         "googlecloudtools",
@@ -28,11 +29,14 @@
         "PTRACE",
         "purepower",
         "rangav",
+        "realpath",
         "ripgrep",
         "SAVEHIST",
         "seccomp",
         "setopt",
         "shardulm",
+        "shellcheck",
+        "timonwong",
         "yzhang"
     ]
 }
