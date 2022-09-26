@@ -8,6 +8,6 @@ on:
 
 jobs:
   test-build:
-    uses: hayas1/dotfiles/.github/workflows/devcontainer-ci.yml
+    uses: hayas1/dotfiles/.github/workflows/devcontainer-ci.yml@master
     with:
       branch: ${{ github.ref }}
