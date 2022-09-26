@@ -21,7 +21,7 @@ jobs:
           AUTHOR: ${{ github.event.pusher.name }}
       - run: echo "${{ steps.create-pull-request.outcome }} create new pull request"
   build:
-    uses: hayas1/dotfiles/.github/workflows/devcontainer-ci.yml@v1
+    uses: hayas1/dotfiles/.github/workflows/devcontainer-ci.yml@master
     with:
       branch: "refs/pull/$(gh pr view --json number -q .number)/merge"
   merge-pr:
