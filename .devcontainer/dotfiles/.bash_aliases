@@ -1,8 +1,15 @@
-alias ls='exa --icons --git'
-alias la='exa -a --icons'
-alias ll='exa -aal --icons'
-alias lt='exa -T -L 3 -a -I "node_modules|.git|.cache" --icons'
-alias ltl='exa -T -L 3 -a -I "node_modules|.git|.cache" -l --icons'
+#! /bin/bash
+if [[ $USE_NERDFONT == nerdfont-complete ]]; then
+    ICONS='--icons'
+else
+    ICONS=''
+fi
+
+alias ls='exa --git $ICONS'
+alias la='exa -a $ICONS'
+alias ll='exa -aal $ICONS'
+alias lt='exa -T -L 3 -a -I "node_modules|.git|.cache" $ICONS'
+alias ltl='exa -T -L 3 -a -I "node_modules|.git|.cache" -l $ICONS'
 alias grep=rg
 alias psp=htop
 alias cat='batcat --paging=never --style=header'
