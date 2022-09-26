@@ -5,26 +5,33 @@ on:
     branches: ["mount"]
 
 jobs:
-  pr-integration:
+  create-pr:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Create pull request
         id: create-pull-request
         run: >
-          gh pr create --assignee $AUTHOR
+          gh pr create
           --title 'Auto integration to master'
           --body 'No mount setting in master branch.'
         continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           AUTHOR: ${{ github.event.pusher.name }}
-      - name: Build pull request
-        uses: hayas1/dotfiles/.github/workflows/devcontainer-ci.yml@"refs/pull/$(gh pr view --json number -q .number)/merge"
+      - run: echo "${{ steps.create-pull-request.outcome }} create new pull request"
+  build:
+    uses: hayas1/dotfiles/.github/workflows/devcontainer-ci.yml@"refs/pull/$(gh pr view --json number -q .number)/merge"
+  merge-pr:
+    runs-on: ubuntu-latest
+    needs: [create-pr, build]
+    steps:
+      - uses: actions/checkout@v3
       - name: Merge pull request
         id: merge-pull-request
         run: >
-          gh pr merge mount --merge
-          --body 'Pass build, auto merged'
+          gh pr merge mount --body 'Pass build, do auto merge' --merge
+        continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: echo "${{ steps.merge-pull-request.outcome }} merge pull request"
