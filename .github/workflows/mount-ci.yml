@@ -37,16 +37,16 @@ jobs:
     needs: get-pr-branch
     with:
       branch: ${{ needs.get-pr-branch.outputs.pr-branch-ref }}
-  merge-pr:
-    runs-on: ubuntu-latest
-    needs: [create-pr, build]
-    steps:
-      - uses: actions/checkout@v3
-      - name: Merge pull request
-        id: merge-pull-request
-        run: >
-          gh pr merge mount --body 'Pass build, do auto merge' --merge
-        continue-on-error: true
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: echo "${{ steps.merge-pull-request.outcome }} merge pull request"
+  # merge-pr:
+  #   runs-on: ubuntu-latest
+  #   needs: [create-pr, build]
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - name: Merge pull request
+  #       id: merge-pull-request
+  #       run: >
+  #         gh pr merge mount --body 'Pass build, do auto merge' --merge
+  #       continue-on-error: true
+  #       env:
+  #         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #     - run: echo "${{ steps.merge-pull-request.outcome }} merge pull request"
