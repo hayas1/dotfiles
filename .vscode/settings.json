@@ -29,6 +29,7 @@
         "PTRACE",
         "purepower",
         "rangav",
+        "realpath",
         "ripgrep",
         "SAVEHIST",
         "seccomp",
