@@ -20,9 +20,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           AUTHOR: ${{ github.event.pusher.name }}
       - name: Build pull request
-        uses: hayas1/dotfiles/.github/workflows/devcontainer-ci.yml
-        with:
-          branches: "refs/pull/$(gh pr view --json number -q .number)/merge"
+        uses: hayas1/dotfiles/.github/workflows/devcontainer-ci.yml@"refs/pull/$(gh pr view --json number -q .number)/merge"
       - name: Merge pull request
         id: merge-pull-request
         run: >
