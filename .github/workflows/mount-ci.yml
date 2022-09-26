@@ -20,10 +20,20 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           AUTHOR: ${{ github.event.pusher.name }}
       - run: echo "${{ steps.create-pull-request.outcome }} create new pull request"
+  get-pr-branch:
+    runs-on: ubuntu-latest
+    needs: create-pr
+    outputs:
+      pr-branch-ref: ${{ steps.pr-branch-ref.outputs.pr-ref }}
+    steps:
+      - name: Get pull request branch ref
+        id: pr-branch-ref
+        run: echo "::set-output name=pr-ref::refs/pull/$(gh pr view --json number -q .number)/merge"
   build:
     uses: hayas1/dotfiles/.github/workflows/devcontainer-ci.yml@master
+    needs: get-pr-branch
     with:
-      branch: "refs/pull/$(gh pr view --json number -q .number)/merge"
+      branch: ${{ ${{needs.job1.outputs.output1}} }}
   merge-pr:
     runs-on: ubuntu-latest
     needs: [create-pr, build]
