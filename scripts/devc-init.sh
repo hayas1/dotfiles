@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 # USAGE: make symlink to this file in some directory that is contained PATH
 echo '\e[36m###\e[m this is simple copy program \e[36m###\e[m'
 
