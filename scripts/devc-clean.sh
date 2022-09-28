@@ -11,7 +11,7 @@ remove_current() {
         [Yy]*)
             mv "$PWD"/"$1" "$tmp_dir"
             echo "\e[31m...\e[m file $1 moved to $tmp_dir"
-            echo "\e[30m^^^ want to recover, try \$ mv $tmp_dir/.* $PWD\e[m"
+            echo "\e[35m^^^ want to recover, try \$ mv $tmp_dir/.* $PWD\e[m"
             ;;
         *)
             echo "\e[32m!!!\e[m do not remove $1"
