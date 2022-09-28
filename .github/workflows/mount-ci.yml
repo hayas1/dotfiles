@@ -32,14 +32,19 @@ jobs:
         run: echo "::set-output name=pr-ref::refs/pull/$(gh pr view --json number -q .number)/merge"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  build:
+  test-build:
     uses: hayas1/dotfiles/.github/workflows/devcontainer-ci.yml@master
+    needs: get-pr-branch
+    with:
+      branch: ${{ needs.get-pr-branch.outputs.pr-branch-ref }}
+  test-public-script:
+    uses: hayas1/dotfiles/.github/workflows/public-script-ci.yml@master
     needs: get-pr-branch
     with:
       branch: ${{ needs.get-pr-branch.outputs.pr-branch-ref }}
   merge-pr:
     runs-on: ubuntu-latest
-    needs: [create-pr, build]
+    needs: [create-pr, test-build]
     steps:
       - uses: actions/checkout@v3
       - name: Merge pull request
