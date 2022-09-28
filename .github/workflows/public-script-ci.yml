@@ -8,13 +8,13 @@ on:
         type: string
 
 jobs:
-  test-init:
+  test-init-script:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
         with:
           ref: ${{ inputs.branch }}
-      - name: Run public init
+      - name: Run public init script
         id: run-init
         run: |
           tmp_dir=$(mktemp -dt "dotfiles.XXXXXX")
@@ -24,3 +24,16 @@ jobs:
         run: |
           diff -r ${{ steps.run-init.outputs.tmp_dir }}/.vscode .vscode
           diff -r ${{ steps.run-init.outputs.tmp_dir }}/.devcontainer .devcontainer
+  test-clean-script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test public clean script
+        run: |
+          tmp_dir=$(mktemp -dt "dotfiles.XXXXXX")
+          tmp_dir2=$(mktemp -dt "dotfiles.XXXXXX")
+          curl -fsL https://raw.githubusercontent.com/hayas1/dotfiles/master/scripts/public/init.sh | bash -s $tmp_dir
+          [ "$(ls -A $tmp_dir)" ] || exit 1 # should not be empty
+          curl -fsL https://raw.githubusercontent.com/hayas1/dotfiles/master/scripts/public/clean.sh > $tmp_dir2/clean.sh
+          chmod +x clean.sh
+          yes | $tmp_dir2/clean.sh $tmp_dir
+          [ "$(ls -A $tmp_dir)" ] && exit 1 # should be empty
