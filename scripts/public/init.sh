@@ -16,5 +16,5 @@ tmp_dir=$(mktemp -dt "dotfiles.$timestamp.XXXXXX")
 repository="https://github.com/hayas1/dotfiles.git"
 git clone $repository "$tmp_dir"
 
-init_script="$tmp_dir/scripts/devc-init.sh"
+init_script="$tmp_dir/scripts/core/devc-init.sh"
 $init_script
