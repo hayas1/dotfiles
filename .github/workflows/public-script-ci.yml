@@ -11,20 +11,17 @@ jobs:
   test-init-script:
     runs-on: ubuntu-latest
     steps:
-      - name: Run public init script
-        id: run-init
-        run: |
-          curl -fsL https://raw.githubusercontent.com/hayas1/dotfiles/master/scripts/public/init.sh | bash -s
-          tmp_dir=$(mktemp -dt "dotfiles.XXXXXX")
-          echo "::set-output name=tmp-dir::$tmp_dir"
-          mv .* $tmp_dir
       - uses: actions/checkout@v3
         with:
           ref: ${{ inputs.branch }}
-      - name: Test diff directories
+      - name: Test public init script
         run: |
-          diff -r ${{ steps.run-init.outputs.tmp_dir }}/.vscode .vscode
-          diff -r ${{ steps.run-init.outputs.tmp_dir }}/.devcontainer .devcontainer
+          cwd=$(pwd)
+          tmp_dir=$(mktemp -dt "dotfiles.XXXXXX")
+          cd $tmp_dir
+          curl -fsL https://raw.githubusercontent.com/hayas1/dotfiles/master/scripts/public/init.sh | bash -s
+          diff -r $cwd/.vscode $tmp_dir/.vscode
+          diff -r $cwd/.devcontainer $tmp_dir/.devcontainer
   test-clean-script:
     runs-on: ubuntu-latest
     steps:
@@ -33,7 +30,7 @@ jobs:
           tmp_dir=$(mktemp -dt "dotfiles.XXXXXX")
           cd $tmp_dir
           [ "$(ls -A)" ] && exit 1 # should be empty
-          curl -fsL https://raw.githubusercontent.com/hayas1/dotfiles/master/scripts/public/init.sh | bash -s
+          curl -fsL https://raw.githubusercontent.com/hayas1/dotfiles/mount/scripts/public/init.sh | bash -s
           [ "$(ls -A)" ] || exit 1 # should not be empty
-          yes | bash <(curl -fsL https://raw.githubusercontent.com/hayas1/dotfiles/master/scripts/public/clean.sh)
+          echo 'y\n' | bash <(curl -fsL https://raw.githubusercontent.com/hayas1/dotfiles/mount/scripts/public/clean.sh)
           [ "$(ls -A)" ] && exit 1 # should be empty
