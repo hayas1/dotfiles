@@ -9,7 +9,6 @@ on:
 jobs:
   pr-opener:
     runs-on: ubuntu-latest
-    needs: create-pr
     outputs:
       pr-opener: ${{ steps.get-pr-opener.outputs.pr-opener }}
     steps:
