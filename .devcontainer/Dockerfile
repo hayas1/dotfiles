@@ -1,6 +1,5 @@
-ARG VARIANT="bullseye"
 ### See here for image contents: https://github.com/microsoft/vscode-dev-containers/tree/v0.245.2/containers/debian/.devcontainer/base.Dockerfile
-FROM mcr.microsoft.com/vscode/devcontainers/base:0-${VARIANT:-bullseye}
+FROM mcr.microsoft.com/vscode/devcontainers/base:0-bullseye
 
 ### set home directory for docker
 ARG HOME="/home/vscode"

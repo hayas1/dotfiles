@@ -3,27 +3,28 @@ This is devcontainer image for [VSCode](https://github.com/microsoft/vscode) wit
 
 ![main screen](/images/main.png)
 
-## Remark
+# Remark
 - ***Default shell***: Just after build, terminal will be opened by `bash`. To use `zsh`, execute `zsh` or open new terminal with `+` button.
 - ***Local config***: [devcontainer.json](.devcontainer/devcontainer.json) in `master` branch has commented out mounts setting. So, if we want to use `git`/`gcloud`/`kubectl`/etc with local config, enable these settings by uncomment.
-- ***Fonts***: To use this image with better icon, we have to install [nerdfont](https://github.com/ryanoasis/nerd-fonts) to our local machine and set it for VSCode like [Manual font installation](https://github.com/romkatv/powerlevel10k/blob/master/font.md#manual-font-installation). If we cannot install it, recommend to comment out `USE_NERDFONT` setting of [devcontainer.json](.devcontainer/devcontainer.json).
+- ***Fonts***: To use this image with better icon, we have to install [nerdfont](https://github.com/ryanoasis/nerd-fonts) to our local machine and set it for VSCode like [Manual font installation](https://github.com/romkatv/powerlevel10k/blob/master/font.md#manual-font-installation). If we cannot install it, recommend to comment out `USE_NERDFONT` setting of [devcontainer.json](/.devcontainer/devcontainer.json).
 
-## Installation
-### Simple
+# Installation
+## Simple
 Copy [.devcontainer](/.devcontainer/) directory to our workspace, and customize files, and build devcontainer.
 
-### Use script
+## Use script
 We have a simple script [devcinit.sh](/scripts/devcinit.sh) to prepare workspace. Clone this repository appropriate path (such as `/usr/lib/`) and make symbolic link for it in `Path` set directory (such as `/usr/bin`). We make workspace and execute the script.
 ```sh
-$ su # OPTIONAL
 $ git clone https://github.com/hayas1/dotfiles.git /usr/lib/
-$ ln -s /usr/lib/dotfiles/scripts/devcinit.sh /usr/bin/devcinit
+$ ln -s /usr/lib/dotfiles/scripts/devc.sh /usr/bin/devc
 ```
-
+And example of usage.
 ```sh
 $ mkdir ./workspace && cd $_
-$ devcinit
+$ devc init
 ### this is simple copy program ###
 >>> made new directory .vscode
 >>> made new directory .devcontainer
 ```
+### Script dependencies
+Some subcommands (such as simple `init` or `update`) can be executed without Python, but a lot of subcommands require Python 3.
