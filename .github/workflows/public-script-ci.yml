@@ -16,7 +16,7 @@ jobs:
         run: |
           curl -fsL https://raw.githubusercontent.com/hayas1/dotfiles/master/scripts/public/init.sh | bash -s
           tmp_dir=$(mktemp -dt "dotfiles.XXXXXX")
-          echo "::set-output name=tmp-dir::$tmp_dir"
+          echo "::set-output name=tmp-dir::\"$tmp_dir\""
           mv .[^\.]* $tmp_dir
       - uses: actions/checkout@v3
         with:
@@ -30,10 +30,11 @@ jobs:
     steps:
       - name: Test public clean script
         run: |
+          set +o pipefail
           tmp_dir=$(mktemp -dt "dotfiles.XXXXXX")
           cd $tmp_dir
           [ "$(ls -A)" ] && exit 1 # should be empty
           curl -fsL https://raw.githubusercontent.com/hayas1/dotfiles/master/scripts/public/init.sh | bash -s
           [ "$(ls -A)" ] || exit 1 # should not be empty
-          echo "y\ny\n" | bash <(curl -fsL https://raw.githubusercontent.com/hayas1/dotfiles/master/scripts/public/clean.sh)
+          yes | bash <(curl -fsL https://raw.githubusercontent.com/hayas1/dotfiles/master/scripts/public/clean.sh)
           [ "$(ls -A)" ] && exit 1 # should be empty
