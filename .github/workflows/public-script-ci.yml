@@ -32,7 +32,5 @@ jobs:
           [ "$(ls -A)" ] && exit 1 # should be empty
           curl -fsL https://raw.githubusercontent.com/hayas1/dotfiles/master/scripts/public/init.sh | bash -s
           [ "$(ls -A)" ] || exit 1 # should not be empty
-          tmp_dir=$(mktemp -dt "dotfiles.XXXXXX")
-          curl -fsL https://raw.githubusercontent.com/hayas1/dotfiles/master/scripts/public/clean.sh > $tmp_dir/clean.sh
-          chmod +x $tmp_dir/clean.sh
+          echo 'y\n' | bash <(curl -fsL https://raw.githubusercontent.com/hayas1/dotfiles/master/scripts/public/clean.sh)
           [ "$(ls -A)" ] && exit 1 # should be empty
