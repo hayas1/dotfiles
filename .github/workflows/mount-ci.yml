@@ -38,7 +38,7 @@ jobs:
     with:
       branch: ${{ needs.get-pr-branch.outputs.pr-branch-ref }}
   test-public-script:
-    uses: hayas1/dotfiles/.github/workflows/public-script-ci.yml@master
+    uses: hayas1/dotfiles/.github/workflows/public-script-ci.yml@mount
     needs: get-pr-branch
     with:
       branch: ${{ needs.get-pr-branch.outputs.pr-branch-ref }}
