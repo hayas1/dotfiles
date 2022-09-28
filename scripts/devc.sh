@@ -6,6 +6,8 @@ if [ $# = 1 ] && [ "$1" = 'init' ]; then
     "$SCRIPT_ROOT"/devc-init.sh
 elif [ $# = 1 ] && [ "$1" = 'update' ]; then
     "$SCRIPT_ROOT"/devc-update.sh
+elif [ $# = 1 ] && [ "$1" = 'clean' ]; then
+    "$SCRIPT_ROOT"/devc-clean.sh
 elif type python >/dev/null 2>&1; then
     python "$SCRIPT_ROOT"/python/devc.py "$@"
 elif type python3; then
