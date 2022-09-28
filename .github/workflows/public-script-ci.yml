@@ -1,0 +1,23 @@
+name: Test Public Script CI
+
+on:
+  push:
+    branches: ["master"]
+  pull_request:
+    branches: ["master"]
+
+jobs:
+  test-init:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run public init
+        id: run-init
+        run: |
+          tmp_dir=$(mktemp -dt "dotfiles.XXXXXX")
+          echo "::set-output name=tmp-dir::$(tmp_dir)"
+          curl -fsL https://raw.githubusercontent.com/hayas1/dotfiles/master/scripts/public/init.sh | bash -s $tmp_dir
+      - name: Test diff directories
+        run: |
+          diff -r ${{ steps.run-init.outputs.tmp_dir }}/.vscode .vscode
+          diff -r ${{ steps.run-init.outputs.tmp_dir }}/.devcontainer .devcontainer
