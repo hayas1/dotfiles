@@ -17,7 +17,7 @@ jobs:
           curl -fsL https://raw.githubusercontent.com/hayas1/dotfiles/master/scripts/public/init.sh | bash -s
           tmp_dir=$(mktemp -dt "dotfiles.XXXXXX")
           echo "::set-output name=tmp-dir::$tmp_dir"
-          mv .* $tmp_dir
+          mv .[^\.]* $tmp_dir
       - uses: actions/checkout@v3
         with:
           ref: ${{ inputs.branch }}
@@ -35,5 +35,5 @@ jobs:
           [ "$(ls -A)" ] && exit 1 # should be empty
           curl -fsL https://raw.githubusercontent.com/hayas1/dotfiles/master/scripts/public/init.sh | bash -s
           [ "$(ls -A)" ] || exit 1 # should not be empty
-          yes | bash <(curl -fsL https://raw.githubusercontent.com/hayas1/dotfiles/master/scripts/public/clean.sh)
+          echo "y\ny\n" | bash <(curl -fsL https://raw.githubusercontent.com/hayas1/dotfiles/master/scripts/public/clean.sh)
           [ "$(ls -A)" ] && exit 1 # should be empty

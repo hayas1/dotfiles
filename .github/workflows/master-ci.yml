@@ -25,7 +25,7 @@ jobs:
     with:
       branch: ${{ github.ref }}
   test-public-script:
-    uses: hayas1/dotfiles/.github/workflows/public-script-ci.yml@master
+    uses: hayas1/dotfiles/.github/workflows/public-script-ci.yml@mount
     needs: pr-opener
     if: ${{ needs.pr-opener.outputs.pr-opener }} != ${ GITHUB_ACTOR }
     with:
