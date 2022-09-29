@@ -1,26 +1,6 @@
 #!/bin/bash -e
-echo '### this is simple remove program ###'
-remove_from() {
-    local file_bases=${*:1:($# - 1)}
-    echo -n ">>> really remove [$file_bases]? [y/N]"
-    read -r ans
-    case $ans in
-    [Yy]*)
-        local target=${*:$#}
-        for f in $file_bases; do
-            mv "$target"/"$f" "$tmp_dir"
-        done
-        echo "... files [$file_bases] moved to $tmp_dir"
-        echo "^^^ want to recover, try \$ mv $tmp_dir/.[^\.]* $target"
-        ;;
-    *)
-        echo "!!! do not remove [$file_bases]"
-        ;;
-    esac
-}
-
-timestamp=$(date +%Y%m%d%H%M%S)
-tmp_dir=$(mktemp -dt "dotfiles.remove.$timestamp.XXXXXX")
+CORE_DIR="$(dirname "$(realpath "$0")")"
+source "$CORE_DIR/core.sh"
 
 if [ $# = 0 ]; then
     target=$PWD
@@ -34,4 +14,4 @@ else
     exit 1
 fi
 
-remove_from .vscode .devcontainer "$target"
+remove_from "$(tr '\n' ' ' <"$CORE_DIR"/copylist.txt)" "$target"
