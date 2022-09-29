@@ -1,18 +1,20 @@
 #!/bin/bash -e
 echo '### this is simple remove program ###'
 remove_from() {
-    echo -n ">>> really remove ${*:1:($# - 1)}? [y/N]"
+    local file_bases=${*:1:($# - 1)}
+    echo -n ">>> really remove [$file_bases]? [y/N]"
     read -r ans
     case $ans in
     [Yy]*)
-        for f in "${@:1:($# - 1)}"; do
-            mv "${*:$#}"/"$f" "$tmp_dir"
+        local target=${*:$#}
+        for f in $file_bases; do
+            mv "$target"/"$f" "$tmp_dir"
         done
-        echo "... files ${*:1:($# - 1)} moved to $tmp_dir"
-        echo "^^^ want to recover, try \$ mv $tmp_dir/.[^\.]* ${*:$#}"
+        echo "... files [$file_bases] moved to $tmp_dir"
+        echo "^^^ want to recover, try \$ mv $tmp_dir/.[^\.]* $target"
         ;;
     *)
-        echo "!!! do not remove ${*:1:($# - 1)}"
+        echo "!!! do not remove [$file_bases]"
         ;;
     esac
 }
@@ -21,9 +23,9 @@ timestamp=$(date +%Y%m%d%H%M%S)
 tmp_dir=$(mktemp -dt "dotfiles.remove.$timestamp.XXXXXX")
 
 if [ $# = 0 ]; then
-    TARGET=$PWD
+    target=$PWD
 elif [ $# = 1 ] && [ -e "$1" ]; then
-    TARGET=$1
+    target=$1
 elif [ $# = 1 ] && [ ! -e "$1" ]; then
     echo "cannot find directory: $1" 1>&2
     exit 1
@@ -32,4 +34,4 @@ else
     exit 1
 fi
 
-remove_from .vscode .devcontainer "$TARGET"
+remove_from .vscode .devcontainer "$target"
