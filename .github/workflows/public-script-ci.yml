@@ -30,7 +30,8 @@ jobs:
           tmp_dir=$(mktemp -dt "dotfiles.XXXXXX")
           cd $tmp_dir
           [ "$(ls -A)" ] && exit 1 # should be empty
-          curl -fsL https://raw.githubusercontent.com/hayas1/dotfiles/mount/scripts/public/init.sh | bash -s
+          curl -fsL https://raw.githubusercontent.com/hayas1/dotfiles/master/scripts/public/init.sh | bash -s
           [ "$(ls -A)" ] || exit 1 # should not be empty
-          echo 'y\n' | bash <(curl -fsL https://raw.githubusercontent.com/hayas1/dotfiles/mount/scripts/public/clean.sh)
+          echo 'y' | bash <(curl -fsL https://raw.githubusercontent.com/hayas1/dotfiles/master/scripts/public/clean.sh)
           [ "$(ls -A)" ] && exit 1 # should be empty
+          ls -A
