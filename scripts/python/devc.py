@@ -1,9 +1,11 @@
 # create the top-level parser
 import argparse
+from pathlib import Path
 
 
 def init(args):
     print("init args:", args)
+    print("absolute path:", args.path.resolve())
 
 
 def migrate(args):
@@ -43,16 +45,19 @@ if __name__ == "__main__":
     subparsers = parser.add_subparsers(help="sub-command")
 
     init_parser = subparsers.add_parser("init", help="Initialize workspace")
+    init_parser.add_argument("path", type=Path, default=".", help="initialize path")
     init_parser.add_argument("-f", "--force", action="store_true", help="Force initialization with over write")
     init_parser.add_argument("--gitignore", action="store_true", help="Make gitignore in copied directory")
     init_parser.add_argument("--features", choices=FEATURES, help="Initialize workspace with features")
     init_parser.set_defaults(handler=init)
 
     migrate_parser = subparsers.add_parser("migrate", help="Migrate workspace (developing)")
+    migrate_parser.add_argument("path", type=Path, default=".", help="initialize path")
     migrate_parser.add_argument("-f", "--force", action="store_true", help="Force migration, overwrite workspace")
     migrate_parser.set_defaults(handler=migrate)
 
     clean_parser = subparsers.add_parser("clean", help="Clean workspace")
+    clean_parser.add_argument("path", type=Path, default=".", help="initialize path")
     clean_parser.add_argument("-y", "--yes", action="store_true", help="Clean workspace without confirmation")
     clean_parser.set_defaults(handler=clean)
 
