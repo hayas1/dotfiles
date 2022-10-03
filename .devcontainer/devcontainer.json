@@ -6,9 +6,6 @@
 	"build": {
 		"dockerfile": "./Dockerfile",
 		"context": "..",
-		"args": {
-			"USE_NERDFONT": "nerdfont-complete", // cannot use nerdfont, comment out this line
-		}
 	},
 	/// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
@@ -24,6 +21,8 @@
 		"foxundermoon.shell-format",
 		"yzhang.markdown-all-in-one",
 		"rangav.vscode-thunder-client",
+		"ms-azuretools.vscode-docker", // installed by docker-from-docker features
+		"ms-kubernetes-tools.vscode-kubernetes-tools", // installed by kubectl-helm-minikube features
 		// "googlecloudtools.cloudcode", /// this extension will cause 100% cup/memory/storage
 	],
 	"settings": {
@@ -31,6 +30,7 @@
 		"editor.formatOnSave": true,
 	},
 	"containerEnv": {
+		"USE_NERDFONT": "nerdfont-complete", // cannot use nerdfont, comment out this line
 		"CLOUDSDK_CONFIG": "/home/vscode/.gcloud-config/"
 	},
 	/// devcontainer-ci cannot ignore mounts yet https://github.com/devcontainers/ci/issues/166
@@ -44,42 +44,48 @@
 		// "source=${localEnv:HOME}/.aws/,target=/home/vscode/.aws/,type=bind,consistency=cached",
 		// "source=${localEnv:HOME}/.config/gcloud/,target=/home/vscode/.gcloud-config/,type=bind,consistency=cached",
 		// "source=${localEnv:HOME}/.kube/,target=/home/vscode/.kube/,type=bind,consistency=cached",
+    // "source=${localEnv:HOME}/.helm/,target=/home/vscode/.helm/,type=bind,consistency=cached",
 	],
 	/// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "vscode",
 	/// Uncomment when using a ptrace-based debugger like C++, Go, and Rust
-	// "runArgs": [ "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined" ],
-	/// available features list https://github.com/devcontainers/features/tree/main/src
+	"runArgs": [
+		"--cap-add=SYS_PTRACE",
+		"--security-opt",
+		"seccomp=unconfined"
+	],
+	/// available features list https://github.com/devcontainers/features/tree/main/src,
+	/// but features is yet preview
 	"features": {
-		"ghcr.io/devcontainers/features/python:1": {
-			"version": "latest"
-		},
-		// "ghcr.io/devcontainers/features/rust:1": {
+		// "ghcr.io/devcontainers/features/python:1": {
 		// 	"version": "latest"
 		// },
-		// "ghcr.io/devcontainers/features/go:1": {
+		// // "ghcr.io/devcontainers/features/rust:1": {
+		// // 	"version": "latest"
+		// // },
+		// // "ghcr.io/devcontainers/features/go:1": {
+		// // 	"version": "latest"
+		// // },
+		// // "ghcr.io/devcontainers/features/node:1": {
+		// // 	"version": "latest"
+		// // },
+		// // "ghcr.io/devcontainers/features/java:1": {
+		// //     "version": "latest"
+		// // },
+		// // "ghcr.io/devcontainers/features/terraform:1": {
+		// // 	"version": "latest"
+		// // },
+		// "ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {
 		// 	"version": "latest"
 		// },
-		// "ghcr.io/devcontainers/features/node:1": {
+		// "ghcr.io/devcontainers/features/docker-from-docker:1": {
 		// 	"version": "latest"
 		// },
-		// "ghcr.io/devcontainers/features/java:1": {
-		//     "version": "latest"
-		// },
-		// "ghcr.io/devcontainers/features/terraform:1": {
-		// 	"version": "latest"
-		// },
-		"ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {
-			"version": "latest"
-		},
-		"ghcr.io/devcontainers/features/docker-from-docker:1": {
-			"version": "latest"
-		},
-		// "ghcr.io/devcontainers/features/aws-cli:1": {
-		//     "version": "latest"
-		// },
-		// "ghcr.io/devcontainers/features/github-cli:1": {
-		// 	"version": "latest"
-		// },
+		// // "ghcr.io/devcontainers/features/aws-cli:1": {
+		// //     "version": "latest"
+		// // },
+		// // "ghcr.io/devcontainers/features/github-cli:1": {
+		// // 	"version": "latest"
+		// // },
 	}
 }

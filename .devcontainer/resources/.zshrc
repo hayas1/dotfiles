@@ -8,7 +8,7 @@ export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+[[ -s ~/.p10k.zsh ]] && source ~/.p10k.zsh
 
 # without opening configuration wizard
 POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
@@ -18,15 +18,15 @@ DISABLE_AUTO_UPDATE=true
 DISABLE_UPDATE_PROMPT=true
 
 # use purepower
-[[ ! -f ~/.purepower ]] || source ~/.purepower
+[[ -s ~/.purepower ]] && source ~/.purepower
 
 # load plugins
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 plugins=(git zsh-autosuggestions zsh-history-substring-search)
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
-[[ ! -f /usr/local/lib/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] || source /usr/local/lib/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-[[ ! -f $ZSH/oh-my-zsh.sh ]] || source $ZSH/oh-my-zsh.sh
+[[ -s "${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}"/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && source "${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}"/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+[[ -s $ZSH/oh-my-zsh.sh ]] && source $ZSH/oh-my-zsh.sh
 
 # timezone and language environment
 export TZ=Asia/Tokyo
@@ -34,11 +34,19 @@ export TZ=Asia/Tokyo
 setopt print_eight_bit
 
 # Alias definitions.
-[[ ! -f ~/.bash_aliases ]] || source ~/.bash_aliases
+[[ -s ~/.bash_aliases ]] && source ~/.bash_aliases
 
-# gcloud and kubectl completion setting
+# gcloud and kubectl and helm completion setting
 source /usr/lib/google-cloud-sdk/completion.bash.inc
 [[ $commands[kubectl] ]] && source <(kubectl completion zsh)
+source <(helm completion zsh)
+
+# cargo env
+[ -s "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
+# nvm settings
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"                   # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
 # history setting
 export HISTSIZE=5000        # history size in memory
