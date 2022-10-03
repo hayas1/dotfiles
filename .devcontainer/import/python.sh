@@ -26,7 +26,7 @@ fi
 
 # install python
 WORK_DIR="${DEVC_CONFIG:-$HOME/.devc}/work/python"
-INSTALL_PATH="/usr/local/lib/python$VERSION"
+INSTALL_PATH="/usr/lib/python$VERSION"
 apt-get update -y && apt-get install -y build-essential zlib1g-dev libssl-dev
 
 wget -P "$WORK_DIR/" "https://www.python.org/ftp/python/$VERSION/Python-$VERSION.tgz"
