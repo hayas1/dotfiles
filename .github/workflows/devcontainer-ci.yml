@@ -24,12 +24,4 @@ jobs:
         uses: devcontainers/ci@v0.2
         with:
           imageName: ghcr.io/hayas1/dotfiles
-          runCmd: >
-            zsh -c exit && cat /home/vscode/.oh-my-zsh/custom/themes/powerlevel10k/internal/p10k.zsh > /dev/null
-            && diff /workspaces/dotfiles/.devcontainer/resources/.p10k.zsh ~/.p10k.zsh 1>&2
-            && diff /workspaces/dotfiles/.devcontainer/resources/.bash_aliases ~/.bash_aliases 1>&2
-            && python --version > /dev/null && pip --version > /dev/null
-            && npm --version > /dev/null && nvm --version > /dev/null
-            && go version > /dev/null
-            && cargo --version > /dev/null && rustc --version > /dev/null && rustup --version > /dev/null
-            && gcloud --help > /dev/null && kubectl --help > /dev/null && helm --help > /dev/null
+          runCmd: ./tests/container/installed.sh
