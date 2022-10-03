@@ -25,13 +25,13 @@ else
 fi
 
 # install python
-TMP_DIR=$(mktemp -dt "work.python.$(date +%Y%m%d%H%M%S).XXXXXX")
+WORK_DIR="${DEVC_CONFIG:-$HOME/.devc}/work/python"
 INSTALL_PATH="/usr/local/lib/python$VERSION"
 apt-get update -y && apt-get install -y build-essential zlib1g-dev libssl-dev
 
-wget -P "$TMP_DIR/" "https://www.python.org/ftp/python/$VERSION/Python-$VERSION.tgz"
-tar xf "$TMP_DIR/Python-$VERSION.tgz" -C "$TMP_DIR"
-cd "$TMP_DIR/Python-$VERSION"
+wget -P "$WORK_DIR/" "https://www.python.org/ftp/python/$VERSION/Python-$VERSION.tgz"
+tar xf "$WORK_DIR/Python-$VERSION.tgz" -C "$WORK_DIR"
+cd "$WORK_DIR/Python-$VERSION"
 ./configure --prefix="$INSTALL_PATH" --with-ssl
 make && make install
 
