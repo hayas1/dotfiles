@@ -1,46 +1,35 @@
 {
-    "cSpell.words": [
-        "atexit",
-        "azuretools",
-        "batcat",
-        "cloudcode",
-        "CLOUDSDK",
-        "codespaces",
-        "copylist",
-        "devc",
-        "devcinit",
-        "devcontainer",
-        "devcontainers",
-        "dotfiles",
-        "dups",
-        "eamodio",
-        "fdfind",
-        "foxundermoon",
-        "fpath",
-        "gcloud",
-        "googlecloudtools",
-        "Gruntfuggly",
-        "keyrings",
-        "kohler",
-        "mhutchie",
-        "mktemp",
-        "nerdfont",
-        "noninteractive",
-        "noreply",
-        "powerlevel",
-        "powerline",
-        "procs",
-        "PTRACE",
-        "purepower",
-        "rangav",
-        "realpath",
-        "ripgrep",
-        "SAVEHIST",
-        "seccomp",
-        "setopt",
-        "shardulm",
-        "shellcheck",
-        "timonwong",
-        "yzhang"
-    ]
+  "cSpell.words": [
+    "devc",
+    "devcinit",
+    "devcontainer",
+    "devcontainers",
+    "dotfiles",
+    "gcloud",
+    "nerdfont"
+  ],
+
+  "python.languageServer": "Pylance",
+  "python.formatting.provider": "black",
+  "python.formatting.autopep8Args": ["--line-length", "120"],
+  "[python]": {
+    "editor.codeActionsOnSave": { "source.organizeImports": true }
+  },
+
+  "go.toolsManagement.checkForUpdates": "local",
+  "go.useLanguageServer": true,
+  "gopls": {
+    "experimentalWorkspaceModule": true
+  },
+
+  "rust-analyzer.checkOnSave.command": "clippy",
+  //   "lldb.executable": "/usr/bin/lldb",
+  "files.watcherExclude": { "**/target/**": true },
+
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[dockerfile]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  }
 }
