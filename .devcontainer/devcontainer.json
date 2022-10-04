@@ -45,12 +45,12 @@
 		/// but it seems that docker-from-docker can be used if comment out this...?
 		// "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind",
 		/// tool settings from host machine
-		// "source=${localEnv:HOME}/.ssh/,target=/home/vscode/.ssh/,type=bind,consistency=cached",
-		// "source=${localEnv:HOME}/.config/git/,target=/home/vscode/.git-config/,type=bind,consistency=cached",
-		// "source=${localEnv:HOME}/.aws/,target=/home/vscode/.aws/,type=bind,consistency=cached",
-		// "source=${localEnv:HOME}/.config/gcloud/,target=/home/vscode/.gcloud-config/,type=bind,consistency=cached",
-		// "source=${localEnv:HOME}/.kube/,target=/home/vscode/.kube/,type=bind,consistency=cached",
-		// "source=${localEnv:HOME}/.helm/,target=/home/vscode/.helm/,type=bind,consistency=cached",
+		"source=${localEnv:HOME}/.ssh/,target=/home/vscode/.ssh/,type=bind,consistency=cached",
+		"source=${localEnv:HOME}/.config/git/,target=/home/vscode/.git-config/,type=bind,consistency=cached",
+		"source=${localEnv:HOME}/.aws/,target=/home/vscode/.aws/,type=bind,consistency=cached",
+		"source=${localEnv:HOME}/.config/gcloud/,target=/home/vscode/.gcloud-config/,type=bind,consistency=cached",
+		"source=${localEnv:HOME}/.kube/,target=/home/vscode/.kube/,type=bind,consistency=cached",
+		"source=${localEnv:HOME}/.helm/,target=/home/vscode/.helm/,type=bind,consistency=cached",
 	],
 	/// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "vscode",

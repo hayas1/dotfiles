@@ -12,8 +12,8 @@ alias lt='exa -T -L 3 -a -I "node_modules|.git|.cache" $ICONS'
 alias ltl='exa -T -L 3 -a -I "node_modules|.git|.cache" -l $ICONS'
 alias grep=rg
 alias psp=htop
-alias cat='batcat --paging=never --style=header'
-alias less=batcat
+alias cat='batcat --paging=never --style=header --theme=TwoDark'
+alias less='batcat --theme=TwoDark'
 alias odp=hexyl
 # alias find=fdfind
 alias fd=fdfind
