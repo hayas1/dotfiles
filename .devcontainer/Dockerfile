@@ -8,6 +8,17 @@ ENV DEVC_CONFIG="${DEVC_CONFIG}"
 ENV DEVC_IMPORT="${DEVC_CONFIG}/import"
 WORKDIR $HOME
 
+### proxy setting
+# ARG http_proxy
+# ARG HTTP_PROXY
+# ARG https_proxy
+# ARG HTTPS_PROXY
+# ARG no_proxy
+# ARG NO_PROXY
+# ENV http_proxy=${http_proxy} HTTP_PROXY=${HTTP_PROXY}
+# ENV https_proxy=${https_proxy} HTTPS_PROXY=${HTTPS_PROXY}
+# ENV no_proxy=${no_proxy} NO_PROXY=${NO_PROXY}
+
 ### copy dotfiles and scripts
 COPY .devcontainer/resources/ ${HOME}/
 COPY .devcontainer/import ${DEVC_CONFIG}/import/

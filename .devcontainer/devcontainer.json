@@ -6,6 +6,14 @@
 	"build": {
 		"dockerfile": "./Dockerfile",
 		"context": "..",
+		// "args": {
+		// 	"http_proxy": "${localEnv:http_proxy}",
+		// 	"HTTP_PROXY": "${localEnv:HTTP_PROXY}",
+		// 	"https_proxy": "${localEnv:https_proxy}",
+		// 	"HTTPS_PROXY": "${localEnv:HTTPS_PROXY}",
+		// 	"no_PROXY": "${localEnv:no_proxy}",
+		// 	"NO_PROXY": "${localEnv:NO_PROXY}",
+		// }
 	},
 	/// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
