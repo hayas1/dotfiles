@@ -1,11 +1,35 @@
 {
-    "cSpell.words": [
-        "devc",
-        "devcinit",
-        "devcontainer",
-        "devcontainers",
-        "dotfiles",
-        "gcloud",
-        "nerdfont",
-    ]
+  "cSpell.words": [
+    "devc",
+    "devcinit",
+    "devcontainer",
+    "devcontainers",
+    "dotfiles",
+    "gcloud",
+    "nerdfont"
+  ],
+
+  "python.languageServer": "Pylance",
+  "python.formatting.provider": "black",
+  "python.formatting.autopep8Args": ["--line-length", "120"],
+  "[python]": {
+    "editor.codeActionsOnSave": { "source.organizeImports": true }
+  },
+
+  "go.toolsManagement.checkForUpdates": "local",
+  "go.useLanguageServer": true,
+  "gopls": {
+    "experimentalWorkspaceModule": true
+  },
+
+  "rust-analyzer.checkOnSave.command": "clippy",
+  //   "lldb.executable": "/usr/bin/lldb",
+  "files.watcherExclude": { "**/target/**": true },
+
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[dockerfile]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  }
 }
