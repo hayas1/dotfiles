@@ -41,4 +41,4 @@ ln -s "$INSTALL_PATH/bin/idle3" /usr/bin/idle
 ln -s "$INSTALL_PATH/bin/python3-config" /usr/bin/python-config
 
 # for develop
-pip install black pytest
+pip install black flake8 pytest
