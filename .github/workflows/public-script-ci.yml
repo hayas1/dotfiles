@@ -20,8 +20,8 @@ jobs:
           tmp_dir=$(mktemp -dt "dotfiles.XXXXXX")
           cd $tmp_dir
           curl -fsL https://github.com/hayas1/dotfiles/raw/master/scripts/public/init.sh | bash -s
-          diff -r $cwd/.vscode $tmp_dir/.vscode
-          diff -r $cwd/.devcontainer $tmp_dir/.devcontainer
+          diff -r -x .gitignore $cwd/.vscode $tmp_dir/.vscode
+          diff -r -x .gitignore $cwd/.devcontainer $tmp_dir/.devcontainer
   test-clean-script:
     runs-on: ubuntu-latest
     steps:

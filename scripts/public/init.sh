@@ -16,7 +16,8 @@ copy_to() {
     local target=${*:$#}
     for d in $dir_bases; do
         if [ ! -e "$target/$d" ]; then
-            cp -r "$tmp_dir"/"$d" "$target"/"$d"
+            cp -r "$tmp_dir/$d" "$target/$d"
+            echo "*" >"$target/$d/.gitignore"
             echo ">>> made new directory $d"
         else
             echo "!!! $d already exists, so not copied" 1>&2
