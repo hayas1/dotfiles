@@ -4,6 +4,8 @@ FROM mcr.microsoft.com/vscode/devcontainers/base:0-bullseye
 ### set home directory for docker and devc's directory
 ARG HOME="/home/vscode"
 ARG DEVC_CONFIG="${HOME}/.devc"
+ARG WORK_SPACE="/workspace/dotfiles"
+ENV WORK_SPACE=${WORK_SPACE}
 ENV DEVC_CONFIG="${DEVC_CONFIG}"
 ENV DEVC_IMPORT="${DEVC_CONFIG}/import"
 WORKDIR $HOME
