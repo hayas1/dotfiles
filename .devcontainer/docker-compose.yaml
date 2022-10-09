@@ -1,29 +1,37 @@
 version: "3.9"
 services:
   devc:
-    # container_name: devc
-    # image: devc
     build:
       context: ../
       dockerfile: .devcontainer/Dockerfile
       args:
+        ### user setting
         UID: ${UID:-20000}
         GID: ${GID:-20000}
         USERNAME: ${USER:-devc}
         GROUPNAME: ${GROUP:-${USER:-devc}}
+        ### proxy setting
+        # http_proxy: ${http_proxy}
+        # HTTP_PROXY: ${HTTP_PROXY}
+        # https_proxy: ${https_proxy}
+        # HTTPS_PROXY: ${HTTPS_PROXY}
+        # no_proxy: ${no_proxy}
+        # NO_PROXY: ${NO_PROXY}
     environment:
       USE_NERDFONT: nerdfont-complete # cannot use nerdfont, comment out this line
       CLOUDSDK_CONFIG: /home/${USER:-devc}/.gcloud/config/ # if owner of .config is root, devcontainer's terminal fail
     command: sleep infinity
     volumes:
+      ### workspace
       - ../:/home/${USER:-devc}/workspace/:cached
+      ### tools config
       - ~/.ssh/:/home/${USER:-devc}/.ssh/:cached
       - ~/.config/git/:/home/${USER:-devc}/.git/config/:cached
       - ~/.aws/:/home/${USER:-devc}/.aws/:cached
       - ~/.config/gcloud/:/home/${USER:-devc}/.gcloud/config/:cached
       - ~/.kube/:/home/${USER:-devc}/.kube/:cached
       - ~/.helm/:/home/${USER:-devc}/.helm/:cached
-      # when using a ptrace-based debugger like C++, Go, and Rust
+    ### when using a ptrace-based debugger like C++, Go, and Rust
     cap_add:
       - SYS_PTRACE
     security_opt:
