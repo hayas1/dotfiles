@@ -1,5 +1,11 @@
 #! /bin/bash -e
 
+### install zsh and oh-my-zsh
+if ! (type zsh >/dev/null 2>&1); then
+    apt-get update -y && apt-get install -y zsh
+    sh -c "$(curl -fsL https://github.com/ohmyzsh/ohmyzsh/raw/master/tools/install.sh)"
+fi
+
 ### get powerlevel10k fonts, however this configuration may need to be done on the host machine.
 # wget -P .fonts/ https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
 # wget -P .fonts/ https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf
