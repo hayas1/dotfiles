@@ -10,6 +10,3 @@ source "$HOME/.cargo/env"
 if [ "$VERSION" != "latest" ]; then
     rustup default "$VERSION"
 fi
-
-mkdir -p "$HOME/.cargo"
-chown "${USER:-vscode}" "$HOME/.cargo"
