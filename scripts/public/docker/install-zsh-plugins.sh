@@ -1,5 +1,8 @@
-#! /bin/sh
+#! /bin/bash
 set -e
+
+### install git and curl
+apt-get update -y && apt-get install -y git curl && apt-get clean && rm -rf /var/lib/apt/lists
 
 ### install zsh
 if ! (type zsh >/dev/null 2>&1); then
@@ -8,8 +11,6 @@ fi
 
 if [ -e "${HOME}/.oh-my-zsh" ]; then
     ### if exist oh-my-zsh, use it
-    # install git and curl
-    apt-get update -y && apt-get install -y git curl && apt-get clean && rm -rf /var/lib/apt/lists
     if [ ! -e ~/.zshrc ]; then
         # if no .zshrc, get from oh-my-zsh template
         curl -fsL 'https://github.com/ohmyzsh/ohmyzsh/raw/master/templates/zshrc.zsh-template' -o "${HOME}/.zshrc"
@@ -33,10 +34,8 @@ if [ -e "${HOME}/.oh-my-zsh" ]; then
     git clone https://github.com/zsh-users/zsh-history-substring-search "${ZSH_CUSTOM:-${ZSH:-${HOME}/.oh-my-zsh}/custom}/plugins/zsh-history-substring-search"
     sed -ri 's/^\s*plugins=\((.*)\)/plugins=(\1 zsh-history-substring-search)/g' "${HOME}/.zshrc"
 else
-    ### if not exist oh-my-zsh, use zinit
-    # install git and curl
-    apt-get update -y && apt-get install -y git curl && apt-get clean && rm -rf /var/lib/apt/lists
-    bash -c "$(curl -fsSL https://git.io/zinit-install)"
+    ### if not exist oh-my-zsh, use zinit # TODO use sheldon
+    echo 'y' | bash -c "$(curl -fsSL https://git.io/zinit-install)"
     {
         echo '### zsh plugins'
         echo 'zinit light romkatv/powerlevel10k'
@@ -51,3 +50,4 @@ fi
 curl -fsL 'https://github.com/romkatv/dotfiles-public/raw/master/.purepower' -o "${HOME}/.purepower"
 curl -fsL 'https://github.com/hayas1/dotfiles/raw/master/.devcontainer/resources/.p10k.zsh' -o "${HOME}/.p10k.zsh"
 echo '[ -e ~/.p10k.zsh ] && source ~/.p10k.zsh' >>"${HOME}/.zshrc"
+zsh -s source "${HOME}/.zshrc"

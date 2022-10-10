@@ -2,8 +2,7 @@ FROM debian:latest
 
 ### apt update and install tools
 RUN apt-get update -y && apt-get upgrade -y && export DEBIAN_FRONTEND=noninteractive\
-    && apt-get install -y curl wget procps htop git connect-proxy sudo\
-    exa ripgrep fd-find bat hexyl\
+    && apt-get install -y connect-proxy sudo\
     && apt-get clean && rm -rf /var/lib/apt/lists
 
 ### proxy setting
@@ -39,6 +38,8 @@ WORKDIR $HOME
 ### install features
 # copy scripts
 COPY .devcontainer/import ${DEVC_CONFIG}/import/
+# install tools
+RUN ${DEVC_IMPORT}/tools.sh
 # install zsh and plugins
 RUN ${DEVC_IMPORT}/zsh-plugins.sh
 # install python
