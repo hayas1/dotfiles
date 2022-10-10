@@ -1,14 +1,10 @@
-### See here for image contents: https://github.com/microsoft/vscode-dev-containers/tree/v0.245.2/containers/debian/.devcontainer/base.Dockerfile
-FROM mcr.microsoft.com/vscode/devcontainers/base:0-bullseye
+FROM debian:latest
 
-### set home directory for docker and devc's directory
-ARG HOME="/home/vscode"
-ARG DEVC_CONFIG="${HOME}/.devc"
-ARG WORK_SPACE="/workspace/dotfiles"
-ENV WORK_SPACE=${WORK_SPACE}
-ENV DEVC_CONFIG="${DEVC_CONFIG}"
-ENV DEVC_IMPORT="${DEVC_CONFIG}/import"
-WORKDIR $HOME
+### apt update and install tools
+RUN apt-get update -y && apt-get upgrade -y && export DEBIAN_FRONTEND=noninteractive\
+    && apt-get install -y curl wget procps htop git connect-proxy sudo\
+    exa ripgrep fd-find bat hexyl\
+    && apt-get clean && rm -rf /var/lib/apt/lists
 
 ### proxy setting
 # ARG http_proxy
@@ -21,16 +17,29 @@ WORKDIR $HOME
 # ENV https_proxy=${https_proxy} HTTPS_PROXY=${HTTPS_PROXY}
 # ENV no_proxy=${no_proxy} NO_PROXY=${NO_PROXY}
 
-### copy dotfiles and scripts
-COPY .devcontainer/resources/ ${HOME}/
-COPY .devcontainer/import ${DEVC_CONFIG}/import/
+### user setting
+ARG UID
+ARG GID=${UID}
+ARG USERNAME
+ARG GROUPNAME=${USERNAME}
+RUN groupadd --gid $GID $USERNAME &&\
+    useradd -s /bin/bash --uid $UID --gid $GID -m $USERNAME &&\
+    echo $USERNAME ALL=\(root\) NOPASSWD:ALL >/etc/sudoers.d/$USERNAME && chmod 0440 /etc/sudoers.d/$USERNAME
 
-### apt update and install tools
-RUN apt-get update -y && apt-get upgrade -y && export DEBIAN_FRONTEND=noninteractive
-RUN apt-get install -y connect-proxy exa ripgrep fd-find bat hexyl
+### set home directory for docker and devc's directory
+ARG HOME="${HOME:-/home/$USERNAME}"
+ARG DEVC_CONFIG="${HOME}/.devc"
+ARG WORKSPACE="${HOME}/workspace"
+ENV HOME=${HOME}
+ENV DEVC_CONFIG="${DEVC_CONFIG}"
+ENV DEVC_IMPORT="${DEVC_CONFIG}/import/build"
+ENV WORKSPACE=${WORKSPACE}
+WORKDIR $HOME
 
 ### install features
-# install powerlevel10k and plugins
+# copy scripts
+COPY .devcontainer/import ${DEVC_CONFIG}/import/
+# install zsh and plugins
 RUN ${DEVC_IMPORT}/zsh-plugins.sh
 # install python
 ARG PYTHON_VERSION="latest"
@@ -46,6 +55,11 @@ ARG RUST_VERSION="latest"
 RUN ${DEVC_IMPORT}/rust.sh ${RUST_VERSION}
 # install gcloud and kubectl and helm
 RUN ${DEVC_IMPORT}/gcloud-kubectl-helm.sh
+# install docker linter and scanner
+RUN ${DEVC_IMPORT}/docker.sh
+
+### copy dotfiles
+COPY .devcontainer/resources/ ${HOME}/
 
 ### for sudo, use same zsh setting
 RUN cp -r .bash_aliases .oh-my-zsh .p10k.zsh .purepower .zshrc /root
