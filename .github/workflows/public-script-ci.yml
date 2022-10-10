@@ -35,3 +35,14 @@ jobs:
           echo 'y' | bash <(curl -fsL https://github.com/hayas1/dotfiles/raw/master/scripts/public/clean.sh)
           [ "$(ls -A)" ] && exit 1 # should be empty
           ls -A
+  test-install-zsh-and-prugins:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test install zsh and plugins
+        run: |
+          curl -fsL https://github.com/hayas1/dotfiles/raw/master/scripts/public/docker/install-zsh-plugins.sh | bash -s
+          [ "$(grep powerlevel10k ${HOME}/.zshrc)" ] || exit 1
+          [ "$(grep zsh-completions ${HOME}/.zshrc)" ] || exit 1
+          [ "$(grep zsh-autosuggestions ${HOME}/.zshrc)" ] || exit 1
+          [ "$(grep zsh-syntax-highlighting ${HOME}/.zshrc)" ] || exit 1
+          [ "$(grep zsh-history-substring-search ${HOME}/.zshrc)" ] || exit 1
