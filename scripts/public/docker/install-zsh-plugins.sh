@@ -50,4 +50,3 @@ fi
 curl -fsL 'https://github.com/romkatv/dotfiles-public/raw/master/.purepower' -o "${HOME}/.purepower"
 curl -fsL 'https://github.com/hayas1/dotfiles/raw/master/.devcontainer/resources/.p10k.zsh' -o "${HOME}/.p10k.zsh"
 echo '[ -e ~/.p10k.zsh ] && source ~/.p10k.zsh' >>"${HOME}/.zshrc"
-zsh -s source "${HOME}/.zshrc"
