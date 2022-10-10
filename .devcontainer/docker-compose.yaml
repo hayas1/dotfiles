@@ -31,6 +31,9 @@ services:
       - ~/.config/gcloud/:/home/${USER:-devc}/.gcloud/config/:cached
       - ~/.kube/:/home/${USER:-devc}/.kube/:cached
       - ~/.helm/:/home/${USER:-devc}/.helm/:cached
+      ### docker-from-docker
+      - /var/run/docker.sock:/var/run/docker-host.sock
+    init: true
     ### when using a ptrace-based debugger like C++, Go, and Rust
     cap_add:
       - SYS_PTRACE
