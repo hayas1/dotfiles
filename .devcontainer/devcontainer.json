@@ -1,6 +1,6 @@
 {
   "name": "Debian",
-  "postCreateCommand": "${containerWorkspaceFolder}/.devcontainer/import/entry.sh",
+  "postCreateCommand": "${containerWorkspaceFolder}/.devcontainer/import/command/entry.sh",
   "dockerComposeFile": "docker-compose.yaml",
   "service": "devc",
   "workspaceFolder": "/home/${localEnv:USER:devc}/workspace/",

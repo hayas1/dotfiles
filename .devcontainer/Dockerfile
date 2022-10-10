@@ -32,7 +32,7 @@ ARG DEVC_CONFIG="${HOME}/.devc"
 ARG WORKSPACE="${HOME}/workspace"
 ENV HOME=${HOME}
 ENV DEVC_CONFIG="${DEVC_CONFIG}"
-ENV DEVC_IMPORT="${DEVC_CONFIG}/import"
+ENV DEVC_IMPORT="${DEVC_CONFIG}/import/build"
 ENV WORKSPACE=${WORKSPACE}
 WORKDIR $HOME
 
@@ -60,9 +60,6 @@ RUN ${DEVC_IMPORT}/docker.sh
 
 ### copy dotfiles
 COPY .devcontainer/resources/ ${HOME}/
-
-### home dir owner
-# RUN chown -R ${UID}:${GID} /home/vscode
 
 ### for sudo, use same zsh setting
 RUN cp -r .bash_aliases .oh-my-zsh .p10k.zsh .purepower .zshrc /root
