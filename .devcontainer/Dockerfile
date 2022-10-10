@@ -1,9 +1,10 @@
 FROM debian:latest
 
 ### apt update and install tools
-RUN apt-get update -y && apt-get upgrade -y && export DEBIAN_FRONTEND=noninteractive
-RUN apt-get install -y curl wget procps htop git sudo connect-proxy
-RUN apt-get install -y exa ripgrep fd-find bat hexyl
+RUN apt-get update -y && apt-get upgrade -y && export DEBIAN_FRONTEND=noninteractive\
+    && apt-get install -y curl wget procps htop git connect-proxy sudo\
+    exa ripgrep fd-find bat hexyl\
+    && apt-get clean && rm -rf /var/lib/apt/lists
 
 ### proxy setting
 # ARG http_proxy
@@ -20,7 +21,6 @@ RUN apt-get install -y exa ripgrep fd-find bat hexyl
 ARG UID
 ARG GID=${UID}
 ARG USERNAME
-ARG PASSWORD=power
 ARG GROUPNAME=${USERNAME}
 RUN groupadd --gid $GID $USERNAME &&\
     useradd -s /bin/bash --uid $UID --gid $GID -m $USERNAME &&\
@@ -55,6 +55,8 @@ ARG RUST_VERSION="latest"
 RUN ${DEVC_IMPORT}/rust.sh ${RUST_VERSION}
 # install gcloud and kubectl and helm
 RUN ${DEVC_IMPORT}/gcloud-kubectl-helm.sh
+# install docker linter and scanner
+RUN ${DEVC_IMPORT}/docker.sh
 
 ### copy dotfiles
 COPY .devcontainer/resources/ ${HOME}/

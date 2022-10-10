@@ -24,6 +24,7 @@
     "yzhang.markdown-all-in-one",
     "rangav.vscode-thunder-client",
     "ms-azuretools.vscode-docker", // installed by docker-from-docker features
+    // "exiasr.hadolint", // dockerfile linter
     "ms-kubernetes-tools.vscode-kubernetes-tools", // installed by kubectl-helm-minikube features
     "ms-python.python", // installed by python features
     "dbaeumer.vscode-eslint", // installed by node features
