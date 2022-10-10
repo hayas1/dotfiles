@@ -6,3 +6,4 @@ SAMPLE=$(dirname "$DIR")/sample/
 [ "$(node "$SAMPLE"/hello.js)" = "Hello World" ]
 [ "$(go run "$SAMPLE"/hello.go)" = "Hello World" ]
 [ "$(rustc -o "$SAMPLE"/hello-rs "$SAMPLE"/hello.rs && "$SAMPLE"/hello-rs)" = "Hello World" ]
+[ -e "$SAMPLE"/hello-rs ] && rm "$SAMPLE"/hello-rs
