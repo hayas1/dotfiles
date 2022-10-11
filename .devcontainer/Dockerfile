@@ -54,6 +54,8 @@ RUN ${DEVC_IMPORT}/go.sh ${GO_VERSION}
 # install rust
 ARG RUST_VERSION="latest"
 RUN ${DEVC_IMPORT}/rust.sh ${RUST_VERSION}
+# install terraform
+RUN ${DEVC_IMPORT}/terraform.sh
 # install gcloud and kubectl and helm
 RUN ${DEVC_IMPORT}/gcloud-kubectl-helm.sh
 # install docker linter and scanner
