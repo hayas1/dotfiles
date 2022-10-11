@@ -40,7 +40,7 @@ jobs:
     steps:
       - name: Test install zsh and plugins
         run: |
-          curl -fsL https://github.com/hayas1/dotfiles/raw/master/scripts/public/docker/install-zsh-plugins.sh | bash -s
+          curl -fsL https://github.com/hayas1/dotfiles/raw/master/scripts/public/docker/install-zsh-plugins.sh | sudo bash -s
           [ "$(grep powerlevel10k ${HOME}/.zshrc)" ] || exit 1
           [ "$(grep zsh-completions ${HOME}/.zshrc)" ] || exit 1
           [ "$(grep zsh-autosuggestions ${HOME}/.zshrc)" ] || exit 1
