@@ -1,13 +1,12 @@
 #! /bin/bash
 set -e
 
-### install git and curl
-apt-get update -y && apt-get install -y git curl && apt-get clean && rm -rf /var/lib/apt/lists
-
-### install zsh
-if ! (type zsh >/dev/null 2>&1); then
-    apt-get update -y && apt-get install -y zsh && apt-get clean && rm -rf /var/lib/apt/lists
-fi
+for com in curl git zsh; do
+    if ! (type $com >/dev/null 2>&1); then
+        echo "install $com"
+        apt-get update -y && apt-get install -y $com && apt-get clean && rm -rf /var/lib/apt/lists
+    fi
+done
 
 if [ -e "$HOME/.oh-my-zsh" ]; then
     ### if exist oh-my-zsh, use it
