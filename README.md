@@ -16,9 +16,9 @@ Copy [.devcontainer](/.devcontainer/) directory to our workspace, and customize 
 We have simple scripts [init.sh](/scripts/public/init.sh) and [clean.sh](/scripts/public/clean.sh). We can prepare and cleanup workspace with these scripts.
 
 ### Usage [init.sh](/scripts/public/init.sh)
-The script will clone this repository to temporary directory, and execute [devc-init.sh](/scripts/devc-init.sh). The temporary directory is removed after initialization.
+This script will copy `.devcontainer` and `.vscode` from this repository.
 ```sh:input
-$ curl -fsL https://github.com/hayas1/dotfiles/raw/master/scripts/public/init.sh | bash -s
+curl -fsL https://github.com/hayas1/dotfiles/raw/master/scripts/public/init.sh | bash -s
 ```
 ```sh:output
 Cloning into '/tmp/dotfiles.20220928204937.ztw9B2'...
@@ -35,7 +35,7 @@ cleaned tmp dir /tmp/dotfiles.20220928204937.ztw9B2
 ```
 
 ### Usage [clean.sh](/scripts/public/clean.sh)
-The script will clone this repository to temporary directory, and execute [devc-clean.sh](/scripts/devc-clean.sh). The temporary directory is removed after initialization.
+This script will move `.devcontainer` and `.vscode` to temporary directory.
 ```sh:input
 bash <(curl -fsL https://github.com/hayas1/dotfiles/raw/master/scripts/public/clean.sh)
 ```
@@ -57,9 +57,8 @@ Resolving deltas: 100% (250/250), done.
 cleaned tmp dir /tmp/dotfiles.20220928205212.if1Jck
 ```
 
-
-<!-- # Installation -->
-<!-- ## Use script
+<!-- TODO -->
+<!-- ## Local cli tool
 We have a simple script [devc-init.sh](/scripts/devcinit.sh) to prepare workspace. Clone this repository appropriate path (such as `/usr/lib/`) and make symbolic link for it in `Path` set directory (such as `/usr/bin`). We make workspace and execute the script.
 ```sh
 $ git clone https://github.com/hayas1/dotfiles.git /usr/lib/
@@ -74,4 +73,28 @@ $ devc init
 >>> made new directory .devcontainer
 ```
 ### Script dependencies
-Some subcommands (such as simple `init` or `update`) can be executed without Python, but a lot of subcommands require Python 3. -->
+require Python3 in host machine. -->
+
+# Scripts for container
+## Install zsh and settings and tools
+we have some scripts that install some tools for zsh on container.
+### Usage [install-zsh-plugins.sh](/scripts/public/docker/install-zsh-plugins.sh)
+The script will install zsh and some plugins.
+```dockerfile
+ENV HOME=/home/${USER}
+RUN curl -fsL 'https://github.com/hayas1/dotfiles/raw/master/scripts/public/docker/install-zsh-plugins.sh' | bash -s
+```
+
+### Usage [install-tools-and-set-aliases.sh](/scripts/public/docker/install-tools-and-set-aliases.sh)
+The script will install tools and set aliases.
+```dockerfile
+ENV HOME=/home/${USER}
+RUN curl -fsL 'https://github.com/hayas1/dotfiles/raw/master/scripts/public/docker/install-zsh-plugins.sh' | bash -s
+```
+
+### Usage [install-gcloud-kubectl-helm.sh](/scripts/public/docker/install-gcloud-kubectl-helm.sh)
+The script will install gcloud and kubectl and helm.
+```dockerfile
+ENV HOME=/home/${USER}
+RUN curl -fsL 'https://github.com/hayas1/dotfiles/raw/master/scripts/public/docker/install-zsh-plugins.sh' | bash -s
+```
