@@ -26,7 +26,7 @@ services:
       - ../:/home/${USER:-devc}/workspace/:cached
       ### tools config
       - ~/.ssh/:/home/${USER:-devc}/.ssh/:cached
-      - ~/.config/git/:/home/${USER:-devc}/.git/config/:cached
+      - ~/.config/git/config:/home/${USER:-devc}/.gitconfig:cached
       - ~/.aws/:/home/${USER:-devc}/.aws/:cached
       - ~/.config/gcloud/:/home/${USER:-devc}/.gcloud/config/:cached
       - ~/.kube/:/home/${USER:-devc}/.kube/:cached
