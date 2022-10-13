@@ -25,14 +25,14 @@ services:
       ### workspace
       - ../:/home/${USER:-devc}/workspace/:cached
       ### tools config
-      - ~/.ssh/:/home/${USER:-devc}/.ssh/:cached
-      - ~/.config/git/config:/home/${USER:-devc}/.gitconfig:cached
-      - ~/.aws/:/home/${USER:-devc}/.aws/:cached
-      - ~/.config/gcloud/:/home/${USER:-devc}/.gcloud/config/:cached
-      - ~/.kube/:/home/${USER:-devc}/.kube/:cached
-      - ~/.helm/:/home/${USER:-devc}/.helm/:cached
-      ### docker-from-docker
-      - /var/run/docker.sock:/var/run/docker-host.sock
+      # - ~/.ssh/:/home/${USER:-devc}/.ssh/:cached
+      # - ~/.config/git/config:/home/${USER:-devc}/.gitconfig:cached
+      # - ~/.aws/:/home/${USER:-devc}/.aws/:cached
+      # - ~/.config/gcloud/:/home/${USER:-devc}/.gcloud/config/:cached
+      # - ~/.kube/:/home/${USER:-devc}/.kube/:cached
+      # - ~/.helm/:/home/${USER:-devc}/.helm/:cached
+      # ### docker-from-docker
+      # - /var/run/docker.sock:/var/run/docker-host.sock
     init: true
     ### when using a ptrace-based debugger like C++, Go, and Rust
     cap_add:
