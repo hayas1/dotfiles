@@ -86,15 +86,15 @@ RUN curl -fsL 'https://github.com/hayas1/dotfiles/raw/master/scripts/public/dock
 ```
 
 ### Usage [install-tools-and-set-aliases.sh](/scripts/public/docker/install-tools-and-set-aliases.sh)
-The script will install tools and set aliases.
+The script will install tools and set aliases. **Remark**: this script write aliases settings to only `${HOME}/.zshrc`, so not support `bash`.
 ```dockerfile
 ENV HOME=/home/${USER}
-RUN curl -fsL 'https://github.com/hayas1/dotfiles/raw/master/scripts/public/docker/install-zsh-plugins.sh' | bash -s
+RUN curl -fsL 'https://github.com/hayas1/dotfiles/raw/master/scripts/public/docker/install-tools-and-set-aliases.sh' | bash -s
 ```
 
 ### Usage [install-gcloud-kubectl-helm.sh](/scripts/public/docker/install-gcloud-kubectl-helm.sh)
-The script will install gcloud and kubectl and helm.
+The script will install gcloud and kubectl and helm. **Remark**: this script write completion settings to only `${HOME}/.zshrc`, so not support `bash`.
 ```dockerfile
 ENV HOME=/home/${USER}
-RUN curl -fsL 'https://github.com/hayas1/dotfiles/raw/master/scripts/public/docker/install-zsh-plugins.sh' | bash -s
+RUN curl -fsL 'https://github.com/hayas1/dotfiles/raw/master/scripts/public/docker/install-gcloud-kubectl-helm.sh' | bash -s
 ```
