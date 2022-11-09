@@ -1,10 +1,5 @@
 FROM debian:latest
 
-### apt update and install tools
-RUN apt-get update -y && apt-get upgrade -y && export DEBIAN_FRONTEND=noninteractive\
-    && apt-get install -y connect-proxy sudo\
-    && apt-get clean && rm -rf /var/lib/apt/lists
-
 ### proxy setting
 # ARG http_proxy
 # ARG HTTP_PROXY
@@ -21,9 +16,10 @@ ARG UID
 ARG GID=${UID}
 ARG USERNAME
 ARG GROUPNAME=${USERNAME}
-RUN groupadd --gid $GID $USERNAME &&\
+RUN apt-get update && apt-get install sudo && groupadd --gid $GID $USERNAME &&\
     useradd -s /bin/bash --uid $UID --gid $GID -m $USERNAME &&\
     echo $USERNAME ALL=\(root\) NOPASSWD:ALL >/etc/sudoers.d/$USERNAME && chmod 0440 /etc/sudoers.d/$USERNAME
+
 
 ### set home directory for docker and devc's directory
 ARG HOME="${HOME:-/home/$USERNAME}"
@@ -66,3 +62,9 @@ COPY .devcontainer/resources/ ${HOME}/
 
 ### for sudo, use same zsh setting
 RUN cp -r .bash_aliases .oh-my-zsh .p10k.zsh .purepower .zshrc /root
+RUN echo "export http_proxy=${http_proxy}" >> /root/.bashrc &&\
+    echo "export HTTP_PROXY=${HTTP_PROXY}" >> /root/.bashrc &&\
+    echo "export https_proxy=${https_proxy}" >> /root/.bashrc &&\
+    echo "export HTTPS_PROXY=${HTTPS_PROXY}" >> /root/.bashrc &&\
+    echo "export no_proxy=${no_proxy}" >> /root/.bashrc &&\
+    echo "export NO_PROXY=${NO_PROXY}" >> /root/.bashrc
