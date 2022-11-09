@@ -27,35 +27,37 @@ ARG DEVC_CONFIG="${HOME}/.devc"
 ARG WORKSPACE="${HOME}/workspace"
 ENV HOME=${HOME}
 ENV DEVC_CONFIG="${DEVC_CONFIG}"
-ENV DEVC_IMPORT="${DEVC_CONFIG}/import/build"
+ENV DEVC_BUILD="${DEVC_CONFIG}/build"
+ENV DEVC_ENTRY="${DEVC_CONFIG}/entry"
 ENV WORKSPACE=${WORKSPACE}
 WORKDIR $HOME
 
 ### install features
 # copy scripts
-COPY .devcontainer/import ${DEVC_CONFIG}/import/
+COPY .devcontainer/build ${DEVC_BUILD}
+COPY .devcontainer/entry ${DEVC_ENTRY}
 # install tools
-RUN ${DEVC_IMPORT}/tools.sh
+RUN ${DEVC_BUILD}/tools.sh
 # install zsh and plugins
-RUN ${DEVC_IMPORT}/zsh-plugins.sh
+RUN ${DEVC_BUILD}/zsh-plugins.sh
 # install python
 ARG PYTHON_VERSION="latest"
-RUN ${DEVC_IMPORT}/python.sh ${PYTHON_VERSION}
+RUN ${DEVC_BUILD}/python.sh ${PYTHON_VERSION}
 # install node
 ARG NODE_VERSION="latest"
-RUN ${DEVC_IMPORT}/node.sh ${NODE_VERSION}
+RUN ${DEVC_BUILD}/node.sh ${NODE_VERSION}
 # install go
 ARG GO_VERSION="latest"
-RUN ${DEVC_IMPORT}/go.sh ${GO_VERSION}
+RUN ${DEVC_BUILD}/go.sh ${GO_VERSION}
 # install rust
 ARG RUST_VERSION="latest"
-RUN ${DEVC_IMPORT}/rust.sh ${RUST_VERSION}
+RUN ${DEVC_BUILD}/rust.sh ${RUST_VERSION}
 # install terraform
-RUN ${DEVC_IMPORT}/terraform.sh
+RUN ${DEVC_BUILD}/terraform.sh
 # install gcloud and kubectl and helm
-RUN ${DEVC_IMPORT}/gcloud-kubectl-helm.sh
+RUN ${DEVC_BUILD}/gcloud-kubectl-helm.sh
 # install docker linter and scanner
-RUN ${DEVC_IMPORT}/docker.sh
+RUN ${DEVC_BUILD}/docker.sh
 
 ### copy dotfiles
 COPY .devcontainer/resources/ ${HOME}/
