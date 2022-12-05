@@ -26,7 +26,8 @@
   ],
   "containerEnv": {
     "USE_NERDFONT": "nerdfont-complete",
-    "CLOUDSDK_CONFIG": "/home/${localEnv:USER}/.gcloud/config/"
+    "CLOUDSDK_CONFIG": "/home/${localEnv:USER}/.gcloud/config/",
+    "GOOGLE_APPLICATION_CREDENTIALS": "home/${localEnv:USER}/.gcloud/config/application_default_credentials.json"
   },
 
   "mounts": [
