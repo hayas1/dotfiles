@@ -4,5 +4,5 @@ python --version && pip --version &&
     go version &&
     cargo --version && rustc --version && rustup --version &&
     docker --version &&
-    terraform --version &&
+    tfenv install latest && tfenv use latest && terraform --version &&
     echo q | gcloud --help && kubectl --help && helm --help

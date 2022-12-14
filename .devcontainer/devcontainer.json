@@ -26,7 +26,8 @@
   ],
   "containerEnv": {
     "USE_NERDFONT": "nerdfont-complete",
-    "CLOUDSDK_CONFIG": "/home/${localEnv:USER}/.gcloud/config/"
+    "CLOUDSDK_CONFIG": "/home/${localEnv:USER}/.gcloud/config/",
+    "GOOGLE_APPLICATION_CREDENTIALS": "home/${localEnv:USER}/.gcloud/config/application_default_credentials.json"
   },
 
   "mounts": [
@@ -67,7 +68,8 @@
     "esbenp.prettier-vscode", // install for node
     "golang.Go", // installed by go features
     "vadimcn.vscode-lldb", // installed by rust features
-    "rust-lang.rust-analyzer" // installed by rust features
+    "rust-lang.rust-analyzer", // installed by rust features
+    "HashiCorp.terraform" // installed by terraform features
     // "googlecloudtools.cloudcode", /// this extension will cause 100% cup/memory/storage
   ],
 

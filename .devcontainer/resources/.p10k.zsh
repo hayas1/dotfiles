@@ -1748,8 +1748,8 @@ typeset -g POWERLEVEL9K_CONFIG_FILE=${${(%):-%x}:a}
 function prompt_devcontainer() {
   if [[ -n $REMOTE_CONTAINERS$CODESPACES$VSCODE_REMOTE_CONTAINERS_SESSION$GITPOD_HOST ]]; then
     if [[ $USE_NERDFONT == 'nerdfont-complete'  ]]; then
-      # p10k segment -f cyan -i "\uf308" -t 'dev'
-      p10k segment -f cyan -i '' -t 'Dev'
+      # p10k segment -f cyan -i "\uf308"
+      p10k segment -f cyan -i ''
     else
       p10k segment -f cyan -t 'Dev Container'
     fi
