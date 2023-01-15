@@ -34,33 +34,35 @@ WORKDIR $HOME
 
 ### install features
 # copy scripts
-COPY .devcontainer/build ${DEVC_BUILD}
-COPY .devcontainer/entry ${DEVC_ENTRY}
+COPY public/docker/scripts/build ${DEVC_BUILD}
+COPY public/docker/scripts/cmd ${DEVC_ENTRY}
 # install tools
-RUN ${DEVC_BUILD}/tools.sh
+RUN ${DEVC_BUILD}/install-tools-and-set-aliases.sh
 # install zsh and plugins
-RUN ${DEVC_BUILD}/zsh-plugins.sh
+RUN ${DEVC_BUILD}/install-oh-my-zsh.sh
+RUN ${DEVC_BUILD}/install-zsh-plugins.sh
 # install python
 ARG PYTHON_VERSION="latest"
-RUN ${DEVC_BUILD}/python.sh ${PYTHON_VERSION}
+RUN ${DEVC_BUILD}/install-python.sh ${PYTHON_VERSION}
 # install node
 ARG NODE_VERSION="latest"
-RUN ${DEVC_BUILD}/node.sh ${NODE_VERSION}
+RUN ${DEVC_BUILD}/install-node.sh ${NODE_VERSION}
 # install go
 ARG GO_VERSION="latest"
-RUN ${DEVC_BUILD}/go.sh ${GO_VERSION}
+RUN ${DEVC_BUILD}/install-go.sh ${GO_VERSION}
 # install rust
 ARG RUST_VERSION="latest"
-RUN ${DEVC_BUILD}/rust.sh ${RUST_VERSION}
+RUN ${DEVC_BUILD}/install-rust.sh ${RUST_VERSION}
 # install terraform
-RUN ${DEVC_BUILD}/terraform.sh
+RUN ${DEVC_BUILD}/install-terraform.sh
 # install gcloud and kubectl and helm
-RUN ${DEVC_BUILD}/gcloud-kubectl-helm.sh
+RUN ${DEVC_BUILD}/install-gcloud-kubectl-helm.sh
 # install docker linter and scanner
-RUN ${DEVC_BUILD}/docker.sh
+RUN ${DEVC_BUILD}/install-hadolint-dockle.sh
 
 ### copy dotfiles
-COPY .devcontainer/resources/ ${HOME}/
+COPY .devcontainer/resources/.zshrc ${HOME}/.zshrc
+COPY .devcontainer/resources/.p10k.zsh ${HOME}/.p10k.zsh
 
 ### for sudo, use same zsh setting
 RUN cp -r .bash_aliases .oh-my-zsh .p10k.zsh .purepower .zshrc /root

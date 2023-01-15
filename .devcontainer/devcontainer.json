@@ -1,6 +1,6 @@
 {
   "name": "Debian",
-  "postCreateCommand": "${containerWorkspaceFolder}/.devcontainer/entry/entry.sh",
+  "postCreateCommand": "${containerWorkspaceFolder}/.devcontainer/entry.sh",
   "build": {
     "dockerfile": "Dockerfile",
     "context": "../",
