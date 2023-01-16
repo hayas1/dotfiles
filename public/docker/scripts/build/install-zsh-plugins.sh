@@ -32,6 +32,10 @@ if [ -e "$HOME/.oh-my-zsh" ]; then
     # zsh-history-substring-search https://github.com/zsh-users/zsh-history-substring-search
     git clone https://github.com/zsh-users/zsh-history-substring-search "${ZSH_CUSTOM:-${ZSH:-$HOME/.oh-my-zsh}/custom}/plugins/zsh-history-substring-search"
     sed -ri 's/^\s*plugins=\((.*)\)/plugins=(\1 zsh-history-substring-search)/g' "$HOME/.zshrc"
+    # https://github.com/zdharma/history-search-multi-word#oh-my-zsh-omz
+    git clone https://github.com/z-shell/H-S-MW.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/H-S-MW"
+    sed -ri 's/^\s*plugins=\((.*)\)/plugins=(\1 H-S-MW)/g' "$HOME/.zshrc"
+    echo >>"$HOME/.zshrc"
 else
     ### if not exist oh-my-zsh, use zinit # TODO use sheldon
     echo 'y' | bash -c "$(curl -fsSL https://git.io/zinit-install)"
@@ -42,10 +46,28 @@ else
         echo 'zinit light zsh-users/zsh-autosuggestions'
         echo 'zinit light zsh-users/zsh-syntax-highlighting'
         echo 'zinit light zsh-users/zsh-history-substring-search'
+        echo 'zinit light zdharma/history-search-multi-word'
+        echo
     } >>"$HOME/.zshrc"
+    {
+        echo '# ctrl+← ctrl+→'
+        echo 'key[Control-Left]="${terminfo[kLFT5]}"'
+        echo 'key[Control-Right]="${terminfo[kRIT5]}"'
+        echo '[[ -n "${key[Control-Left]}"  ]] && bindkey -- "${key[Control-Left]}"  backward-word'
+        echo '[[ -n "${key[Control-Right]}" ]] && bindkey -- "${key[Control-Right]}" forward-word'
+        echo
+    } >>"$HOME/.zshrc"
+    {
+        echo '# history ↑ ↓'
+        echo 'autoload -Uz up-line-or-beginning-search down-line-or-beginning-search'
+        echo 'zle -N up-line-or-beginning-search'
+        echo 'zle -N down-line-or-beginning-search'
+        echo '[[ -n "${key[Up]}" ]] && bindkey -- "${key[Up]}" up-line-or-beginning-search'
+        echo '[[ -n "${key[Down]}" ]] && bindkey -- "${key[Down]}" down-line-or-beginning-search'
+        echo
+    } >>"$HOME/.zshrc"
+
 fi
 
-# purepower and some settings
+# purepower
 curl -fsL 'https://github.com/romkatv/dotfiles-public/raw/master/.purepower' -o "$HOME/.purepower"
-curl -fsL 'https://github.com/hayas1/dotfiles/raw/master/.devcontainer/resources/.p10k.zsh' -o "$HOME/.p10k.zsh"
-echo '[ -e $HOME/.p10k.zsh ] && source $HOME/.p10k.zsh' >>"$HOME/.zshrc"

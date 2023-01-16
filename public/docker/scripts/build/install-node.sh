@@ -14,3 +14,11 @@ elif [ "$VERSION" = "lts" ]; then
     VERSION="lts/*"
 fi
 nvm install "$VERSION" && nvm clear-cache
+
+cat <<'EOF' >>"$HOME/.zshrc"
+### nvm settings
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"                   # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+
+EOF

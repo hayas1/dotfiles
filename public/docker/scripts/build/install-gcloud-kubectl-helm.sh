@@ -25,4 +25,5 @@ cat <<'EOF' >>"$HOME/.zshrc"
 source /usr/share/google-cloud-sdk/completion.zsh.inc
 [[ $commands[kubectl] ]] && source <(kubectl completion zsh)
 source <(helm completion zsh)
+
 EOF
