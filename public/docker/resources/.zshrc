@@ -15,6 +15,34 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
     curl -fsL 'https://github.com/romkatv/dotfiles-public/raw/master/.purepower' -o "$HOME/.purepower"
 [[ -s ~/.purepower ]] && source ~/.purepower
 
+# powerlevel10k
+[[ -s "${ZSH_CUSTOM:-${ZSH:-$HOME/.oh-my-zsh}/custom}/themes/powerlevel10k" ]] ||
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k "${ZSH_CUSTOM:-${ZSH:-$HOME/.oh-my-zsh}/custom}/themes/powerlevel10k"
+# zsh-completions https://github.com/zsh-users/zsh-completions
+[[ -s "${ZSH_CUSTOM:-${ZSH:-$HOME/.oh-my-zsh}/custom}/plugins/zsh-completions" ]] ||
+    git clone --depth=1 https://github.com/zsh-users/zsh-completions "${ZSH_CUSTOM:-${ZSH:-$HOME/.oh-my-zsh}/custom}/plugins/zsh-completions"
+# zsh-autosuggestion https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md
+[[ -s "${ZSH_CUSTOM:-${ZSH:-$HOME/.oh-my-zsh}/custom}/plugins/zsh-autosuggestions" ]] ||
+    git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM:-${ZSH:-$HOME/.oh-my-zsh}/custom}/plugins/zsh-autosuggestions"
+# zsh-syntax-highliting https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md
+[[ -s "${ZSH_CUSTOM:-${ZSH:-$HOME/.oh-my-zsh}/custom}/plugins/zsh-syntax-highlighting" ]] ||
+    git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting "${ZSH_CUSTOM:-${ZSH:-$HOME/.oh-my-zsh}/custom}/plugins/zsh-syntax-highlighting"
+# zsh-history-substring-search https://github.com/zsh-users/zsh-history-substring-search
+[[ -s "${ZSH_CUSTOM:-${ZSH:-$HOME/.oh-my-zsh}/custom}/plugins/zsh-history-substring-search" ]] ||
+    git clone --depth=1 https://github.com/zsh-users/zsh-history-substring-search "${ZSH_CUSTOM:-${ZSH:-$HOME/.oh-my-zsh}/custom}/plugins/zsh-history-substring-search"
+# https://github.com/zdharma/history-search-multi-word#oh-my-zsh-omz
+[[ -s "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/H-S-MW" ]] ||
+    git clone --depth=1 https://github.com/z-shell/H-S-MW "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/H-S-MW"
+
+# load plugins
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
+plugins=(git zsh-autosuggestions zsh-history-substring-search H-S-MW)
+fpath+=${ZSH_CUSTOM:-${ZSH:-$HOME/.oh-my-zsh}/custom}/plugins/zsh-completions/src
+. ${ZSH_CUSTOM:-${ZSH:-$HOME/.oh-my-zsh}/custom}/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+[[ -s $ZSH/oh-my-zsh.sh ]] && source $ZSH/oh-my-zsh.sh
+
 # without opening configuration wizard
 POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
 
@@ -40,31 +68,4 @@ DISABLE_UPDATE_PROMPT=true
 # do not close by ctrl+D
 setopt IGNORE_EOF
 
-# powerlevel10k
-[[ -s "${ZSH_CUSTOM:-${ZSH:-$HOME/.oh-my-zsh}/custom}/themes/powerlevel10k" ]] ||
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k "${ZSH_CUSTOM:-${ZSH:-$HOME/.oh-my-zsh}/custom}/themes/powerlevel10k"
-
-# zsh-completions https://github.com/zsh-users/zsh-completions
-[[ -s "${ZSH_CUSTOM:-${ZSH:-$HOME/.oh-my-zsh}/custom}/plugins/zsh-completions" ]] ||
-    git clone --depth=1 https://github.com/zsh-users/zsh-completions "${ZSH_CUSTOM:-${ZSH:-$HOME/.oh-my-zsh}/custom}/plugins/zsh-completions"
-# zsh-autosuggestion https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md
-[[ -s "${ZSH_CUSTOM:-${ZSH:-$HOME/.oh-my-zsh}/custom}/plugins/zsh-autosuggestions" ]] ||
-    git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM:-${ZSH:-$HOME/.oh-my-zsh}/custom}/plugins/zsh-autosuggestions"
-# zsh-syntax-highliting https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md
-[[ -s "${ZSH_CUSTOM:-${ZSH:-$HOME/.oh-my-zsh}/custom}/plugins/zsh-syntax-highlighting" ]] ||
-    git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting "${ZSH_CUSTOM:-${ZSH:-$HOME/.oh-my-zsh}/custom}/plugins/zsh-syntax-highlighting"
-# zsh-history-substring-search https://github.com/zsh-users/zsh-history-substring-search
-[[ -s "${ZSH_CUSTOM:-${ZSH:-$HOME/.oh-my-zsh}/custom}/plugins/zsh-history-substring-search" ]] ||
-    git clone --depth=1 https://github.com/zsh-users/zsh-history-substring-search "${ZSH_CUSTOM:-${ZSH:-$HOME/.oh-my-zsh}/custom}/plugins/zsh-history-substring-search"
-# https://github.com/zdharma/history-search-multi-word#oh-my-zsh-omz
-[[ -s "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/H-S-MW" ]] ||
-    git clone --depth=1 https://github.com/z-shell/H-S-MW "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/H-S-MW"
-
-# load plugins
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-plugins=(git zsh-autosuggestions zsh-history-substring-search H-S-MW)
-fpath+=${ZSH_CUSTOM:-${ZSH:-$HOME/.oh-my-zsh}/custom}/plugins/zsh-completions/src
-. ${ZSH_CUSTOM:-${ZSH:-$HOME/.oh-my-zsh}/custom}/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-[[ -s $ZSH/oh-my-zsh.sh ]] && source $ZSH/oh-my-zsh.sh
+### specified settings ###
