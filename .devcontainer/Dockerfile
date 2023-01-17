@@ -32,15 +32,24 @@ ENV DEVC_ENTRY="${DEVC_CONFIG}/entry"
 ENV WORKSPACE=${WORKSPACE}
 WORKDIR $HOME
 
-### install features
+### copy resources
 # copy scripts
 COPY public/docker/scripts/build ${DEVC_BUILD}
 COPY public/docker/scripts/cmd ${DEVC_ENTRY}
+
+# copy dotfiles
+COPY public/docker/resources/.zshrc ${HOME}/.zshrc
+COPY public/docker/resources/.bash_aliases ${HOME}/.bash_aliases
+COPY public/docker/resources/.p10k.zsh ${HOME}/.p10k.zsh
+
+
+### install essentials
 # install tools
-RUN ${DEVC_BUILD}/install-tools-and-set-aliases.sh
-# install zsh and plugins
+RUN ${DEVC_BUILD}/install-tools.sh
 RUN ${DEVC_BUILD}/install-oh-my-zsh.sh
-RUN ${DEVC_BUILD}/install-zsh-plugins.sh
+
+
+### install features
 # install python
 ARG PYTHON_VERSION="latest"
 RUN ${DEVC_BUILD}/install-python.sh ${PYTHON_VERSION}
@@ -60,12 +69,8 @@ RUN ${DEVC_BUILD}/install-gcloud-kubectl-helm.sh
 # install docker linter and scanner
 RUN ${DEVC_BUILD}/install-hadolint-dockle.sh
 
-### copy dotfiles
-COPY .devcontainer/resources/.zshrc ${HOME}/.zshrc
-COPY .devcontainer/resources/.p10k.zsh ${HOME}/.p10k.zsh
-
 ### for sudo, use same zsh setting
-RUN cp -r .bash_aliases .oh-my-zsh .p10k.zsh .purepower .zshrc /root
+RUN cp -r .bash_aliases .oh-my-zsh .p10k.zsh .zshrc /root
 RUN echo "export http_proxy=${http_proxy}" >> /root/.bashrc &&\
     echo "export HTTP_PROXY=${HTTP_PROXY}" >> /root/.bashrc &&\
     echo "export https_proxy=${https_proxy}" >> /root/.bashrc &&\
