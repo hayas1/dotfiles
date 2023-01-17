@@ -46,7 +46,8 @@ COPY ${RESOURCES}/.p10k.zsh ${HOME}/.p10k.zsh
 ### install essentials
 RUN ${DEVC_BUILD}/install-tools.sh
 RUN ${DEVC_BUILD}/install-oh-my-zsh.sh
-
+# download zsh plugins
+RUN zsh ${HOME}/.zshrc
 
 ### install features
 # install python
