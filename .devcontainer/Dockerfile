@@ -24,27 +24,26 @@ RUN apt-get update && apt-get install sudo && groupadd --gid $GID $USERNAME &&\
 ### set home directory for docker and devc's directory
 ARG HOME="${HOME:-/home/$USERNAME}"
 ARG DEVC_CONFIG="${HOME}/.devc"
-ARG WORKSPACE="${HOME}/workspace"
 ENV HOME=${HOME}
 ENV DEVC_CONFIG="${DEVC_CONFIG}"
 ENV DEVC_BUILD="${DEVC_CONFIG}/build"
 ENV DEVC_ENTRY="${DEVC_CONFIG}/entry"
-ENV WORKSPACE=${WORKSPACE}
 WORKDIR $HOME
 
 ### copy resources
 # copy scripts
-COPY public/docker/scripts/build ${DEVC_BUILD}
-COPY public/docker/scripts/cmd ${DEVC_ENTRY}
+ARG SCRIPTS="./public/docker/scripts"
+COPY ${SCRIPTS}/build ${DEVC_BUILD}
+COPY ${SCRIPTS}/cmd ${DEVC_ENTRY}
 
 # copy dotfiles
-COPY public/docker/resources/.zshrc ${HOME}/.zshrc
-COPY public/docker/resources/.bash_aliases ${HOME}/.bash_aliases
-COPY public/docker/resources/.p10k.zsh ${HOME}/.p10k.zsh
+ARG RESOURCES="./public/docker/resources"
+COPY ${RESOURCES}/.zshrc ${HOME}/.zshrc
+COPY ${RESOURCES}/.bash_aliases ${HOME}/.bash_aliases
+COPY ${RESOURCES}/.p10k.zsh ${HOME}/.p10k.zsh
 
 
 ### install essentials
-# install tools
 RUN ${DEVC_BUILD}/install-tools.sh
 RUN ${DEVC_BUILD}/install-oh-my-zsh.sh
 
@@ -63,7 +62,8 @@ RUN ${DEVC_BUILD}/install-go.sh ${GO_VERSION}
 ARG RUST_VERSION="latest"
 RUN ${DEVC_BUILD}/install-rust.sh ${RUST_VERSION}
 # install terraform
-RUN ${DEVC_BUILD}/install-terraform.sh
+ARG TERRAFORM_VERSION="latest"
+RUN ${DEVC_BUILD}/install-terraform.sh ${TERRAFORM_VERSION}
 # install gcloud and kubectl and helm
 RUN ${DEVC_BUILD}/install-gcloud-kubectl-helm.sh
 # install docker linter and scanner
