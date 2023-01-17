@@ -68,6 +68,3 @@ else
     } >>"$HOME/.zshrc"
 
 fi
-
-# purepower
-curl -fsL 'https://github.com/romkatv/dotfiles-public/raw/master/.purepower' -o "$HOME/.purepower"
