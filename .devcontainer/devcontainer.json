@@ -1,6 +1,6 @@
 {
   "name": "Debian",
-  "postCreateCommand": "${containerWorkspaceFolder}/.devcontainer/entry.sh",
+  "postCreateCommand": "${containerEnv:DEVC_ENTRY}/entry.sh",
   "build": {
     "dockerfile": "Dockerfile",
     "context": "../",
@@ -8,13 +8,13 @@
       "USERNAME": "${localEnv:USER}",
       "UID": "${localEnv:UID:20000}",
       "GID": "${localEnv:GID:20000}",
-      "WORKSPACE": "${containerWorkspaceFolder}"
       // "http_proxy": "${localEnv:http_proxy}",
       // "HTTP_PROXY": "${localEnv:HTTP_PROXY}",
       // "https_proxy": "${localEnv:https_proxy}",
       // "HTTPS_PROXY": "${localEnv:HTTPS_PROXY}",
       // "no_PROXY": "${localEnv:no_proxy}",
-      // "NO_PROXY": "${localEnv:NO_PROXY}"
+      // "NO_PROXY": "${localEnv:NO_PROXY}",
+      "ENTRY_SCRIPTS": "${localEnv:DEVC_ENTRY_SCRIPTS:./public/docker/scripts/cmd}"
     }
   },
   "runArgs": [
@@ -25,6 +25,7 @@
     // "--env-file=.env"
   ],
   "containerEnv": {
+    "WORKSPACE": "${containerWorkspaceFolder}",
     "USE_NERDFONT": "nerdfont-complete",
     "CLOUDSDK_CONFIG": "/home/${localEnv:USER}/.gcloud/config/",
     "GOOGLE_APPLICATION_CREDENTIALS": "home/${localEnv:USER}/.gcloud/config/application_default_credentials.json"

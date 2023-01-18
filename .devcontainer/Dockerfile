@@ -23,6 +23,7 @@ RUN apt-get update && apt-get install sudo && groupadd --gid $GID $USERNAME &&\
 
 ### set home directory for docker and devc's directory
 ARG HOME="${HOME:-/home/$USERNAME}"
+ARG WORKSPACE="${HOME}/workspace"
 ARG DEVC_CONFIG="${HOME}/.devc"
 ENV HOME=${HOME}
 ENV DEVC_CONFIG="${DEVC_CONFIG}"
@@ -33,8 +34,10 @@ WORKDIR $HOME
 ### copy resources
 # copy scripts
 ARG SCRIPTS="./public/docker/scripts"
-COPY ${SCRIPTS}/build ${DEVC_BUILD}
-COPY ${SCRIPTS}/cmd ${DEVC_ENTRY}
+ARG BUILD_SCRIPTS="${SCRIPTS}/build"
+ARG ENTRY_SCRIPTS="${SCRIPTS}/cmd"
+COPY ${BUILD_SCRIPTS} ${DEVC_BUILD}
+COPY ${ENTRY_SCRIPTS} ${DEVC_ENTRY}
 
 # copy dotfiles
 ARG RESOURCES="./public/docker/resources"
