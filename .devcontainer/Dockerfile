@@ -23,47 +23,58 @@ RUN apt-get update && apt-get install sudo && groupadd --gid $GID $USERNAME &&\
 
 ### set home directory for docker and devc's directory
 ARG HOME="${HOME:-/home/$USERNAME}"
-ARG DEVC_CONFIG="${HOME}/.devc"
 ARG WORKSPACE="${HOME}/workspace"
+ARG DEVC_CONFIG="${HOME}/.devc"
 ENV HOME=${HOME}
 ENV DEVC_CONFIG="${DEVC_CONFIG}"
 ENV DEVC_BUILD="${DEVC_CONFIG}/build"
 ENV DEVC_ENTRY="${DEVC_CONFIG}/entry"
-ENV WORKSPACE=${WORKSPACE}
 WORKDIR $HOME
 
-### install features
+### copy resources
 # copy scripts
-COPY .devcontainer/build ${DEVC_BUILD}
-COPY .devcontainer/entry ${DEVC_ENTRY}
-# install tools
-RUN ${DEVC_BUILD}/tools.sh
-# install zsh and plugins
-RUN ${DEVC_BUILD}/zsh-plugins.sh
+ARG SCRIPTS="./public/docker/scripts"
+ARG BUILD_SCRIPTS="${SCRIPTS}/build"
+ARG ENTRY_SCRIPTS="${SCRIPTS}/cmd"
+COPY ${BUILD_SCRIPTS} ${DEVC_BUILD}
+COPY ${ENTRY_SCRIPTS} ${DEVC_ENTRY}
+
+# copy dotfiles
+ARG RESOURCES="./public/docker/resources"
+COPY ${RESOURCES}/.zshrc ${HOME}/.zshrc
+COPY ${RESOURCES}/.bash_aliases ${HOME}/.bash_aliases
+COPY ${RESOURCES}/.p10k.zsh ${HOME}/.p10k.zsh
+
+
+### install essentials
+RUN ${DEVC_BUILD}/install-tools.sh
+RUN ${DEVC_BUILD}/install-oh-my-zsh.sh
+# download zsh plugins
+RUN zsh ${HOME}/.zshrc
+
+### install features
 # install python
 ARG PYTHON_VERSION="latest"
-RUN ${DEVC_BUILD}/python.sh ${PYTHON_VERSION}
+RUN ${DEVC_BUILD}/install-python.sh ${PYTHON_VERSION}
 # install node
 ARG NODE_VERSION="latest"
-RUN ${DEVC_BUILD}/node.sh ${NODE_VERSION}
+RUN ${DEVC_BUILD}/install-node.sh ${NODE_VERSION}
 # install go
 ARG GO_VERSION="latest"
-RUN ${DEVC_BUILD}/go.sh ${GO_VERSION}
+RUN ${DEVC_BUILD}/install-go.sh ${GO_VERSION}
 # install rust
 ARG RUST_VERSION="latest"
-RUN ${DEVC_BUILD}/rust.sh ${RUST_VERSION}
+RUN ${DEVC_BUILD}/install-rust.sh ${RUST_VERSION}
 # install terraform
-RUN ${DEVC_BUILD}/terraform.sh
+ARG TERRAFORM_VERSION="latest"
+RUN ${DEVC_BUILD}/install-terraform.sh ${TERRAFORM_VERSION}
 # install gcloud and kubectl and helm
-RUN ${DEVC_BUILD}/gcloud-kubectl-helm.sh
+RUN ${DEVC_BUILD}/install-gcloud-kubectl-helm.sh
 # install docker linter and scanner
-RUN ${DEVC_BUILD}/docker.sh
-
-### copy dotfiles
-COPY .devcontainer/resources/ ${HOME}/
+RUN ${DEVC_BUILD}/install-hadolint-dockle.sh
 
 ### for sudo, use same zsh setting
-RUN cp -r .bash_aliases .oh-my-zsh .p10k.zsh .purepower .zshrc /root
+RUN cp -r .bash_aliases .oh-my-zsh .p10k.zsh .zshrc /root
 RUN echo "export http_proxy=${http_proxy}" >> /root/.bashrc &&\
     echo "export HTTP_PROXY=${HTTP_PROXY}" >> /root/.bashrc &&\
     echo "export https_proxy=${https_proxy}" >> /root/.bashrc &&\
