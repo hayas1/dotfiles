@@ -14,7 +14,7 @@
       // "HTTPS_PROXY": "${localEnv:HTTPS_PROXY}",
       // "no_PROXY": "${localEnv:no_proxy}",
       // "NO_PROXY": "${localEnv:NO_PROXY}",
-      "ENTRY_SCRIPTS": "${localEnv:DEVC_ENTRY_SCRIPTS:./public/docker/scripts/cmd}"
+      "SCRIPTS": "${localEnv:DEVC_SCRIPTS:./public/docker/scripts}"
     }
   },
   "runArgs": [
