@@ -10,7 +10,13 @@ This is devcontainer image for [VSCode](https://github.com/microsoft/vscode) wit
 
 # Scripts for container
 ## Install zsh and settings and tools
-we have some scripts that install some tools for zsh on container.
+We have some scripts that install some tools for zsh on container.
+End of Dockerfile, should be changed home directory owner.
+```dockerfile
+ENV HOME=/home/${USER}
+RUN chown -R ${USER}:${USER} ${HOME}
+```
+
 ### Usage [install-zsh-plugins.sh](/scripts/public/docker/install-zsh-plugins.sh)
 The script will install zsh and some plugins.
 ```dockerfile
