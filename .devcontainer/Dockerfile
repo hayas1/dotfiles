@@ -70,6 +70,8 @@ ARG TERRAFORM_VERSION="latest"
 RUN ${DEVC_BUILD}/install-terraform.sh ${TERRAFORM_VERSION}
 # install gcloud and kubectl and helm
 RUN ${DEVC_BUILD}/install-gcloud-kubectl-helm.sh
+# install github cli
+RUN ${DEVC_BUILD}/install-gh.sh
 # install docker linter and scanner
 RUN ${DEVC_BUILD}/install-hadolint-dockle.sh
 
