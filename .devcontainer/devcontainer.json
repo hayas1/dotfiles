@@ -33,17 +33,16 @@
   },
 
   "mounts": [
-    /// tools config
-    "source=${localEnv:HOME}/.zsh_history,target=/home/${localEnv:USER}/.zsh_history,type=bind",
-    "source=${localEnv:HOME}/.ssh/,target=/home/${localEnv:USER}/.ssh/,type=bind",
-    "source=${localEnv:HOME}/.config/git/config,target=/home/${localEnv:USER}/.gitconfig,type=bind",
-    "source=${localEnv:HOME}/.aws/,target=/home/${localEnv:USER}/.aws/,type=bind",
-    "source=${localEnv:HOME}/.config/gcloud/,target=/home/${localEnv:USER}/.gcloud/config/,type=bind",
-    "source=${localEnv:HOME}/.config/gh/,target=/home/${localEnv:USER}/.gh/config/,type=bind",
-    "source=${localEnv:HOME}/.kube/,target=/home/${localEnv:USER}/.kube/,type=bind",
-    "source=${localEnv:HOME}/.helm/,target=/home/${localEnv:USER}/.helm/,type=bind",
-    /// docker-from-docker
-    "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
+    // /// tools config
+    // "source=${localEnv:HOME}/.ssh/,target=/home/${localEnv:USER}/.ssh/,type=bind",
+    // "source=${localEnv:HOME}/.config/git/config,target=/home/${localEnv:USER}/.gitconfig,type=bind",
+    // "source=${localEnv:HOME}/.aws/,target=/home/${localEnv:USER}/.aws/,type=bind",
+    // "source=${localEnv:HOME}/.config/gcloud/,target=/home/${localEnv:USER}/.gcloud/config/,type=bind",
+    // "source=${localEnv:HOME}/.config/gh/,target=/home/${localEnv:USER}/.gh/config/,type=bind",
+    // "source=${localEnv:HOME}/.kube/,target=/home/${localEnv:USER}/.kube/,type=bind",
+    // "source=${localEnv:HOME}/.helm/,target=/home/${localEnv:USER}/.helm/,type=bind",
+    // /// docker-from-docker
+    // "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
   ],
 
   "settings": {
