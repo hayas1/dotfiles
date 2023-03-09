@@ -27,3 +27,9 @@ source /usr/share/google-cloud-sdk/completion.zsh.inc
 source <(helm completion zsh)
 
 EOF
+
+### install k9s if go exist https://github.com/derailed/k9s#installation
+if type go >/dev/null 2>&1; then
+    # NOTE: The dev version will be in effect!
+    go install github.com/derailed/k9s@latest
+fi

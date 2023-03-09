@@ -19,3 +19,10 @@ tar -xzf "$WORK_DIR/$VERSION.linux-amd64.tar.gz" -C "$INSTALL_PATH"
 # ln -s "$INSTALL_PATH"/go/bin/* /usr/bin/
 ln -s "$INSTALL_PATH"/go/bin/go /usr/bin/go
 ln -s "$INSTALL_PATH"/go/bin/gofmt /usr/bin/gofmt
+
+# go bin path
+cat <<'EOF' >>"$HOME/.zshrc"
+### go bin settings
+export PATH=$PATH:$HOME/go/bin
+
+EOF
