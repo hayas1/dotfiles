@@ -10,24 +10,47 @@ This is devcontainer image for [VSCode](https://github.com/microsoft/vscode) wit
 
 # Scripts for container
 ## Install zsh and settings and tools
-we have some scripts that install some tools for zsh on container.
-### Usage [install-zsh-plugins.sh](/scripts/public/docker/install-zsh-plugins.sh)
-The script will install zsh and some plugins.
+We have some [scripts](/public/docker/scripts/build/) that install some tools for zsh on container. Every scripts has similar usage.
+End of Dockerfile, should be changed home directory owner.
 ```dockerfile
 ENV HOME=/home/${USER}
-RUN curl -fsL 'https://github.com/hayas1/dotfiles/raw/master/scripts/public/docker/install-zsh-plugins.sh' | bash -s
+RUN chown -R ${USER}:${USER} ${HOME}
 ```
 
-### Usage [install-tools-and-set-aliases.sh](/scripts/public/docker/install-tools-and-set-aliases.sh)
-The script will install tools and set aliases. **Remark**: this script write aliases settings to only `${HOME}/.zshrc`, so not support `bash`.
+### install zsh
+The script will install zsh and install-oh-my-zsh.
 ```dockerfile
 ENV HOME=/home/${USER}
-RUN curl -fsL 'https://github.com/hayas1/dotfiles/raw/master/scripts/public/docker/install-tools-and-set-aliases.sh' | bash -s
+RUN curl -fsL 'https://github.com/hayas1/dotfiles/raw/master/public/docker/scripts/build/install-oh-my-zsh.sh' | bash -s
 ```
 
-### Usage [install-gcloud-kubectl-helm.sh](/scripts/public/docker/install-gcloud-kubectl-helm.sh)
-The script will install gcloud and kubectl and helm. **Remark**: this script write completion settings to only `${HOME}/.zshrc`, so not support `bash`.
+### install tools
+The script will install some tools.
 ```dockerfile
 ENV HOME=/home/${USER}
-RUN curl -fsL 'https://github.com/hayas1/dotfiles/raw/master/scripts/public/docker/install-gcloud-kubectl-helm.sh' | bash -s
+RUN curl -fsL 'https://github.com/hayas1/dotfiles/raw/master/public/docker/scripts/build/install-tools.sh' | bash -s
+```
+
+## Setting files for zsh
+We have some [resources](/public/docker/resources/) that have settings for zsh.
+
+### .zshrc
+Some settings for zsh.
+```dockerfile
+ENV HOME=/home/${USER}
+RUN curl -fsL 'https://github.com/hayas1/dotfiles/raw/master/public/docker/resources/.zshrc' -o ${HOME}/.zshrc && zsh ${HOME}/.zshrc
+```
+
+### .p10k.zsh
+Some settings for powerlevel10k.
+```dockerfile
+ENV HOME=/home/${USER}
+RUN curl -fsL 'https://github.com/hayas1/dotfiles/raw/master/public/docker/resources/.p10k.zsh' -o ${HOME}/.p10k.zsh
+```
+
+### .bash_aliases
+Aliases settings.
+```dockerfile
+ENV HOME=/home/${USER}
+RUN curl -fsL 'https://github.com/hayas1/dotfiles/raw/master/public/docker/resources/.bash_aliases' -o ${HOME}/.bash_aliases
 ```
