@@ -1,6 +1,6 @@
 {
   "name": "Debian",
-  "postCreateCommand": "${containerEnv:DEVC_ENTRY}/entry.sh",
+  "postCreateCommand": "${containerWorkspaceFolder}/.devcontainer/entry.sh",
   "build": {
     "dockerfile": "Dockerfile",
     "context": "../",
@@ -42,7 +42,6 @@
     // "source=${localEnv:HOME}/.kube/,target=/home/${localEnv:USER}/.kube/,type=bind",
     // "source=${localEnv:HOME}/.helm/,target=/home/${localEnv:USER}/.helm/,type=bind",
     // /// docker-from-docker
-    // "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
   ],
 
   "settings": {
