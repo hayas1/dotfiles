@@ -5,4 +5,4 @@ python --version && pip --version &&
     cargo --version && rustc --version && rustup --version &&
     docker --version &&
     sudo tfenv install latest && sudo tfenv use latest && terraform --version &&
-    echo q | gcloud --help && kubectl --help && helm --help
+    gcloud version && kubectl version --client --output=yaml && helm version --client
