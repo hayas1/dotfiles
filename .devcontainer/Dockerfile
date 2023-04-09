@@ -26,6 +26,8 @@ RUN mkdir "${HOME}/.config" && chown -R "${UID}:${GID}" "${HOME}/.config"
 
 ### copy repository into container
 ARG REPOSITORY="${HOME}/.config/dotfiles"
+# RUN apt-get update -y && apt-get upgrade -y && apt-get install -y git && \
+#     git clone --depth=1 https://github.com/hayas1/dotfiles.git "${REPOSITORY}"
 COPY ./ ${REPOSITORY}
 
 ### run install commands
