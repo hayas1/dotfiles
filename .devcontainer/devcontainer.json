@@ -15,7 +15,8 @@
       // "no_PROXY": "${localEnv:no_proxy}",
       // "NO_PROXY": "${localEnv:NO_PROXY}",
       "SCRIPTS": "${localEnv:DEVC_SCRIPTS:./public/docker/scripts}"
-    }
+    },
+    "cacheFrom": "ghcr.io/hayas1/dotfiles",
   },
   "runArgs": [
     "--cap-add=SYS_PTRACE",
