@@ -1,6 +1,4 @@
-# FROM mcr.microsoft.com/vscode/devcontainers/base:0-bullseye
 FROM debian:latest
-
 
 ### proxy setting
 # ARG http_proxy
@@ -18,34 +16,68 @@ ARG UID
 ARG GID=${UID}
 ARG USERNAME
 ARG GROUPNAME=${USERNAME}
-ARG HOME="${HOME:-/home/$USERNAME}"
 RUN apt-get update && apt-get install sudo && groupadd --gid $GID $USERNAME &&\
     useradd -s /bin/bash --uid $UID --gid $GID -m $USERNAME &&\
     echo $USERNAME ALL=\(root\) NOPASSWD:ALL >/etc/sudoers.d/$USERNAME && chmod 0440 /etc/sudoers.d/$USERNAME
-RUN mkdir "${HOME}/.config" && chown -R "${UID}:${GID}" "${HOME}/.config"
 
-### copy repository into container
-ARG REPOSITORY="${HOME}/.config/dotfiles"
-COPY ./ ${REPOSITORY}
 
-### run install commands
-RUN "${REPOSITORY}/public/build/install-tools.sh" && \
-    "${REPOSITORY}/public/build/install-oh-my-zsh.sh"
-RUN "${REPOSITORY}/public/build/install-python.sh" latest && \
-    "${REPOSITORY}/public/build/install-node.sh" latest && \
-    "${REPOSITORY}/public/build/install-go.sh" latest && \
-    "${REPOSITORY}/public/build/install-rust.sh" latest && \
-    "${REPOSITORY}/public/build/install-terraform.sh" latest && \
-    "${REPOSITORY}/public/build/install-gcloud-kubectl-helm.sh" && \
-    "${REPOSITORY}/public/build/install-gh.sh" && \
-    "${REPOSITORY}/public/build/install-hadolint-dockle.sh"
-RUN cp "${REPOSITORY}/public/resources/.zshrc" "${HOME}/.zshrc" && \
-    cp "${REPOSITORY}/public/resources/.bash_aliases" "${HOME}/.bash_aliases" && \
-    cp "${REPOSITORY}/public/resources/.p10k.zsh" "${HOME}/.p10k.zsh" && \
-    zsh ${HOME}/.zshrc
+### set home directory for docker and devc's directory
+ARG HOME="${HOME:-/home/$USERNAME}"
+ARG WORKSPACE="${HOME}/workspace"
+ARG DEVC_CONFIG="${HOME}/.devc"
+ENV HOME=${HOME}
+ENV DEVC_CONFIG="${DEVC_CONFIG}"
+ENV DEVC_BUILD="${DEVC_CONFIG}/build"
+ENV DEVC_ENTRY="${DEVC_CONFIG}/entry"
+WORKDIR $HOME
+
+### copy resources
+# copy scripts
+ARG SCRIPTS="./public/docker/scripts"
+ARG BUILD_SCRIPTS="${SCRIPTS}/build"
+ARG ENTRY_SCRIPTS="${SCRIPTS}/cmd"
+COPY ${BUILD_SCRIPTS} ${DEVC_BUILD}
+COPY ${ENTRY_SCRIPTS} ${DEVC_ENTRY}
+
+# copy dotfiles
+ARG RESOURCES="./public/docker/resources"
+COPY ${RESOURCES}/.zshrc ${HOME}/.zshrc
+COPY ${RESOURCES}/.bash_aliases ${HOME}/.bash_aliases
+COPY ${RESOURCES}/.p10k.zsh ${HOME}/.p10k.zsh
+
+
+### install essentials
+RUN ${DEVC_BUILD}/install-tools.sh
+RUN ${DEVC_BUILD}/install-oh-my-zsh.sh
+# download zsh plugins
+RUN zsh ${HOME}/.zshrc
+
+### install features
+# install python
+ARG PYTHON_VERSION="latest"
+RUN ${DEVC_BUILD}/install-python.sh ${PYTHON_VERSION}
+# install node
+ARG NODE_VERSION="latest"
+RUN ${DEVC_BUILD}/install-node.sh ${NODE_VERSION}
+# install go
+ARG GO_VERSION="latest"
+RUN ${DEVC_BUILD}/install-go.sh ${GO_VERSION}
+# install rust
+ARG RUST_VERSION="latest"
+RUN ${DEVC_BUILD}/install-rust.sh ${RUST_VERSION}
+# install terraform
+ARG TERRAFORM_VERSION="latest"
+RUN ${DEVC_BUILD}/install-terraform.sh ${TERRAFORM_VERSION}
+# install gcloud and kubectl and helm
+RUN ${DEVC_BUILD}/install-gcloud-kubectl-helm.sh
+# install github cli
+RUN ${DEVC_BUILD}/install-gh.sh
+# install docker linter and scanner
+RUN ${DEVC_BUILD}/install-hadolint-dockle.sh
+
 ### for sudo, use same zsh setting
-RUN cp -r "${HOME}/.bash_aliases" "${HOME}/.oh-my-zsh" "${HOME}/.p10k.zsh" "${HOME}/.zshrc" /root && \
-    echo "export http_proxy=${http_proxy}" >> /root/.bashrc &&\
+RUN cp -r .bash_aliases .oh-my-zsh .p10k.zsh .zshrc /root
+RUN echo "export http_proxy=${http_proxy}" >> /root/.bashrc &&\
     echo "export HTTP_PROXY=${HTTP_PROXY}" >> /root/.bashrc &&\
     echo "export https_proxy=${https_proxy}" >> /root/.bashrc &&\
     echo "export HTTPS_PROXY=${HTTPS_PROXY}" >> /root/.bashrc &&\

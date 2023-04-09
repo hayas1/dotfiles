@@ -1,7 +1,7 @@
 #! /bin/bash -e
 
 ### install hadolint https://github.com/hadolint/hadolint#install
-WORK_DIR=$(mktemp -dt "dotfiles-install-go-$(date +%Y%m%d%H%M%S)-XXXXXX")
+WORK_DIR="${DEVC_CONFIG:-$HOME/.devc}/work/docker"
 wget -P "$WORK_DIR" https://github.com/hadolint/hadolint/releases/latest/download/hadolint-Linux-x86_64
 chmod +x "$WORK_DIR/hadolint-Linux-x86_64"
 ln -s "$WORK_DIR/hadolint-Linux-x86_64" /usr/bin/hadolint
