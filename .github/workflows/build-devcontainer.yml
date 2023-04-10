@@ -18,6 +18,8 @@ jobs:
         with:
           ref: ${{ inputs.branch }}
       - uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
       - name: Install with pip
         run: pip install -r tests/build/requirements.txt
       - name: Prepare build source directories/files
@@ -32,7 +34,7 @@ jobs:
         run: cp -r ${{ inputs.path }}/.devcontainer/* .devcontainer || true
       - name: Trim path prefix `.`
         id: trim-dot
-        run: echo "##[set-output name=suffix;]$(sed -e 's/^\.//' <<< '${{ inputs.path }}')"
+        run: echo "{suffix}={$(sed -e 's/^\.//' <<< '${{ inputs.path }}')}" >> $GITHUB_OUTPUT
       - name: Build and test zsh
         uses: devcontainers/ci@v0.2
         with:
