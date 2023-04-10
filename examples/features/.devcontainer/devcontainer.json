@@ -1,0 +1,72 @@
+{
+  "name": "Debian",
+  "postCreateCommand": "${containerWorkspaceFolder}/.devcontainer/entry.sh",
+  "remoteUser": "vscode",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "../",
+    "cacheFrom": "ghcr.io/hayas1/dotfiles/examples/features"
+  },
+  "runArgs": [
+    "--cap-add=SYS_PTRACE",
+    "--security-opt",
+    "seccomp=unconfined"
+    // "--network=dotfiles_default",
+    // "--env-file=.env"
+  ],
+  "containerEnv": {
+    "USE_NERDFONT": "nerdfont-complete"
+  },
+  "mounts": [
+    /// tools config
+    "source=${localEnv:HOME}/.ssh/,target=/home/${localEnv:USER}/.ssh/,type=bind",
+    "source=${localEnv:HOME}/.config/git/config,target=/home/${localEnv:USER}/.config/git/config,type=bind",
+    "source=${localEnv:HOME}/.config/gh/,target=/home/${localEnv:USER}/.config/gh/,type=bind",
+    "source=${localEnv:HOME}/.config/gcloud/,target=/home/${localEnv:USER}/.config/gcloud/,type=bind",
+    "source=${localEnv:HOME}/.aws/,target=/home/${localEnv:USER}/.aws/,type=bind",
+    "source=${localEnv:HOME}/.kube/,target=/home/${localEnv:USER}/.kube/,type=bind",
+    "source=${localEnv:HOME}/.helm/,target=/home/${localEnv:USER}/.helm/,type=bind",
+    "source=${localEnv:HOME}/.zsh_history,target=/home/${localEnv:USER}/.zsh_history,type=bind",
+    /// docker-from-docker
+    "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
+  ],
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "editor.formatOnSave": true,
+        "terminal.integrated.defaultProfile.linux": "zsh",
+        "trailing-spaces.trimOnSave": true
+      },
+      "extensions": [
+        "eamodio.gitlens",
+        // "mhutchie.git-graph", /// in open source project, gitlens has same feature
+        "streetsidesoftware.code-spell-checker",
+        "shardulm94.trailing-spaces",
+        "Gruntfuggly.todo-tree",
+        "christian-kohler.path-intellisense",
+        "mads-hartmann.bash-ide-vscode",
+        "timonwong.shellcheck",
+        "foxundermoon.shell-format",
+        "yzhang.markdown-all-in-one",
+        "rangav.vscode-thunder-client"
+      ]
+    }
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/docker-outside-of-docker": "latest",
+    "ghcr.io/devcontainers/features/python": "latest",
+    "ghcr.io/devcontainers/features/go": "latest",
+    "ghcr.io/devcontainers/features/rust": "latest",
+    "ghcr.io/devcontainers/features/node": "latest",
+    "ghcr.io/devcontainers/features/terraform": "latest",
+    "ghcr.io/devcontainers/features/kubectl-helm-minikube": "latest",
+    "ghcr.io/devcontainers/features/github-cli": "latest",
+    "ghcr.io/devcontainers/features/aws-cli": "latest",
+    "ghcr.io/dhoeric/features/google-cloud-cli": "latest",
+    "ghcr.io/dhoeric/features/k6": "latest",
+    // "ghcr.io/dhoeric/features/k9s": "latest",
+    "ghcr.io/rio/features/k9s": "latest",
+    "ghcr.io/devcontainers-contrib/features/argo-cd": "latest",
+    "ghcr.io/devcontainers-contrib/features/argo-workflows": "latest"
+  }
+}
