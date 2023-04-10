@@ -23,8 +23,8 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Copy .devcontainer/ into working directory
-        run: cp -r examples/${{ matrix.features }}/.devcontainer/* .devcontainer
+      - name: Copy examples/.devcontainer/ into working directory
+        run: cp -r examples/${{ matrix.example }}/.devcontainer/* .devcontainer
       - name: Build and test zsh
         uses: devcontainers/ci@v0.2
         with:
