@@ -12,6 +12,7 @@ RUN curl -fsL 'https://github.com/hayas1/dotfiles/raw/master/public/resources/.z
 RUN zsh ${HOME}/.zshrc
 
 RUN curl -fsL 'https://github.com/hayas1/dotfiles/raw/master/public/build/install-oh-my-zsh.sh' | bash -s
-RUN curl -fsL 'https://github.com/haySas1/dotfiles/raw/master/public/build/install-tools.sh' | bash -s
+RUN curl -fsL 'https://github.com/hayas1/dotfiles/raw/master/public/build/install-tools.sh' | bash -s
+RUN curl -fsL 'https://github.com/hayas1/dotfiles/raw/master/public/build/install-terraform.sh' | bash -s
 
 RUN mkdir "${HOME}/.config" && chown -R ${USER}:${USER} ${HOME}

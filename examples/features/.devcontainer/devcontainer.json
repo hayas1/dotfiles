@@ -58,7 +58,7 @@
     "ghcr.io/devcontainers/features/go": "latest",
     "ghcr.io/devcontainers/features/rust": "latest",
     "ghcr.io/devcontainers/features/node": "latest",
-    "ghcr.io/devcontainers/features/terraform": "latest",
+    // "ghcr.io/devcontainers/features/terraform": "latest",
     "ghcr.io/devcontainers/features/kubectl-helm-minikube": "latest",
     "ghcr.io/devcontainers/features/github-cli": "latest",
     "ghcr.io/devcontainers/features/aws-cli": "latest",
@@ -67,6 +67,6 @@
     // "ghcr.io/dhoeric/features/k9s": "latest",
     "ghcr.io/rio/features/k9s": "latest",
     "ghcr.io/devcontainers-contrib/features/argo-cd": "latest",
-    "ghcr.io/devcontainers-contrib/features/argo-workflows": "latest"
+    "ghcr.io/devcontainers-contrib/features/argo-workflows": "latest",
   }
 }
