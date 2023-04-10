@@ -23,7 +23,7 @@ jobs:
       - name: Prepare build source directories/files
         run: python ./tests/build/prebuild.py prepare-mounts ${{ inputs.path }}/.devcontainer/devcontainer.json
       - name: Login to GitHub Container Registry
-        uses: docker/login-action@v1
+        uses: docker/login-action@v2
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}

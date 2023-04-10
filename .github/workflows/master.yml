@@ -7,6 +7,15 @@ on:
     branches: ["master"]
 
 jobs:
+  # build: # wait for update...?
+  #   strategy:
+  #     matrix:
+  #       devcontainer: [".", "./examples/clone", "./examples/features"]
+  #   uses: hayas1/dotfiles/.github/workflows/build-devcontainer.yml@master
+  #   if: ${{ matrix.devcontainer == "" || github.event_name == 'push' }} # matrix in if, cannot be recognized 2023/04/11
+  #   with:
+  #     branch: ${{ github.ref }}
+  #     path: ${{ matrix.devcontainer }}
   build:
     uses: hayas1/dotfiles/.github/workflows/build-devcontainer.yml@master
     with:
