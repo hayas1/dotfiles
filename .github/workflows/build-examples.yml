@@ -1,0 +1,35 @@
+name: Build Example Devcontainer
+
+on:
+  push:
+    branches: ["master"]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        example: ["clone", "features"]
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v2
+      - name: Install with pip
+        run: pip install -r tests/build/requirements.txt
+      - name: Prepare build source directories/files
+        run: python ./tests/build/prebuild.py prepare-mounts examples/${{ matrix.example }}/.devcontainer/devcontainer.json
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Copy .devcontainer/ into working directory
+        run: cp -r examples/${{ matrix.features }}/.devcontainer/* .devcontainer
+      - name: Build and test zsh
+        uses: devcontainers/ci@v0.2
+        with:
+          imageName: ghcr.io/hayas1/dotfiles/examples/${{ matrix.example }}
+          runCmd: ./tests/container/installed.sh
