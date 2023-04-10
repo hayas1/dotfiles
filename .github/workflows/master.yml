@@ -12,7 +12,6 @@ jobs:
       matrix:
         devcontainer: [".", "./examples/clone", "./examples/features"]
     uses: hayas1/dotfiles/.github/workflows/build-devcontainer.yml@master
-    if: ${{ matrix.devcontainer  == "" || github.event_name == 'push' }}
     with:
       branch: ${{ github.ref }}
       path: ${{ matrix.devcontainer }}
