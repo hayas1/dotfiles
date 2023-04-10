@@ -1,0 +1,20 @@
+name: Master CI
+
+on:
+  push:
+    branches: ["master"]
+  pull_request:
+    branches: ["master"]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        devcontainer: [".", "./examples/clone", "./examples/features"]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: hayas1/dotfiles/.github/workflows/build-devcontainer.yml@master
+        if: github.event_name == 'push' || ${{ matrix.devcontainer }} == ""
+        with:
+          branch: ${{ github.ref }}
+          path: ${{ matrix.devcontainer }}
