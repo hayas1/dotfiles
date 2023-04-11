@@ -1,0 +1,2 @@
+> RUN apt-get update -y && apt-get upgrade -y && apt-get install -y git && \
+>     git clone --depth=1 -b master 'https://github.com/hayas1/dotfiles.git' ${REPOSITORY}
