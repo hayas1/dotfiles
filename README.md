@@ -29,6 +29,7 @@ Every scripts has similar usage, as follow[^zshrc].
 ENV HOME=/home/${USER}
 RUN curl -fsL 'https://github.com/hayas1/dotfiles/raw/master/public/resources/.zshrc' -o ${HOME}/.zshrc && zsh ${HOME}/.zshrc
 ```
+Some scripts write to `.zshrc`, so we should get resources before run install-scripts.
 [^zshrc]: For the first time only, `.zshrc` downloads several plugins. So, if  `&& zsh ${HOME}/.zshrc` is omitted, the download is performed at the time of initial entry, not at the time of container build.
 
 ## Avoid using master
