@@ -39,4 +39,4 @@ jobs:
         uses: devcontainers/ci@v0.2
         with:
           imageName: ghcr.io/hayas1/dotfiles${{ steps.trim-dot.outputs.suffix }}
-          runCmd: zsh ./tests/container/installed.sh
+          runCmd: cp "${HOME}/.zshrc" "${HOME}/.zshenv" && zsh ./tests/container/installed.sh # TODO PATH
