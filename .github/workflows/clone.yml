@@ -1,0 +1,15 @@
+name: Check Clone Example
+
+on:
+  push:
+    branches: ["master"]
+  pull_request:
+    branches: ["master"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Diff dockerfile
+        run: ./tests/example/example-diff.sh
