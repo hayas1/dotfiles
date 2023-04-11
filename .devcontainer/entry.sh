@@ -1,8 +1,8 @@
 #! /bin/bash -e
 
 ### for develop with python
-if [ -e "$WORKSPACE/requirements.txt" ]; then
-    pip install -r "$WORKSPACE/requirements.txt"
+if [ -e ./requirements.txt ]; then
+    pip install -r ./requirements.txt
 fi
 
 ### for develop with go
