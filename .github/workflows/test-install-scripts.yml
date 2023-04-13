@@ -14,5 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: install-oh-my-zsh
+        run: sudo -E ${INSTALL_SCRIPTS}/install-oh-my-zsh.sh
       - name: install-python
+        shell: zsh {0}
         run: sudo -E ${INSTALL_SCRIPTS}/install-python.sh && python --version && pip --version
