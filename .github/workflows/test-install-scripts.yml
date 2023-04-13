@@ -10,9 +10,9 @@ env:
   INSTALL_SCRIPTS: ./public/build
 
 jobs:
-  build:
+  tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: install-python
-        run: ${INSTALL_SCRIPTS}/install-python.sh && python --version && pip --version
+        run: sudo -E ${INSTALL_SCRIPTS}/install-python.sh && python --version && pip --version
