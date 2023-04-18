@@ -79,6 +79,7 @@
     kubecontext             # current kubernetes context (https://kubernetes.io/)
     terraform               # terraform workspace (https://www.terraform.io)
     # terraform_version     # terraform version (https://www.terraform.io)
+    tfenv                   # custom terraform prompt (https://github.com/romkatv/powerlevel10k/issues/1622)
     aws                     # aws profile (https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html)
     aws_eb_env              # aws elastic beanstalk environment (https://aws.amazon.com/elasticbeanstalk/)
     azure                   # azure account name (https://docs.microsoft.com/en-us/cli/azure)
@@ -1301,6 +1302,7 @@
 
   ################[ terraform_version: It shows active terraform version (https://www.terraform.io) ]#################
   typeset -g POWERLEVEL9K_TERRAFORM_VERSION_SHOW_ON_COMMAND='terraform|tf'
+  typeset -g POWERLEVEL9K_TFENV_SHOW_ON_COMMAND='terraform|tf' # custom tfenv prompt
 
   #############[ kubecontext: current kubernetes context (https://kubernetes.io/) ]#############
   # Show kubecontext only when the command you are typing invokes one of these tools.
@@ -1754,4 +1756,10 @@ function prompt_devcontainer() {
       p10k segment -f cyan -t 'Dev Container'
     fi
   fi
+}
+
+# custom tfenv indicator for right prompt
+function prompt_tfenv {
+  # p10k segment -f 038 -i '\ue69a' -t "$(tfenv version-name)"
+  p10k segment -f cyan -i '' -t "$(tfenv version-name)"
 }
