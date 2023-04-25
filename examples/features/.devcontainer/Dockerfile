@@ -11,8 +11,13 @@ RUN curl -fsL 'https://github.com/hayas1/dotfiles/raw/master/public/resources/.p
 RUN curl -fsL 'https://github.com/hayas1/dotfiles/raw/master/public/resources/.zshrc' -o ${HOME}/.zshrc
 RUN zsh ${HOME}/.zshrc
 
-RUN curl -fsL 'https://github.com/hayas1/dotfiles/raw/master/public/build/install-oh-my-zsh.sh' | bash -s
+RUN curl -fsL 'https://github.com/hayas1/dotfiles/raw/master/public/resources/zshrc' -o ${HOME}/.zshrc
+RUN curl -fsL 'https://github.com/hayas1/dotfiles/raw/master/public/resources/config/starship.toml' -o ${HOME}/.config/starship.toml
+RUN  mkdir -p "${HOME}/.config/sheldon" && \
+    curl -fsL 'https://github.com/hayas1/dotfiles/raw/master/public/resources/config/sheldon/plugins.toml' -o ${HOME}/.config/sheldon/plugins.toml
+
 RUN curl -fsL 'https://github.com/hayas1/dotfiles/raw/master/public/build/install-tools.sh' | bash -s
 RUN curl -fsL 'https://github.com/hayas1/dotfiles/raw/master/public/build/install-terraform.sh' | bash -s
+RUN curl -fsL 'https://github.com/hayas1/dotfiles/raw/master/public/build/install-starship-sheldon.sh' | bash -s
 
 RUN mkdir "${HOME}/.config" && chown -R ${USER}:${USER} ${HOME}

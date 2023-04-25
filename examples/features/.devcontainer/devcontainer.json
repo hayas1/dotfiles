@@ -48,7 +48,8 @@
         "timonwong.shellcheck",
         "foxundermoon.shell-format",
         "yzhang.markdown-all-in-one",
-        "rangav.vscode-thunder-client"
+        "rangav.vscode-thunder-client",
+        "naumovs.color-highlight"
       ]
     }
   },
