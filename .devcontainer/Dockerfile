@@ -44,6 +44,7 @@ RUN "${REPOSITORY}/public/build/install-python.sh" latest && \
     "${REPOSITORY}/public/build/install-gh.sh" && \
     "${REPOSITORY}/public/build/install-hadolint-dockle.sh" && \
     "${REPOSITORY}/public/build/install-k9s.sh" && \
+    "${REPOSITORY}/public/build/install-sheldon.sh" && \
     "${REPOSITORY}/public/build/install-starship.sh"
 
 ### owner
