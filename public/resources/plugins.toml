@@ -27,6 +27,8 @@ apply = ["defer"]
 [plugins.zsh-autosuggestions]
 github = "zsh-users/zsh-autosuggestions"
 apply = ["defer"]
+[plugins.zsh-autosuggest-strategy]
+inline = "export ZSH_AUTOSUGGEST_STRATEGY=(history completion)"
 
 [plugins.zsh-syntax-highlighting]
 github = "zsh-users/zsh-syntax-highlighting"
@@ -42,6 +44,7 @@ github = "z-shell/H-S-MW"
 apply = ["defer"]
 
 
+# aliases
 [plugins.alias-exa-ls]
 inline = """
 if type exa >/dev/null 2>&1; then
