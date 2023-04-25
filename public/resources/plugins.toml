@@ -29,3 +29,30 @@ github = "zsh-users/zsh-syntax-highlighting"
 
 [plugins.zsh-history-search-multi-word]
 github = "z-shell/H-S-MW"
+
+
+[plugins.alias-exa-ls]
+inline = """
+if type exa >/dev/null 2>&1; then
+    if [[ $USE_NERDFONT == nerdfont-complete ]]; then
+        ICONS='--icons'
+    else
+        ICONS=''
+    fi
+    alias ls='exa --git $ICONS'
+    alias la='exa -a $ICONS'
+    alias ll='exa -aal $ICONS'
+    alias lt='exa -T -L 3 -a -I "node_modules|.git|.cache" $ICONS'
+    alias ltl='exa -T -L 3 -a -I "node_modules|.git|.cache" -l $ICONS'
+fi
+"""
+[plugins.alias-ripgrep-grep]
+inline = "$(type rg >/dev/null 2>&1) && alias grep=rg"
+[plugins.alias-htop-ps]
+inline = "$(type htop >/dev/null 2>&1) && alias psp=htop"
+[plugins.alias-bat-cat]
+inline = "$(type batcat >/dev/null 2>&1) && alias cat='batcat --paging=never --style=header --theme=TwoDark' && alias less='batcat --theme=TwoDark'"
+[plugins.alias-hexyl-od]
+inline = "$(type hexyl >/dev/null 2>&1) && alias odp=hexyl"
+[plugins.alias-fd-find]
+inline = "$(type fdfind >/dev/null 2>&1) && alias fd=fdfind"

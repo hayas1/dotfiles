@@ -9,9 +9,6 @@ export TZ=Asia/Tokyo
 # export LANG=ja_JP.UTF-8
 setopt print_eight_bit
 
-# Alias definitions.
-[[ -s ~/.bash_aliases ]] && source ~/.bash_aliases
-
 # history setting
 export HISTSIZE=5000        # history size in memory
 export SAVEHIST=100000      # history size in storage
