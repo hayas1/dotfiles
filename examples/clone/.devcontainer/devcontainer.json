@@ -16,7 +16,7 @@
       // "no_PROXY": "${localEnv:no_proxy}",
       // "NO_PROXY": "${localEnv:NO_PROXY}",
     },
-    "cacheFrom": "ghcr.io/hayas1/dotfiles/example/clone",
+    "cacheFrom": "ghcr.io/hayas1/dotfiles/example/clone"
   },
   "runArgs": [
     "--cap-add=SYS_PTRACE",
