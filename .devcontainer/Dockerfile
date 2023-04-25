@@ -28,14 +28,13 @@ ARG REPOSITORY="${HOME}/.config/dotfiles"
 COPY ./ ${REPOSITORY}
 
 ### copy resources
-RUN cp "${REPOSITORY}/public/resources/.zshrc" "${HOME}/.zshrc" && \
-    cp "${REPOSITORY}/public/resources/.bash_aliases" "${HOME}/.bash_aliases"
+RUN cp "${REPOSITORY}/public/resources/zshrc" "${HOME}/.zshrc" && \
+    cp "${REPOSITORY}/public/resources/config/starship.toml" "${HOME}/.config/starship.toml" && \
+    cp "${REPOSITORY}/public/resources/config/sheldon/plugins.toml" "${HOME}/.config/sheldon/plugins.toml"
 
 ### install tools
 RUN "${REPOSITORY}/public/build/install-tools.sh" && \
-    #     "${REPOSITORY}/public/build/install-oh-my-zsh.sh" && \
-    zsh ${HOME}/.zshrc
-RUN "${REPOSITORY}/public/build/install-python.sh" latest && \
+    "${REPOSITORY}/public/build/install-python.sh" latest && \
     "${REPOSITORY}/public/build/install-node.sh" latest && \
     "${REPOSITORY}/public/build/install-go.sh" latest && \
     "${REPOSITORY}/public/build/install-rust.sh" latest && \
@@ -44,8 +43,7 @@ RUN "${REPOSITORY}/public/build/install-python.sh" latest && \
     "${REPOSITORY}/public/build/install-gh.sh" && \
     "${REPOSITORY}/public/build/install-hadolint-dockle.sh" && \
     "${REPOSITORY}/public/build/install-k9s.sh" && \
-    "${REPOSITORY}/public/build/install-sheldon.sh" && \
-    "${REPOSITORY}/public/build/install-starship.sh"
+    "${REPOSITORY}/public/build/install-starship-sheldon.sh"
 
 ### owner
 RUN chown -R ${USERNAME}:${USERNAME} ${HOME}
