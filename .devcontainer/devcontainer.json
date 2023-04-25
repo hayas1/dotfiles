@@ -8,7 +8,7 @@
     "args": {
       "USERNAME": "${localEnv:USER}",
       "UID": "${localEnv:UID:20000}",
-      "GID": "${localEnv:GID:20000}",
+      "GID": "${localEnv:GID:20000}"
       // "http_proxy": "${localEnv:http_proxy}",
       // "HTTP_PROXY": "${localEnv:HTTP_PROXY}",
       // "https_proxy": "${localEnv:https_proxy}",
@@ -16,7 +16,7 @@
       // "no_PROXY": "${localEnv:no_proxy}",
       // "NO_PROXY": "${localEnv:NO_PROXY}",
     },
-    "cacheFrom": "ghcr.io/hayas1/dotfiles",
+    "cacheFrom": "ghcr.io/hayas1/dotfiles"
   },
   "runArgs": [
     "--cap-add=SYS_PTRACE",
@@ -26,7 +26,7 @@
     // "--env-file=.env"
   ],
   "containerEnv": {
-    "USE_NERDFONT": "nerdfont-complete",
+    "USE_NERDFONT": "nerdfont-complete"
   },
   "mounts": [
     /// tools config
@@ -60,6 +60,7 @@
         "foxundermoon.shell-format",
         "yzhang.markdown-all-in-one",
         "rangav.vscode-thunder-client",
+        "naumovs.color-highlight",
         "ms-azuretools.vscode-docker", // installed by docker-from-docker features
         // "exiasr.hadolint", // dockerfile linter
         "ms-kubernetes-tools.vscode-kubernetes-tools", // installed by kubectl-helm-minikube features
