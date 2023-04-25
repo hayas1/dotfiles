@@ -14,21 +14,32 @@ shell = "zsh"
 
 [plugins]
 
+# https://sheldon.cli.rs/Examples.html#deferred-loading-of-plugins-in-zsh
+[plugins.zsh-defer]
+github = "romkatv/zsh-defer"
+[templates]
+defer = "{% for file in files %}zsh-defer source \"{{ file }}\"\n{% endfor %}"
+
 [plugins.zsh-completions]
 github = "zsh-users/zsh-completions"
+apply = ["defer"]
 
 [plugins.zsh-autosuggestions]
 github = "zsh-users/zsh-autosuggestions"
+apply = ["defer"]
 
 [plugins.zsh-syntax-highlighting]
 github = "zsh-users/zsh-syntax-highlighting"
+apply = ["defer"]
 
 # conflict with zsh-syntax-highliting ?
 # [plugins.zsh-history-substring-search]
 # github = "zsh-users/zsh-history-substring-search"
+# apply = ["defer"]
 
 [plugins.zsh-history-search-multi-word]
 github = "z-shell/H-S-MW"
+apply = ["defer"]
 
 
 [plugins.alias-exa-ls]
