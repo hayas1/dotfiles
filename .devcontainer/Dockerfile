@@ -30,6 +30,7 @@ COPY ./ ${REPOSITORY}
 ### copy resources
 RUN cp "${REPOSITORY}/public/resources/zshrc" "${HOME}/.zshrc" && \
     cp "${REPOSITORY}/public/resources/config/starship.toml" "${HOME}/.config/starship.toml" && \
+    mkdir -p "${HOME}/.config/sheldon" && \
     cp "${REPOSITORY}/public/resources/config/sheldon/plugins.toml" "${HOME}/.config/sheldon/plugins.toml"
 
 ### install tools
