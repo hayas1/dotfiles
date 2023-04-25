@@ -1,12 +1,16 @@
 # key config
 bindkey "^[[1;5C" forward-word                   # ctrl+<-
 bindkey "^[[1;5D" backward-word                  # ctrl+->
+bindkey '^[[Z' reverse-menu-complete             # shift+tab completion
 zstyle ':completion:::::default' menu yes select # tab completion
 setopt IGNORE_EOF                                # do not close by ctrl+D
 
+# word boundary
+WORDCHARS=${WORDCHARS/\//}
+
 # timezone and language environment
 export TZ=Asia/Tokyo
-# export LANG=ja_JP.UTF-8
+export LANG=en_US.UTF-8
 setopt print_eight_bit
 
 # history setting
