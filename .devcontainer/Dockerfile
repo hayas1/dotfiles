@@ -29,12 +29,11 @@ COPY ./ ${REPOSITORY}
 
 ### copy resources
 RUN cp "${REPOSITORY}/public/resources/.zshrc" "${HOME}/.zshrc" && \
-    cp "${REPOSITORY}/public/resources/.bash_aliases" "${HOME}/.bash_aliases" && \
-    cp "${REPOSITORY}/public/resources/.p10k.zsh" "${HOME}/.p10k.zsh"
+    cp "${REPOSITORY}/public/resources/.bash_aliases" "${HOME}/.bash_aliases"
 
 ### install tools
 RUN "${REPOSITORY}/public/build/install-tools.sh" && \
-    "${REPOSITORY}/public/build/install-oh-my-zsh.sh" && \
+    #     "${REPOSITORY}/public/build/install-oh-my-zsh.sh" && \
     zsh ${HOME}/.zshrc
 RUN "${REPOSITORY}/public/build/install-python.sh" latest && \
     "${REPOSITORY}/public/build/install-node.sh" latest && \
@@ -44,13 +43,8 @@ RUN "${REPOSITORY}/public/build/install-python.sh" latest && \
     "${REPOSITORY}/public/build/install-gcloud-kubectl-helm.sh" && \
     "${REPOSITORY}/public/build/install-gh.sh" && \
     "${REPOSITORY}/public/build/install-hadolint-dockle.sh" && \
-    "${REPOSITORY}/public/build/install-k9s.sh"
+    "${REPOSITORY}/public/build/install-k9s.sh" && \
+    "${REPOSITORY}/public/build/install-starship.sh"
 
-### for sudo, use same zsh setting
-RUN cp -r "${HOME}/.bash_aliases" "${HOME}/.oh-my-zsh" "${HOME}/.p10k.zsh" "${HOME}/.zshrc" /root && \
-    echo "export http_proxy=${http_proxy}" >> /root/.bashrc &&\
-    echo "export HTTP_PROXY=${HTTP_PROXY}" >> /root/.bashrc &&\
-    echo "export https_proxy=${https_proxy}" >> /root/.bashrc &&\
-    echo "export HTTPS_PROXY=${HTTPS_PROXY}" >> /root/.bashrc &&\
-    echo "export no_proxy=${no_proxy}" >> /root/.bashrc &&\
-    echo "export NO_PROXY=${NO_PROXY}" >> /root/.bashrc
+### owner
+RUN chown -R ${USERNAME}:${USERNAME} ${HOME}
