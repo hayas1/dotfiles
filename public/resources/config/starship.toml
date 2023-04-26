@@ -5,15 +5,15 @@ $os$username\
 $directory\
 [](fg:#4672D0 bg:#394260)\
 $git_branch$git_status\
-[](fg:#394260 bg:#86BBD8)\
+[](fg:#394260 bg:#33658A)\
+$time\
+[](fg:#33658A bg:#121178)\
+$cmd_duration\
+[](fg:#121178)\
+
+$gcloud$docker_context$kubernetes\
 $c$elixir$elm$golang$gradle$haskell$java$julia$nodejs$nim$python$rust$scala$terraform\
-[](fg:#86BBD8 bg:#2365DA)\
-$gcloud\
-[](fg:#2365DA bg:#06969A)\
-$docker_context$kubernetes\
-[](fg:#06969A bg:#33658A)\
-$time$cmd_duration\
-[](fg:#33658A)\
+
 $line_break$character
 """
 
@@ -61,102 +61,109 @@ format = '[ $symbol $branch ]($style)'
 
 [git_status]
 style = "bg:#394260"
-format = '[$all_status$ahead_behind ]($style)'
+format = '[$all_status$ahead_behind]($style)'
+
+[time]
+disabled = false
+time_format = "%H:%M"
+style = "bg:#33658A"
+format = '[  $time]($style)'
+
+[cmd_duration]
+style = "bg:#121178"
+format = '[  $duration]($style)'
+
+[status]
+disabled = false
+
 
 [c]
-symbol = " "
+symbol = ""
 style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+format = '[ ](#86BBD8)[$symbol ($version)]($style)[](#86BBD8)'
 
 [elixir]
-symbol = " "
+symbol = ""
 style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+format = '[ ](#86BBD8)[$symbol ($version)]($style)[](#86BBD8)'
 
 [elm]
-symbol = " "
+symbol = ""
 style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+format = '[ ](#86BBD8)[$symbol ($version)]($style)[](#86BBD8)'
 
 [golang]
-symbol = " "
+symbol = ""
 style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+format = '[ ](#86BBD8)[$symbol ($version)]($style)[](#86BBD8)'
 
 [gradle]
 style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+format = '[ ](#86BBD8)[$symbol ($version)]($style)[](#86BBD8)'
 
 [haskell]
-symbol = " "
+symbol = ""
 style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+format = '[ ](#86BBD8)[$symbol ($version)]($style)[](#86BBD8)'
 
 [java]
-symbol = " "
+symbol = ""
 style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+format = '[ ](#86BBD8)[$symbol ($version)]($style)[](#86BBD8)'
 
 [julia]
-symbol = " "
+symbol = ""
 style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+format = '[ ](#86BBD8)[$symbol ($version)]($style)[](#86BBD8)'
 
 [nodejs]
 symbol = ""
 style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+format = '[ ](#86BBD8)[$symbol ($version)]($style)[](#86BBD8)'
 
 [nim]
-symbol = " "
+symbol = ""
 style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+format = '[ ](#86BBD8)[$symbol ($version)]($style)[](#86BBD8)'
 
 [python]
-symbol = " "
+symbol = ""
 style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+format = '[ ](#86BBD8)[$symbol ($version)]($style)[](#86BBD8)'
 pyenv_version_name = true
 
 [rust]
 symbol = ""
 style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+format = '[ ](#86BBD8)[$symbol ($version)]($style)[](#86BBD8)'
 
 [scala]
-symbol = " "
+symbol = ""
 style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+format = '[ ](#86BBD8)[$symbol ($version)]($style)[](#86BBD8)'
 
 [terraform]
-# TODO symbol (not be tofu)
+# TODO symbol "󰛡" \udb81\udee1 or "󱁢" \udb84\udc62
+symbol = "ﯟ"
 style = "bg:#86BBD8"
-format = '[ $symbol ($version/$workspace) ]($style)'
+format = '[ ](#86BBD8)[$symbol ($version\[$workspace\])]($style)[](#86BBD8)'
+
 
 [docker_context]
 disabled = false
 symbol = ""
 style = "bg:#06969A"
-format = '[ $symbol $context ]($style) $path'
+format = '[ ](#06969A)[$symbol $context $path]($style)[](#06969A)'
 
 [kubernetes]
 disabled = false
-style = "bg:#06969A"
-format = '[$symbol$context(\($namespace\)) ]($style)'
+symbol = "☸"
+style = "bg:#83A1F3"
+format = '[ ](#83A1F3)[$symbol $context(\[$namespace\])]($style)[](#83A1F3)'
 [kubernetes.context_aliases]
 'gke_.*_(?P<var_cluster>[\w-]+)' = '$var_cluster'
 
-[time]
-disabled = false
-time_format = "%H:%m"
-style = "bg:#33658A"
-format = '[ ♥ $time ]($style)'
-
-[cmd_duration]
-style = "bg:#33658A"
-format = '[  $duration ]($style)'
-
 [gcloud]
-symbol = '️🇬️ '
-style = "bg:#2365DA"
-format = '[ $symbol ($project) ]($style)'
+symbol = '️🇬️'
+style = "bg:#3565F4"
+format = '[ ](#3565F4)[$symbol ($project)]($style)[](#3565F4)'
