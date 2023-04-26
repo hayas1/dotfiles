@@ -1,9 +1,9 @@
 format = """
 [▒▓](#9A348E)\
 $os$username\
-[](bg:#DA627D fg:#9A348E)\
+[](fg:#9A348E bg:#BA526D)\
 $directory\
-[](fg:#DA627D bg:#FCA17D)\
+[](fg:#BA526D bg:#FCA17D)\
 $git_branch$git_status\
 [](fg:#FCA17D bg:#86BBD8)\
 $c$elixir$elm$golang$gradle$haskell$java$julia$nodejs$nim$python$rust$scala$terraform\
@@ -36,7 +36,7 @@ style = "bg:#9A348E"
 disabled = false     # Disabled by default
 
 [directory]
-style = "bg:#DA627D"
+style = "bg:#BA526D"
 format = "[ $path ]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
