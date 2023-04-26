@@ -3,9 +3,9 @@ format = """
 $os$username\
 [](fg:#9A348E bg:#BA526D)\
 $directory\
-[](fg:#BA526D bg:#FCA17D)\
+[](fg:#BA526D bg:#C12E12)\
 $git_branch$git_status\
-[](fg:#FCA17D bg:#86BBD8)\
+[](fg:#C12E12 bg:#86BBD8)\
 $c$elixir$elm$golang$gradle$haskell$java$julia$nodejs$nim$python$rust$scala$terraform\
 [](fg:#86BBD8 bg:#2365DA)\
 $gcloud\
@@ -56,11 +56,11 @@ truncation_symbol = "…/"
 
 [git_branch]
 symbol = ""
-style = "bg:#FCA17D"
+style = "bg:#C12E12"
 format = '[ $symbol $branch ]($style)'
 
 [git_status]
-style = "bg:#FCA17D"
+style = "bg:#C12E12"
 format = '[$all_status$ahead_behind ]($style)'
 
 [c]
