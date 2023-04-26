@@ -13,7 +13,7 @@ $cmd_duration\
 
 $status\
 $gcloud$docker_context$kubernetes\
-$c$elixir$elm$golang$gradle$haskell$java$julia$nodejs$nim$python$rust$scala\
+$c$elixir$elm$golang$haskell$java$julia$nodejs$nim$python$rust$scala\
 $helm$terraform\
 
 $line_break$character
@@ -84,68 +84,65 @@ format = '[ ](#EEECCC)[$symbol $status]($style)[](#EEECCC)'
 
 [c]
 symbol = ""
-style = "bg:#86BBD8"
-format = '[ ](#86BBD8)[$symbol ($version)]($style)[](#86BBD8)'
+style = "bg:#669AD3"
+format = '[ ](#669AD3)[$symbol ($version)]($style)[](#669AD3)'
 
 [elixir]
 symbol = ""
-style = "bg:#86BBD8"
-format = '[ ](#86BBD8)[$symbol ($version)]($style)[](#86BBD8)'
+style = "bg:#4E2A8E"
+format = '[ ](#4E2A8E)[$symbol ($version)]($style)[](#4E2A8E)'
 
 [elm]
 symbol = ""
-style = "bg:#86BBD8"
-format = '[ ](#86BBD8)[$symbol ($version)]($style)[](#86BBD8)'
+style = "bg:#7DF13B"
+format = '[ ](#7DF13B)[$symbol ($version)]($style)[](#7DF13B)'
 
 [golang]
 symbol = ""
-style = "bg:#86BBD8"
-format = '[ ](#86BBD8)[$symbol ($version)]($style)[](#86BBD8)'
-
-[gradle]
-style = "bg:#86BBD8"
-format = '[ ](#86BBD8)[$symbol ($version)]($style)[](#86BBD8)'
+style = "bg:#6AD7E5"
+format = '[ ](#6AD7E5)[$symbol ($version)]($style)[](#6AD7E5)'
 
 [haskell]
 symbol = ""
-style = "bg:#86BBD8"
-format = '[ ](#86BBD8)[$symbol ($version)]($style)[](#86BBD8)'
+style = "bg:#666666"
+format = '[ ](#666666)[$symbol ($version)]($style)[](#666666)'
 
 [java]
 symbol = ""
-style = "bg:#86BBD8"
-format = '[ ](#86BBD8)[$symbol ($version)]($style)[](#86BBD8)'
+style = "bg:#497495"
+format = '[ ](#497495)[$symbol ($version)]($style)[](#497495)'
 
 [julia]
 symbol = ""
-style = "bg:#86BBD8"
-format = '[ ](#86BBD8)[$symbol ($version)]($style)[](#86BBD8)'
+style = "bg:#9259A3"
+format = '[ ](#9259A3)[$symbol ($version)]($style)[](#9259A3)'
 
 [nodejs]
 symbol = ""
-style = "bg:#86BBD8"
-format = '[ ](#86BBD8)[$symbol ($version)]($style)[](#86BBD8)'
+style = "bg:#6BBF47"
+format = '[ ](#6BBF47)[$symbol ($version)]($style)[](#6BBF47)'
 
 [nim]
 symbol = ""
-style = "bg:#86BBD8"
-format = '[ ](#86BBD8)[$symbol ($version)]($style)[](#86BBD8)'
+style = "bg:#F3D400"
+format = '[ ](#F3D400)[$symbol ($version)]($style)[](#F3D400)'
 
 [python]
 symbol = ""
-style = "bg:#86BBD8"
-format = '[ ](#86BBD8)[$symbol ($version)]($style)[](#86BBD8)'
+style = "bg:#377AB1"
+format = '[ ](#377AB1)[$symbol ($version)]($style)[](#377AB1)'
 pyenv_version_name = true
 
 [rust]
 symbol = ""
-style = "bg:#86BBD8"
-format = '[ ](#86BBD8)[$symbol ($version)]($style)[](#86BBD8)'
+style = "bg:#F68800"
+format = '[ ](#F68800)[$symbol ($version)]($style)[](#F68800)'
 
 [scala]
 symbol = ""
-style = "bg:#86BBD8"
-format = '[ ](#86BBD8)[$symbol ($version)]($style)[](#86BBD8)'
+style = "bg:#DE3423"
+format = '[ ](#DE3423)[$symbol ($version)]($style)[](#DE3423)'
+
 
 [helm]
 symbol = "⎈"
@@ -174,6 +171,6 @@ format = '[ ](#83A1F3)[$symbol $context(\[$namespace\])]($style)[](#83A1F3
 'gke_.*_(?P<var_cluster>[\w-]+)' = '$var_cluster'
 
 [gcloud]
-symbol = '️🇬️'
+symbol = "🇬️"
 style = "bg:#3565F4"
 format = '[ ](#3565F4)[$symbol ($project)]($style)[](#3565F4)'
