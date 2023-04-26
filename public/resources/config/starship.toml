@@ -13,7 +13,8 @@ $cmd_duration\
 
 $status\
 $gcloud$docker_context$kubernetes\
-$c$elixir$elm$golang$gradle$haskell$java$julia$nodejs$nim$python$rust$scala$terraform\
+$c$elixir$elm$golang$gradle$haskell$java$julia$nodejs$nim$python$rust$scala\
+$helm$terraform\
 
 $line_break$character
 """
@@ -146,11 +147,16 @@ symbol = ""
 style = "bg:#86BBD8"
 format = '[ ](#86BBD8)[$symbol ($version)]($style)[](#86BBD8)'
 
+[helm]
+symbol = "⎈"
+style = "bg:#091C84"
+format = '[ ](#091C84)[$symbol ($version)]($style)[](#091C84)'
+
 [terraform]
 # TODO symbol "󰛡" \udb81\udee1 or "󱁢" \udb84\udc62
 symbol = "ﯟ"
-style = "bg:#86BBD8"
-format = '[ ](#86BBD8)[$symbol ($version\[$workspace\])]($style)[](#86BBD8)'
+style = "bg:#844FBA"
+format = '[ ](#844FBA)[$symbol ($version\[$workspace\])]($style)[](#844FBA)'
 
 
 [docker_context]
