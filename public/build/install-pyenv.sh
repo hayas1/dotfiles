@@ -5,6 +5,7 @@ git clone https://github.com/pyenv/pyenv.git "${HOME}/.pyenv"
 pushd "${HOME}/.pyenv" && src/configure && make -C src && popd
 
 {
+    echo '### pyenv settings'
     echo 'export PYENV_ROOT="$HOME/.pyenv"'
     echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"'
     echo 'eval "$(pyenv init -)"'
