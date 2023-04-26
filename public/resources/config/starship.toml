@@ -6,7 +6,7 @@ $directory\
 [](fg:#DA627D bg:#FCA17D)\
 $git_branch$git_status\
 [](fg:#FCA17D bg:#86BBD8)\
-$c$elixir$elm$golang$gradle$haskell$java$julia$nodejs$nim$rust$scala$terraform\
+$c$elixir$elm$golang$gradle$haskell$java$julia$nodejs$nim$python$rust$scala$terraform\
 [](fg:#86BBD8 bg:#2365DA)\
 $gcloud\
 [](fg:#2365DA bg:#06969A)\
@@ -112,6 +112,12 @@ symbol = " "
 style = "bg:#86BBD8"
 format = '[ $symbol ($version) ]($style)'
 
+[python]
+symbol = " "
+style = "bg:#86BBD8"
+format = '[ $symbol ($version) ]($style)'
+pyenv_version_name = true
+
 [rust]
 symbol = ""
 style = "bg:#86BBD8"
@@ -123,6 +129,7 @@ style = "bg:#86BBD8"
 format = '[ $symbol ($version) ]($style)'
 
 [terraform]
+# TODO symbol (not be tofu)
 style = "bg:#86BBD8"
 format = '[ $symbol ($version/$workspace) ]($style)'
 
