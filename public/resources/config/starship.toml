@@ -1,19 +1,19 @@
 format = """
-[▒▓](#DA94FE)\
+[░▒▓](#A3AED2)\
 $os$username\
-[](fg:#DA94FE bg:#DAE22D)\
+[](fg:#A3AED2 bg:#4672D0)\
 $directory\
-[](fg:#DAE22D bg:#C12E12)\
+[](fg:#4672D0 bg:#394260)\
 $git_branch$git_status\
-[](fg:#C12E12 bg:#86BBD8)\
+[](fg:#394260 bg:#86BBD8)\
 $c$elixir$elm$golang$gradle$haskell$java$julia$nodejs$nim$python$rust$scala$terraform\
-[](fg:#86BBD8 bg:#2365DA)\
+[](fg:#86BBD8 bg:#2365DA)\
 $gcloud\
-[](fg:#2365DA bg:#06969A)\
+[](fg:#2365DA bg:#06969A)\
 $docker_context$kubernetes\
-[](fg:#06969A bg:#33658A)\
+[](fg:#06969A bg:#33658A)\
 $time$cmd_duration\
-[](fg:#33658A)\
+[](fg:#33658A)\
 $line_break$character
 """
 
@@ -24,19 +24,19 @@ $line_break$character
 # and use the os module below
 [username]
 show_always = true
-style_user = "bg:#DA94FE bold"
-style_root = "bg:#DA94FE bold"
+style_user = "bg:#A3AED2"
+style_root = "bg:#A3AED2"
 format = '[$user ]($style)'
 disabled = true
 
 # An alternative to the username module which displays a symbol that
 # represents the current operating system
 [os]
-style = "bg:#DA94FE bold"
+style = "bg:#A3AED2"
 disabled = false
 
 [directory]
-style = "bg:#DAE22D bold"
+style = "bg:#4672D0"
 format = "[  $path ]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
@@ -56,11 +56,11 @@ truncation_symbol = "…/"
 
 [git_branch]
 symbol = ""
-style = "bg:#C12E12 bold"
+style = "bg:#394260"
 format = '[ $symbol $branch ]($style)'
 
 [git_status]
-style = "bg:#C12E12 bold"
+style = "bg:#394260"
 format = '[$all_status$ahead_behind ]($style)'
 
 [c]
