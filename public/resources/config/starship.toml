@@ -39,17 +39,19 @@ disabled = false
 
 [directory]
 style = "bg:#4672D0"
-format = "[  $path ]($style)"
+read_only_style = "bg:#4672D0"
+read_only = ""
+format = "[  $path]($style)[ $read_only ]($read_only_style)"
 truncation_length = 3
 truncation_symbol = "…/"
 
 # Here is how you can shorten some long paths by text replacement
 # similar to mapped_locations in Oh My Posh:
 [directory.substitutions]
-"Documents" = " "
-"Downloads" = " "
-"Music" = " "
-"Pictures" = " "
+"Documents" = ""
+"Downloads" = ""
+"Music" = ""
+"Pictures" = ""
 # Keep in mind that the order matters. For example:
 # "Important Documents" = "  "
 # will not be replaced, because "Documents" was already substituted before.
