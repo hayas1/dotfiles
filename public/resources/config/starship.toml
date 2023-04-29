@@ -65,7 +65,7 @@ format = '[ $symbol $branch ]($style)'
 
 [git_status]
 style = "bg:#394260"
-conflicted = "ﲅ "                             # TODO 󰞇 \udb81\udf87
+conflicted = " "
 ahead = " "
 behind = " "
 diverged = " "
