@@ -65,6 +65,16 @@ format = '[ $symbol $branch ]($style)'
 
 [git_status]
 style = "bg:#394260"
+conflicted = "ﲅ "                             # TODO 󰞇 \udb81\udf87
+ahead = " "
+behind = " "
+diverged = " "
+untracked = " "
+stashed = " "
+modified = " "
+staged = " "
+renamed = " "
+deleted = " "
 format = '[$all_status$ahead_behind]($style)'
 
 [time]
