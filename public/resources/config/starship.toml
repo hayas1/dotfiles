@@ -18,6 +18,7 @@ $helm$terraform\
 
 $line_break$character
 """
+command_timeout = 3000
 
 # Disable the blank line at the start of the prompt
 # add_newline = false
