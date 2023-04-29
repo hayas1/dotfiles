@@ -6,7 +6,7 @@ zstyle ':completion:::::default' menu yes select # tab completion
 setopt IGNORE_EOF                                # do not close by ctrl+D
 
 # word boundary
-WORDCHARS=${WORDCHARS/\//}
+WORDCHARS=${WORDCHARS//(\/|_|-)/} # https://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.html
 
 # timezone and language environment
 export TZ=Asia/Tokyo
