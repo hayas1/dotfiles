@@ -86,7 +86,7 @@ format = '[  $time]($style)'
 
 [cmd_duration]
 style = "bg:#121178"
-format = '[  $duration]($style)'
+format = '[  $duration]($style)'
 
 [status]
 disabled = false
