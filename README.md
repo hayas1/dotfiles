@@ -36,12 +36,12 @@ Some scripts write to `.zshrc`, so we should get resources before run install-sc
 Modify `curl` URL or `git clone` source in `Dockerfile`, as follow.
 ```dockerfile
 ENV HOME=/home/${USER}
-RUN curl -fsL 'https://github.com/hayas1/dotfiles/raw/v0.2.0/public/build/install-tools.sh' | bash -s
+RUN curl -fsL 'https://github.com/hayas1/dotfiles/raw/v0.2.2/public/build/install-tools.sh' | bash -s
 ```
 
 ```dockerfile
 ### copy repository into container
 ARG REPOSITORY="${HOME}/.config/dotfiles"
 RUN apt-get update -y && apt-get upgrade -y && apt-get install -y git && \
-    git clone --depth=1 -b v0.2.0 'https://github.com/hayas1/dotfiles.git' ${REPOSITORY}
+    git clone --depth=1 -b v0.2.2 'https://github.com/hayas1/dotfiles.git' ${REPOSITORY}
 ```
