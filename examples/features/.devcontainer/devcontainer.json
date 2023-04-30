@@ -14,9 +14,6 @@
     // "--network=dotfiles_default",
     // "--env-file=.env"
   ],
-  "containerEnv": {
-    "USE_NERDFONT": "nerdfont-complete"
-  },
   "mounts": [
     /// tools config
     "source=${localEnv:HOME}/.ssh/,target=/home/${localEnv:USER}/.ssh/,type=bind",
