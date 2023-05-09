@@ -58,6 +58,8 @@
         "yzhang.markdown-all-in-one",
         "rangav.vscode-thunder-client",
         "naumovs.color-highlight",
+        "GitHub.vscode-github-actions",
+        "GitHub.copilot",
         "ms-azuretools.vscode-docker", // installed by docker-from-docker features
         // "exiasr.hadolint", // dockerfile linter
         "ms-kubernetes-tools.vscode-kubernetes-tools", // installed by kubectl-helm-minikube features
