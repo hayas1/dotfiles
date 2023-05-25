@@ -14,9 +14,6 @@
     // "--network=dotfiles_default",
     // "--env-file=.env"
   ],
-  "containerEnv": {
-    "USE_NERDFONT": "nerdfont-complete"
-  },
   "mounts": [
     /// tools config
     "source=${localEnv:HOME}/.ssh/,target=/home/${localEnv:USER}/.ssh/,type=bind",
@@ -48,7 +45,8 @@
         "timonwong.shellcheck",
         "foxundermoon.shell-format",
         "yzhang.markdown-all-in-one",
-        "rangav.vscode-thunder-client"
+        "rangav.vscode-thunder-client",
+        "naumovs.color-highlight"
       ]
     }
   },
