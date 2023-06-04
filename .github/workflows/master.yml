@@ -24,7 +24,8 @@ jobs:
   build-examples:
     strategy:
       matrix:
-        devcontainer: ["./examples/clone", "./examples/features", "./examples/archive/v0.2.2"]
+        devcontainer: ["./examples/clone", "./examples/features"]
+        # "./examples/archive/v0.2.2" use p10k, but test script expect starship
     uses: hayas1/dotfiles/.github/workflows/build-devcontainer.yml@master
     if: ${{ github.event_name == 'push' }}
     with:
